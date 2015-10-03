@@ -1,8 +1,9 @@
+
 # autoforms
 
 **Automatic forms on-top of Flask web interface based on SQL models**
 
-*Basic idea*: 
+*Basic idea*:
 > A cleaner bootstrap interface with users, login and registration with a PostgreSQL.
 
 * My thoughts raised from [the flask snippet](http://flask.pocoo.org/snippets/60/);
