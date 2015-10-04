@@ -14,3 +14,13 @@ Preview: [http://www.flaskboilerplate.com/](http://www.flaskboilerplate.com/)
 ## Instructions
 
 To be added
+
+
+## To study
+
+* Creating Wtf forms in flask:
+https://flask-wtf.readthedocs.org/en/latest/quickstart.html#creating-forms
+* Wtf forms from sqlalchemy:
+http://wtforms.readthedocs.org/en/latest/ext.html#module-wtforms.ext.sqlalchemy
+* An interesting tutorial:
+https://github.com/rawrgulmuffins/WTFormMultipleSelectTutorial
