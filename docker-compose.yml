@@ -1,0 +1,44 @@
+
+security:
+    image: busybox
+    environment:
+        POSTGRES_USER: myadmin
+        POSTGRES_PASSWORD: HverYsecretpw
+        #POSTGRES_DB: docker
+
+#################################
+web:
+    image: pdonorio/flasking
+    hostname: flask
+    #command: ./run.py
+    command: sleep 1234567890
+    extends:
+        service: security
+    links:
+        - sql:db
+    volumes:
+        - .:/data:ro
+    # Open your browser here
+    ports:
+        - 80:5000
+
+#################################
+# sqldata:
+#     image: busybox
+#     user: "999"
+#     #command: /bin/sh -c "cd /var/lib; mkdir postgresql; chown 999:999 postgresql"
+#     volumes:
+#         # Boot2docker bug: http://j.mp/1FMm5qj
+#         - ../data/psgr:/var/lib/postgresql/data
+
+sql:
+    image: postgres:9.4
+    volumes:
+        # Init file && Access security
+        - ./init/pginit.sh:/docker-entrypoint-initdb.d/setup-my-schema.sh
+    extends:
+        service: security
+    # volumes_from:
+    #     - sqldata
+# How to reload config
+# $ /usr/lib/postgresql/9.4/bin/pg_ctl reload
