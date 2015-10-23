@@ -1,0 +1,26 @@
+{% extends 'layouts/main.html' %}
+{% block title %}About{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>Testing forms</h1>
+</div>
+<p class="lead">
+
+    Status: {{ status }}
+
+    <form action="logintest" method="post">
+        {{ form.email.label }}:
+        {{ form.email(placeholder='yourname@email.com') }}
+        <br>
+        {{ form.password.label }}:
+        {{ form.password(placeholder='***') }}
+        <br>
+        {{ form.csrf_token }}
+        <br><br>
+        <input type="submit" value="Go">
+    </form>
+
+</p>
+
+{% endblock %}

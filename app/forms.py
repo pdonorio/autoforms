@@ -32,6 +32,15 @@ class ModelForm(BaseModelForm):
 print(ModelForm)
 
 ##################################################
+# https://exploreflask.com/forms.html
+from flask.ext.wtf import Form
+from wtforms.fields import TextField, PasswordField
+from wtforms.validators import Required, Email
+
+class EmailPasswordForm(Form):
+    email = TextField('Email', validators=[Required(), Email()])
+    password = PasswordField('Password', validators=[Required()])
+
 ##################################################
 ##################################################
 

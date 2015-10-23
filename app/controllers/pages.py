@@ -4,54 +4,40 @@
 """ Main routes """
 
 from flask import render_template, Blueprint, request,\
-    flash#, redirect, url_for
+    flash, redirect, url_for
 from app import forms
 
 blueprint = Blueprint('pages', __name__)
 
-################################
-## Paolo
-from flask.ext.wtf import Form
-from wtforms.ext.sqlalchemy.orm import model_form
-from ..models import MyModel
+######################################################
+## PAOLO
+######################################################
 
-#MyForm = model_form(MyModel, Form)
+#Form page
+@blueprint.route('/logintest', methods=["GET", "POST"])
+def mylogin():
+    form = forms.EmailPasswordForm()
+    status = "Empty"
 
-# # Validate?
-# from wtforms import validators
-# MyForm = model_form(MyModel, Form, \
-#     field_args = { 'name' : { 'validators' : [validators.Length(max=10)] } })
+    if form.validate_on_submit():
+        status = "Submitted"
+        flash("MyModel updated")
+        return redirect('/success')
+        #return redirect(url_for('index'))
 
-#@blueprint.route("/edit<id>")
-#def edit(id):
-@blueprint.route("/edit")
-def edit():
-    print("TEST")
-    MyForm = model_form(MyModel, base_class=Form)
-    print(MyForm)
+    return render_template('forms/test.html', \
+        form=form, status=status)
 
-    flash('test')
-    flash('You were successfully logged in', 'danger')
+@blueprint.route('/success')
+def success():
+    return render_template('forms/success.html')
+######################################################
+######################################################
 
-    # model = MyModel.get(id)
-    # form = MyForm(request.form, model)
-
-    # if form.validate_on_submit():
-    #     form.populate_obj(model)
-    #     model.put()
-    #     print("MyModel updated")
-    #     return redirect(url_for("index"))
-    # return render_template("edit.html", form=form)
-
-    return render_template('pages/placeholder.edit.html')
-
-## Paolo
-################################
 
 ################
 #### routes ####
 ################
-
 
 
 @blueprint.route('/')
