@@ -37,15 +37,32 @@ from wtforms.fields import TextField, PasswordField
 from wtforms.validators import Required, Email, ValidationError
 from flask import flash
 
+class FlaskForm(Form):
+
+    def validate(self):
+        rv = Form.validate(self)
+        flash("Validating!", 'warning')
+        #print("Validating", rv, self)
+        if not rv:
+            flash("Failed", 'danger')
+            return False
+        return True
+
 def my_length_check(form, field):
     if len(field.data) > 5:
-        flash("Fail with field '%s'" % field.name)
         raise ValidationError('Field must be less than 50 characters')
 
-class EmailPasswordForm(Form):
+class EmailPasswordForm(FlaskForm):
+
     email = TextField('Email', validators=[Required(), Email()])
     some = TextField('Some', validators=[Required(), my_length_check])
     password = PasswordField('Password', validators=[Required()])
+
+#     def validate(self):
+#         rv = FlaskForm.validate(self)
+# # Note:
+# # Add code here to make db operations
+#         return rv
 
 ##################################################
 ##################################################

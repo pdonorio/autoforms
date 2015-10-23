@@ -21,9 +21,10 @@ def mylogin():
 
     if form.validate_on_submit():
         status = "Submitted"
-        flash("MyModel updated")
-        return redirect('/success')
-        #return redirect(url_for('index'))
+        flash("MyModel updated", 'success')
+        #return redirect(url_for('success'))
+    # else:
+    #     flash("Error")
 
     return render_template('forms/test.html', \
         form=form, status=status)

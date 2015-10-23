@@ -9,20 +9,16 @@
 
     Status: {{ status }}
 
-    <form action="logintest" method="post">
-        {{ form.email.label }}:
-        {{ form.email(placeholder='yourname@email.com') }}
-        <br>
-        {{ form.some.label }}:
-        {{ form.some(placeholder='lengt > 50') }}
-        <br>
-        {{ form.password.label }}:
-        {{ form.password(placeholder='***') }}
-        <br>
-        {{ form.csrf_token }}
-        <br><br>
-        <input type="submit" value="Go">
-    </form>
+{% from "forms/_formhelpers.html" import render_field %}
+<form action="logintest" method="post">
+    <dl> {{ render_field(form.email, placeholder='yourname@email.com') }} </dl>
+    <dl> {{ render_field(form.some, placeholder='smaller than 5 chars') }} </dl>
+    <dl> {{ render_field(form.password, placeholder='***') }} </dl>
+
+    {{ form.csrf_token }}
+    <br><br>
+    <input type="submit" value="Go">
+</form>
 
 </p>
 

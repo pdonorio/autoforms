@@ -14,4 +14,8 @@ https://github.com/rawrgulmuffins/WTFormMultipleSelectTutorial
 TODO:
  ☐ WTF
    ✔ Normal form @done (15-10-23 14:52)
-     ☐ validation
+     ✔ validation @done (15-10-23 15:55)
+     ✔ form helper @done (15-10-23 16:26)
+       http://flask.pocoo.org/docs/0.10/patterns/wtforms/
+     ✔ wtf fields validator, do they integrate with flask flash? @done (15-10-23 16:26)
+     ☐ derive from sqlalchemy model
