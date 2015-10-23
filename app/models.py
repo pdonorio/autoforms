@@ -7,6 +7,11 @@ from flask.ext.sqlalchemy import SQLAlchemy
 # no app object passed! Instead we use use db.init_app in the factory.
 db = SQLAlchemy()
 
+class TestModel(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True)
+    email = db.Column(db.String(120), unique=True)
+
 # create some models
 class MyModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -9,3 +9,4 @@ HOST = '0.0.0.0'
 PORT = int(os.environ.get('PORT', 5000))
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'database.db')
+SQLALCHEMY_TRACK_MODIFICATIONS = False

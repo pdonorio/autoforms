@@ -35,6 +35,10 @@ def create_app(config_filename):
         # is while within this block. Therefore, you can now run........
         db.create_all()
 
+    # TUSCANYWIDGETS?
+    # from tw2.api import make_middleware
+    # app.wsgi_app = make_middleware(app.wsgi_app, stack_registry=True)
+
     # Logging
     @app.after_request
     def log_response(resp):
