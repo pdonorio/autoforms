@@ -35,10 +35,15 @@ print(ModelForm)
 # https://exploreflask.com/forms.html
 from flask.ext.wtf import Form
 from wtforms.fields import TextField, PasswordField
-from wtforms.validators import Required, Email
+from wtforms.validators import Required, Email, ValidationError
+
+def my_length_check(form, field):
+    if len(field.data) > 50:
+        raise ValidationError('Field must be less than 50 characters')
 
 class EmailPasswordForm(Form):
     email = TextField('Email', validators=[Required(), Email()])
+    some = TextField('Some', validators=[Required(), my_length_check])
     password = PasswordField('Password', validators=[Required()])
 
 ##################################################
