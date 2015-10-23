@@ -3,7 +3,6 @@
 
 """ Factory and blueprints patterns """
 
-
 ##################################################
 # http://flask.pocoo.org/snippets/60/
 from flask.ext.wtf import Form
@@ -36,9 +35,11 @@ print(ModelForm)
 from flask.ext.wtf import Form
 from wtforms.fields import TextField, PasswordField
 from wtforms.validators import Required, Email, ValidationError
+from flask import flash
 
 def my_length_check(form, field):
-    if len(field.data) > 50:
+    if len(field.data) > 5:
+        flash("Fail with field '%s'" % field.name)
         raise ValidationError('Field must be less than 50 characters')
 
 class EmailPasswordForm(Form):
@@ -48,6 +49,8 @@ class EmailPasswordForm(Form):
 
 ##################################################
 ##################################################
+
+# ORIGINALS
 
 from flask_wtf import Form
 from wtforms import TextField, PasswordField
@@ -69,13 +72,9 @@ class RegisterForm(Form):
         EqualTo('password', message='Passwords must match')]
     )
 
-
 class LoginForm(Form):
     name = TextField('Username', [DataRequired()])
     password = PasswordField('Password', [DataRequired()])
 
-
 class ForgotForm(Form):
-    email = TextField(
-        'Email', validators=[DataRequired(), Length(min=6, max=40)]
-    )
+    email = TextField('Email', validators=[DataRequired(), Length(min=6,max=40)])
