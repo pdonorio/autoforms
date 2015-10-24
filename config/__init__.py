@@ -6,6 +6,9 @@
 import os
 
 class BaseConfig(object):
+
+    PROJECT = 'My Project'
+
     DEBUG = False
     TESTING = False
 

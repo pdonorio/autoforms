@@ -27,3 +27,8 @@ TODO:
 ☐ Detect offline?
 ☐ Css list
  ☐ from link or from current dir
+
+ http://flask.pocoo.org/docs/0.10/quickstart/#sessions
+ http://flask.pocoo.org/docs/0.10/quickstart/#cookies
+
+ Flask-Cache / memcache

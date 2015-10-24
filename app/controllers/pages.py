@@ -3,8 +3,8 @@
 
 """ Main routes """
 
-from flask import render_template, Blueprint, request,\
-    flash, redirect, url_for
+from flask import current_app, Blueprint, \
+    render_template, request, flash, redirect, url_for
 from app import forms
 
 blueprint = Blueprint('pages', __name__)
@@ -60,9 +60,12 @@ def success():
 #### routes ####
 ################
 
+
 @blueprint.route('/')
 def home():
-    return render_template('pages/placeholder.home.html')
+    print(current_app.config['PROJECT'])
+    return render_template('pages/placeholder.home.html',
+        project=current_app.config['PROJECT'])
 
 
 @blueprint.route('/about')
