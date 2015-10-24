@@ -129,9 +129,42 @@ class RegisterForm(Form):
         EqualTo('password', message='Passwords must match')]
     )
 
-class LoginForm(RedirectForm):
-    name = TextField('Username', [DataRequired()])
-    password = PasswordField('Password', [DataRequired()])
+# class LoginForm(RedirectForm):
+#     name = TextField('Username', [DataRequired()])
+#     password = PasswordField('Password', [DataRequired()])
 
 class ForgotForm(Form):
     email = TextField('Email', validators=[DataRequired(), Length(min=6,max=40)])
+
+
+##################################################
+#http://flask.pocoo.org/snippets/64/
+from flask.ext.wtf import Form
+from wtforms import StringField, PasswordField, validators
+from .models import MyModel as User
+
+class LoginForm(Form):
+    username = StringField('Username', [validators.Required()])
+    password = PasswordField('Password', [validators.Required()])
+
+    def __init__(self, *args, **kwargs):
+        Form.__init__(self, *args, **kwargs)
+        self.user = None
+
+    def validate(self):
+        rv = Form.validate(self)
+        if not rv:
+            return False
+
+        user = User.query.filter_by(
+            username=self.username.data).first()
+        if user is None:
+            self.username.errors.append('Unknown username')
+            return False
+
+        if not user.check_password(self.password.data):
+            self.password.errors.append('Invalid password')
+            return False
+
+        self.user = user
+        return True

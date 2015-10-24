@@ -53,12 +53,20 @@ def about():
 
 @blueprint.route('/login', methods=['GET','POST'])
 def login():
+
     form = forms.LoginForm(request.form)
+
+#http://flask.pocoo.org/snippets/64/
 # NOT WORKING?
     if form.validate_on_submit():
-        # do something with the form data here
-        flash("TEST")
-        print("LOGGED")
+        flash(u'Successfully logged in as %s' % form.user.username)
+        session['user_id'] = form.user.id
+        print("\n\n\nLOGGED!!\n\n\n")
+
+        # Redirect to index?
+        return redirect(url_for('index'))
+
+        # Redirect to last page accessed?
         #return form.redirect('index')
     return render_template('forms/login.html', form=form)
 

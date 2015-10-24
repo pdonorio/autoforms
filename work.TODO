@@ -21,3 +21,6 @@ TODO:
      ✔ fix forms template @done (15-10-24 12:01)
      ✔ secure wtf form snippet @done (15-10-24 12:39)
      ☐ derive from sqlalchemy model
+
+☐ Write some debug not as print or normal logger
+  ☐ a separate file?
