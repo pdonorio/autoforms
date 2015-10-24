@@ -9,11 +9,15 @@
 
     Status: {{ status }}
 
-{% from "forms/_formhelpers.html" import render_field %}
+{% from "forms/_formbootstr.html" import render_field %}
 <form action="logintest" method="post">
-    <dl> {{ render_field(form.email, placeholder='yourname@email.com') }} </dl>
-    <dl> {{ render_field(form.some, placeholder='smaller than 5 chars') }} </dl>
-    <dl> {{ render_field(form.password, placeholder='***') }} </dl>
+
+    {{ render_field(form.email,
+        placeholder = 'yourname@email.com' ,
+        required = true,
+        autofocus = true
+        ) }}
+    {{ render_field(form.password, placeholder='***') }}
 
     {{ form.csrf_token }}
     <br><br>

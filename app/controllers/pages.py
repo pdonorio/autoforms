@@ -10,10 +10,30 @@ from app import forms
 blueprint = Blueprint('pages', __name__)
 
 ######################################################
+#http://flask.pocoo.org/docs/0.10/patterns/viewdecorators/#caching-decorator
+from functools import wraps
+from flask import request
+
+def cached(timeout=5 * 1, key='view/%s'):
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            cache_key = key % request.path
+            rv = cache.get(cache_key)
+            if rv is not None:
+                return rv
+            rv = f(*args, **kwargs)
+            cache.set(cache_key, rv, timeout=timeout)
+            return rv
+        return decorated_function
+    return decorator
+
+######################################################
 ## PAOLO
 ######################################################
 
 #Form page
+#@cached
 @blueprint.route('/logintest', methods=["GET", "POST"])
 def mylogin():
     form = forms.EmailPasswordForm()
@@ -39,7 +59,6 @@ def success():
 ################
 #### routes ####
 ################
-
 
 @blueprint.route('/')
 def home():

@@ -21,6 +21,11 @@ def create_app(config_filename):
     config_name = os.getenv('FLASK_CONFIGURATION', 'default')
     app.config.from_object(config[config_name]) # object-based default configuration
 
+    # Cache
+    #http://flask.pocoo.org/docs/0.10/patterns/caching/#setting-up-a-cache
+    from werkzeug.contrib.cache import SimpleCache
+    cache = SimpleCache()
+
     # Database
     from .models import db
     db.init_app(app)

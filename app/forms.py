@@ -67,7 +67,7 @@ def my_length_check(form, field):
 class EmailPasswordForm(FlaskForm):
 
     email = TextField('Email', validators=[Required(), Email()])
-    some = TextField('Some', validators=[Required(), my_length_check])
+    #some = TextField('Some', validators=[Required(), my_length_check])
     password = PasswordField('Password', validators=[Required()])
 
 #     def validate(self):
