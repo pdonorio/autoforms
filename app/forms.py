@@ -53,8 +53,7 @@ class FlaskForm(Form):
 
     def validate(self):
         rv = Form.validate(self)
-        flash("Validating!", 'warning')
-        #print("Validating", rv, self)
+        # flash("Validating!", 'warning')
         if not rv:
             flash("Failed", 'danger')
             return False

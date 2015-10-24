@@ -2,17 +2,18 @@
 {% macro render_field(field, name=True) %}
 
 <div class="row">
+
   <div class="col-lg-8 col-md-8 col-sm-8">
 
     <div class="input-group">
+    {{ field(class_='form-control',**kwargs)|safe }}
     {% if name %}
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button">
-          {{ field.label }}:
+        <button class="btn btn-secondary">
+          {{ field.label }}
         </button>
       </span>
     {% endif %}
-    {{ field(class_='form-control',**kwargs)|safe }}
     </div><!-- /input-group -->
 
   </div>
@@ -26,6 +27,7 @@
     </ul>
   {% endif %}
   </div>
+
 </div>
 
 {% endmacro %}

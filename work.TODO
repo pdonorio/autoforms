@@ -24,3 +24,6 @@ TODO:
 
 ☐ Write some debug not as print or normal logger
   ☐ a separate file?
+☐ Detect offline?
+☐ Css list
+ ☐ from link or from current dir
