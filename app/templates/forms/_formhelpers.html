@@ -1,6 +1,8 @@
 <!-- Modified from http://flask.pocoo.org/docs/0.10/patterns/wtforms/ -->
-{% macro render_field(field) %}
-  {{ field.label }}:
+{% macro render_field(field, name=True) %}
+  {% if name %}
+      {{ field.label }}:
+  {% endif %}
   {{ field(**kwargs)|safe }}
   <dd>
   {% if field.errors %}

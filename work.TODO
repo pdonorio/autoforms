@@ -18,4 +18,6 @@ TODO:
      ✔ form helper @done (15-10-23 16:26)
        http://flask.pocoo.org/docs/0.10/patterns/wtforms/
      ✔ wtf fields validator, do they integrate with flask flash? @done (15-10-23 16:26)
+     ✔ fix forms template @done (15-10-24 12:01)
+     ✔ secure wtf form snippet @done (15-10-24 12:39)
      ☐ derive from sqlalchemy model

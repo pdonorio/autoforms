@@ -21,6 +21,8 @@ class DevelopmentConfig(BaseConfig):
     DEBUG = True
     HOST = '0.0.0.0'
 
+    WTF_CSRF_SECRET_KEY = 'a random string'
+
     # We have POSTGRESQL. Use docker environment variables
     dbdriver = "postgresql"
     dbhost = os.environ["DB_NAME"].split('/')[2]
@@ -30,3 +32,4 @@ class DevelopmentConfig(BaseConfig):
 
     SQLALCHEMY_DATABASE_URI = "%s://%s:%s@%s:%d" \
         % (dbdriver, dbuser, dbpw, dbhost, dbport)
+    SQLALCHEMY_TRACK_MODIFICATIONS = False

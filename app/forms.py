@@ -4,36 +4,48 @@
 """ Factory and blueprints patterns """
 
 ##################################################
-# http://flask.pocoo.org/snippets/60/
+# Security redirect back with Flask-wtf
+# http://flask.pocoo.org/snippets/63/
+
+try:    #python3
+    from urllib.parse import urlparse, urljoin
+except: #python2
+    from urlparse import urlparse, urljoin
+from flask import request, url_for, redirect
 from flask.ext.wtf import Form
-from wtforms.ext.sqlalchemy.orm import model_form
-from .models import TestModel
+from wtforms import TextField, HiddenField
 
-MyForm = model_form(TestModel, Form)
-print("TEST", MyForm)
+def is_safe_url(target):
+    ref_url = urlparse(request.host_url)
+    test_url = urlparse(urljoin(request.host_url, target))
+    return test_url.scheme in ('http', 'https') and \
+           ref_url.netloc == test_url.netloc
 
-##################################################
-# http://wtforms-alchemy.readthedocs.org/en/latest/advanced.html#using-wtforms-alchemy-with-flask-wtf
+def get_redirect_target():
+    for target in request.args.get('next'), request.referrer:
+        if not target:
+            continue
+        if is_safe_url(target):
+            return target
 
-from flask.ext.wtf import Form
-from wtforms_alchemy import model_form_factory
-# The variable db here is a SQLAlchemy object instance from
-# Flask-SQLAlchemy package
-from .models import db
+class RedirectForm(Form):
+    next = HiddenField()
 
-BaseModelForm = model_form_factory(Form)
+    def __init__(self, *args, **kwargs):
+        Form.__init__(self, *args, **kwargs)
+        if not self.next.data:
+            self.next.data = get_redirect_target() or ''
 
-class ModelForm(BaseModelForm):
-    @classmethod
-    def get_session(self):
-        return db.session
-
-print(ModelForm)
+    def redirect(self, endpoint='index', **values):
+        if is_safe_url(self.next.data):
+            return redirect(self.next.data)
+        target = get_redirect_target()
+        return redirect(target or url_for(endpoint, **values))
 
 ##################################################
 # https://exploreflask.com/forms.html
 from flask.ext.wtf import Form
-from wtforms.fields import TextField, PasswordField
+from wtforms import TextField, PasswordField
 from wtforms.validators import Required, Email, ValidationError
 from flask import flash
 
@@ -65,9 +77,37 @@ class EmailPasswordForm(FlaskForm):
 #         return rv
 
 ##################################################
+## YET TO TEST
 ##################################################
 
+# http://flask.pocoo.org/snippets/60/
+from flask.ext.wtf import Form
+from wtforms.ext.sqlalchemy.orm import model_form
+from .models import TestModel
+MyForm = model_form(TestModel, Form)
+print("TEST", MyForm)
+
+##################################################
+# http://wtforms-alchemy.readthedocs.org/en/latest/advanced.html#using-wtforms-alchemy-with-flask-wtf
+
+from flask.ext.wtf import Form
+from wtforms_alchemy import model_form_factory
+# The variable db here is a SQLAlchemy object instance from
+# Flask-SQLAlchemy package
+from .models import db
+
+BaseModelForm = model_form_factory(Form)
+
+class ModelForm(BaseModelForm):
+    @classmethod
+    def get_session(self):
+        return db.session
+
+print(ModelForm)
+
+##################################################
 # ORIGINALS
+##################################################
 
 from flask_wtf import Form
 from wtforms import TextField, PasswordField
@@ -89,7 +129,7 @@ class RegisterForm(Form):
         EqualTo('password', message='Passwords must match')]
     )
 
-class LoginForm(Form):
+class LoginForm(RedirectForm):
     name = TextField('Username', [DataRequired()])
     password = PasswordField('Password', [DataRequired()])
 

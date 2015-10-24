@@ -51,11 +51,16 @@ def about():
     return render_template('pages/placeholder.about.html')
 
 
-@blueprint.route('/login')
+@blueprint.route('/login', methods=['GET','POST'])
 def login():
     form = forms.LoginForm(request.form)
+# NOT WORKING?
+    if form.validate_on_submit():
+        # do something with the form data here
+        flash("TEST")
+        print("LOGGED")
+        #return form.redirect('index')
     return render_template('forms/login.html', form=form)
-
 
 @blueprint.route('/register')
 def register():
