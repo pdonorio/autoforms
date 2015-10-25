@@ -12,6 +12,11 @@
 {% from "forms/_formbootstr.html" import render_field %}
 <form action="logintest" method="post">
 
+    {{ render_field(form.name,
+        placeholder = 'test' ,
+        required = true,
+        autofocus = true
+        ) }}
     {{ render_field(form.email,
         placeholder = 'yourname@email.com' ,
         required = true,

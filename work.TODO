@@ -20,7 +20,9 @@ TODO:
      ✔ wtf fields validator, do they integrate with flask flash? @done (15-10-23 16:26)
      ✔ fix forms template @done (15-10-24 12:01)
      ✔ secure wtf form snippet @done (15-10-24 12:39)
-     ☐ derive from sqlalchemy model
+     ✔ derive from sqlalchemy model @done (15-10-25 11:56)
+     https://wtforms-alchemy.readthedocs.org/en/latest/configuration.html#custom-form-base-class
+       ☐ REFACTOR!
 
 ☐ Write some debug not as print or normal logger
   ☐ a separate file?
@@ -32,3 +34,6 @@ TODO:
  http://flask.pocoo.org/docs/0.10/quickstart/#cookies
 
  Flask-Cache / memcache
+
+Motion
+ http://zurb.com/playground/motion-ui

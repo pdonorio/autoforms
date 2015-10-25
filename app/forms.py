@@ -29,6 +29,7 @@ def get_redirect_target():
             return target
 
 class RedirectForm(Form):
+#class RedirectForm(Form):
     next = HiddenField()
 
     def __init__(self, *args, **kwargs):
@@ -49,7 +50,7 @@ from wtforms import TextField, PasswordField
 from wtforms.validators import Required, Email, ValidationError
 from flask import flash
 
-class FlaskForm(Form):
+class FlaskForm(RedirectForm):
 
     def validate(self):
         rv = Form.validate(self)
@@ -75,34 +76,44 @@ class EmailPasswordForm(FlaskForm):
 # # Add code here to make db operations
 #         return rv
 
-##################################################
-## YET TO TEST
-##################################################
+# ##################################################
+# ## YET TO TEST
+# ##################################################
 
-# http://flask.pocoo.org/snippets/60/
-from flask.ext.wtf import Form
-from wtforms.ext.sqlalchemy.orm import model_form
-from .models import TestModel
-MyForm = model_form(TestModel, Form)
-print("TEST", MyForm)
+from .models import User
 
-##################################################
-# http://wtforms-alchemy.readthedocs.org/en/latest/advanced.html#using-wtforms-alchemy-with-flask-wtf
-
-from flask.ext.wtf import Form
 from wtforms_alchemy import model_form_factory
-# The variable db here is a SQLAlchemy object instance from
-# Flask-SQLAlchemy package
-from .models import db
+ModelForm = model_form_factory(FlaskForm)
 
-BaseModelForm = model_form_factory(Form)
+class UserForm(ModelForm):
+    class Meta:
+        model = User
+print(UserForm)
 
-class ModelForm(BaseModelForm):
-    @classmethod
-    def get_session(self):
-        return db.session
+# # http://flask.pocoo.org/snippets/60/
+# from flask.ext.wtf import Form
+# from wtforms.ext.sqlalchemy.orm import model_form
+# from .models import TestModel
+# MyForm = model_form(TestModel, Form)
+# print("TEST", MyForm)
 
-print(ModelForm)
+# ##################################################
+# # http://wtforms-alchemy.readthedocs.org/en/latest/advanced.html#using-wtforms-alchemy-with-flask-wtf
+
+# from flask.ext.wtf import Form
+# from wtforms_alchemy import model_form_factory
+# # The variable db here is a SQLAlchemy object instance from
+# # Flask-SQLAlchemy package
+# from .models import db
+
+# BaseModelForm = model_form_factory(Form)
+
+# class ModelForm(BaseModelForm):
+#     @classmethod
+#     def get_session(self):
+#         return db.session
+
+# print(ModelForm)
 
 ##################################################
 # ORIGINALS

@@ -32,26 +32,34 @@ def cached(timeout=5 * 1, key='view/%s'):
 ## PAOLO
 ######################################################
 
-#Form page
-#@cached
 @blueprint.route('/logintest', methods=["GET", "POST"])
-def mylogin():
-    form = forms.EmailPasswordForm()
+def anotherlogin():
+    form = forms.UserForm()
     status = "Empty"
 
+    print("Oh boy")
     if form.validate_on_submit():
-        status = "Submitted"
-        flash("MyModel updated", 'success')
-        #return redirect(url_for('success'))
-    # else:
-    #     flash("Error")
+        flash("SQL alchemy is the way", 'success')
 
-    return render_template('forms/test.html', \
-        form=form, status=status)
+    return render_template('forms/test.html', form=form, status=status)
 
-@blueprint.route('/success')
-def success():
-    return render_template('forms/success.html')
+# #Form page
+# #@cached
+# @blueprint.route('/logintest', methods=["GET", "POST"])
+# def mylogin():
+#     form = forms.EmailPasswordForm()
+#     status = "Empty"
+
+#     if form.validate_on_submit():
+#         status = "Submitted"
+#         flash("MyModel updated", 'success')
+#         #return redirect(url_for('success'))
+#     # else:
+#     #     flash("Error")
+
+#     return render_template('forms/test.html', \
+#         form=form, status=status)
+
 ######################################################
 ######################################################
 
