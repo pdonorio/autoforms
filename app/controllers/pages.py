@@ -36,9 +36,8 @@ def cached(timeout=5 * 1, key='view/%s'):
 def anotherlogin():
     form = forms.UserForm()
     status = "Empty"
-
-    print("Oh boy")
     if form.validate_on_submit():
+        status = "Submitted"
         flash("SQL alchemy is the way", 'success')
 
     return render_template('forms/test.html', form=form, status=status)

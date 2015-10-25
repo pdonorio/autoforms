@@ -60,15 +60,28 @@ class FlaskForm(RedirectForm):
             return False
         return True
 
-def my_length_check(form, field):
-    if len(field.data) > 5:
-        raise ValidationError('Field must be less than 50 characters')
+from wtforms_alchemy import model_form_factory
+ModelForm = model_form_factory(FlaskForm)
 
-class EmailPasswordForm(FlaskForm):
+# def my_length_check(form, field):
+#     if len(field.data) > 5:
+#         raise ValidationError('Field must be less than 50 characters')
 
-    email = TextField('Email', validators=[Required(), Email()])
-    #some = TextField('Some', validators=[Required(), my_length_check])
-    password = PasswordField('Password', validators=[Required()])
+# class EmailPasswordForm(FlaskForm):
+
+#     email = TextField('Email', validators=[Required(), Email()])
+#     #some = TextField('Some', validators=[Required(), my_length_check])
+#     password = PasswordField('Password', validators=[Required()])
+
+##################################################
+## WHERE THE MAGIC HAPPENS
+##################################################
+
+
+from .models import User
+class UserForm(ModelForm):
+    class Meta:
+        model = User
 
 #     def validate(self):
 #         rv = FlaskForm.validate(self)
@@ -76,44 +89,8 @@ class EmailPasswordForm(FlaskForm):
 # # Add code here to make db operations
 #         return rv
 
-# ##################################################
-# ## YET TO TEST
-# ##################################################
-
-from .models import User
-
-from wtforms_alchemy import model_form_factory
-ModelForm = model_form_factory(FlaskForm)
-
-class UserForm(ModelForm):
-    class Meta:
-        model = User
 print(UserForm)
 
-# # http://flask.pocoo.org/snippets/60/
-# from flask.ext.wtf import Form
-# from wtforms.ext.sqlalchemy.orm import model_form
-# from .models import TestModel
-# MyForm = model_form(TestModel, Form)
-# print("TEST", MyForm)
-
-# ##################################################
-# # http://wtforms-alchemy.readthedocs.org/en/latest/advanced.html#using-wtforms-alchemy-with-flask-wtf
-
-# from flask.ext.wtf import Form
-# from wtforms_alchemy import model_form_factory
-# # The variable db here is a SQLAlchemy object instance from
-# # Flask-SQLAlchemy package
-# from .models import db
-
-# BaseModelForm = model_form_factory(Form)
-
-# class ModelForm(BaseModelForm):
-#     @classmethod
-#     def get_session(self):
-#         return db.session
-
-# print(ModelForm)
 
 ##################################################
 # ORIGINALS
@@ -146,35 +123,37 @@ class RegisterForm(Form):
 class ForgotForm(Form):
     email = TextField('Email', validators=[DataRequired(), Length(min=6,max=40)])
 
-
 ##################################################
-#http://flask.pocoo.org/snippets/64/
-from flask.ext.wtf import Form
-from wtforms import StringField, PasswordField, validators
-from .models import MyModel as User
+## YET TO TEST?
+##################################################
 
-class LoginForm(Form):
-    username = StringField('Username', [validators.Required()])
-    password = PasswordField('Password', [validators.Required()])
+# #http://flask.pocoo.org/snippets/64/
+# from flask.ext.wtf import Form
+# from wtforms import StringField, PasswordField, validators
+# from .models import MyModel as User
 
-    def __init__(self, *args, **kwargs):
-        Form.__init__(self, *args, **kwargs)
-        self.user = None
+# class LoginForm(Form):
+#     username = StringField('Username', [validators.Required()])
+#     password = PasswordField('Password', [validators.Required()])
 
-    def validate(self):
-        rv = Form.validate(self)
-        if not rv:
-            return False
+#     def __init__(self, *args, **kwargs):
+#         Form.__init__(self, *args, **kwargs)
+#         self.user = None
 
-        user = User.query.filter_by(
-            username=self.username.data).first()
-        if user is None:
-            self.username.errors.append('Unknown username')
-            return False
+#     def validate(self):
+#         rv = Form.validate(self)
+#         if not rv:
+#             return False
 
-        if not user.check_password(self.password.data):
-            self.password.errors.append('Invalid password')
-            return False
+#         user = User.query.filter_by(
+#             username=self.username.data).first()
+#         if user is None:
+#             self.username.errors.append('Unknown username')
+#             return False
 
-        self.user = user
-        return True
+#         if not user.check_password(self.password.data):
+#             self.password.errors.append('Invalid password')
+#             return False
+
+#         self.user = user
+#         return True

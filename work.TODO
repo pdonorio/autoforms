@@ -13,11 +13,15 @@ TODO:
      https://wtforms-alchemy.readthedocs.org/en/latest/configuration.html#custom-form-base-class
        ☐ REFACTOR!
 
-☐ Write some debug not as print or normal logger
-  ☐ a separate file?
-☐ Detect offline?
-☐ Css list
- ☐ from link or from current dir
+https://wtforms-alchemy.readthedocs.org/en/latest/column_conversion.html#using-include-exclude-and-only
+
+
+ ☐ Others
+  ☐ Write some debug not as print or normal logger
+    ☐ a separate file?
+  ☐ Detect offline?
+  ☐ Css list
+   ☐ from link or from current dir
 
 Session and cookies:
  http://flask.pocoo.org/docs/0.10/quickstart/#sessions
