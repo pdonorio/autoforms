@@ -11,7 +11,9 @@ TODO:
      ✔ secure wtf form snippet @done (15-10-24 12:39)
      ✔ derive from sqlalchemy model @done (15-10-25 11:56)
      https://wtforms-alchemy.readthedocs.org/en/latest/configuration.html#custom-form-base-class
-       ☐ REFACTOR!
+☐ REFACTOR!
+ ☐ Understand how it happened
+ ☐ make bootstrap 4 the default
 
 https://wtforms-alchemy.readthedocs.org/en/latest/column_conversion.html#using-include-exclude-and-only
 
