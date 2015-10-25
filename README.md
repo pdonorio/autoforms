@@ -13,4 +13,4 @@ Preview: [http://www.flaskboilerplate.com/](http://www.flaskboilerplate.com/)
 
 ## Instructions
 
-To be added
+To be added (soon).
