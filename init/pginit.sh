@@ -6,7 +6,8 @@ conf='/var/lib/postgresql/data/pg_hba.conf'
 echo "Changing access"
 echo "" > $conf
 #echo "local   $POSTGRES_USER  $POSTGRES_USER  trust" >> $conf  #ONLY DEBUG
-echo "hostnossl       $POSTGRES_USER  $POSTGRES_USER  172.17.0.0/16   password" >> $conf
+echo "hostnossl       postgres  $POSTGRES_USER  172.17.0.0/16   password" >> $conf
+echo "hostnossl       $POSTGRES_DB  $POSTGRES_USER  172.17.0.0/16   password" >> $conf
 echo "DONE"
 
 ## In case you need to startup a database
