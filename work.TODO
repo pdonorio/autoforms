@@ -1,7 +1,7 @@
 
 
 TODO:
- ☐ WTF
+ ✔ WTF @done (15-10-25 23:34)
    ✔ Normal form @done (15-10-23 14:52)
      ✔ validation @done (15-10-23 15:55)
      ✔ form helper @done (15-10-23 16:26)
@@ -11,19 +11,20 @@ TODO:
      ✔ secure wtf form snippet @done (15-10-24 12:39)
      ✔ derive from sqlalchemy model @done (15-10-25 11:56)
      https://wtforms-alchemy.readthedocs.org/en/latest/configuration.html#custom-form-base-class
+✔ Sqlalchemy sanity checks @done (15-10-25 23:35)
 ☐ REFACTOR!
  ☐ Understand how it happened
  ☐ make bootstrap 4 the default
 
+☐ Write some debug not as print or normal logger
+  ☐ a separate file?
+☐ Detect offline?
+  ☐ Css list
+  ☐ from link or from current dir
+
 https://wtforms-alchemy.readthedocs.org/en/latest/column_conversion.html#using-include-exclude-and-only
 
-
- ☐ Others
-  ☐ Write some debug not as print or normal logger
-    ☐ a separate file?
-  ☐ Detect offline?
-  ☐ Css list
-   ☐ from link or from current dir
+ ✔ Apply data container @done (15-10-25 23:33)
 
 Session and cookies:
  http://flask.pocoo.org/docs/0.10/quickstart/#sessions
@@ -34,3 +35,16 @@ Cache:
  Flask-Cache / memcache container
 Motion:
  http://zurb.com/playground/motion-ui
+
+DATA CONTAINER:
+  persistence http://www.alexecollins.com/docker-persistence/
+  remove http://stackoverflow.com/a/28095410
+  volumes http://stackoverflow.com/a/20652410
+docker run -v /data --name mydata busybox true
+docker run --volumes-from mydata busybox sh -c "echo hello >/data/hello"
+docker run --volumes-from mydata busybox cat /data/hello
+restart
+docker run --volumes-from mydata busybox cat /data/hello
+
+AUTOMATICALLY START CONTAINERS:
+  https://docs.docker.com/articles/host_integration/

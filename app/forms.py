@@ -89,8 +89,7 @@ class UserForm(ModelForm):
 # # Add code here to make db operations
 #         return rv
 
-print(UserForm)
-
+#print(UserForm)
 
 ##################################################
 # ORIGINALS

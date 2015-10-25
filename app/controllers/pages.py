@@ -41,9 +41,11 @@ def anotherlogin():
     status = "Empty"
     if form.validate_on_submit():
         form.populate_obj(user)
-        flash("Populated user %s" % dir(user), 'success')
+        #flash("Populated user %s" % dir(user), 'success')
+
         db.session.add(user)
         db.session.commit()
+        
         flash("User saved", 'success')
         status = "Saved"
 

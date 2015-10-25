@@ -38,8 +38,13 @@ def create_app(config_filename):
     with app.app_context():
         # Extensions like Flask-SQLAlchemy now know what the "current" app
         # is while within this block. Therefore, you can now run........
-        print("Created dbs and tables")
+        print("Created dbs")
         db.create_all()
+
+        from .sanity_checks import is_sane_database
+        from .models import User
+        # Note, this will check all models, not only user...
+        is_sane_database(User, db.session)
 
     # TUSCANYWIDGETS?
     # from tw2.api import make_middleware

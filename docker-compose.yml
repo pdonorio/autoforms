@@ -8,13 +8,14 @@ security:
         POSTGRES_DB: docker
 
 #################################
-# sqldata:
-#     image: busybox
+sqldata:
+    image: busybox
+    volumes:
+        - /var/lib/postgresql/data
+## Boot2docker bug: http://j.mp/1FMm5qj
+#         - ../data/psgr:/var/lib/postgresql/data
 #     user: "999"
 #     #command: /bin/sh -c "cd /var/lib; mkdir postgresql; chown 999:999 postgresql"
-#     volumes:
-#         # Boot2docker bug: http://j.mp/1FMm5qj
-#         - ../data/psgr:/var/lib/postgresql/data
 
 sql:
     image: postgres:9.4
@@ -23,9 +24,9 @@ sql:
         - ./init/pginit.sh:/docker-entrypoint-initdb.d/setup-my-schema.sh
     extends:
         service: security
-    # volumes_from:
-    #     - sqldata
-# How to reload config
+    volumes_from:
+        - sqldata
+# Note: how to reload config
 # $ /usr/lib/postgresql/9.4/bin/pg_ctl reload
 
 #################################
@@ -42,8 +43,8 @@ web:
     hostname: flask
     #command: ./run.py
     command: sleep 1234567890
-    extends:
-        service: security
+    # extends:
+    #     service: security
     links:
         - sql:db
     volumes:
