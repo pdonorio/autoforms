@@ -32,7 +32,8 @@ class DevelopmentConfig(BaseConfig):
     dbport = int(os.environ["DB_PORT"].split(':')[2])
     dbuser = os.environ["DB_ENV_POSTGRES_USER"]
     dbpw = os.environ["DB_ENV_POSTGRES_PASSWORD"]
+    database = os.environ["DB_ENV_POSTGRES_DB"]
 
-    SQLALCHEMY_DATABASE_URI = "%s://%s:%s@%s:%d" \
-        % (dbdriver, dbuser, dbpw, dbhost, dbport)
+    SQLALCHEMY_DATABASE_URI = "%s://%s:%s@%s:%d/%s" \
+        % (dbdriver, dbuser, dbpw, dbhost, dbport, database)
     SQLALCHEMY_TRACK_MODIFICATIONS = False

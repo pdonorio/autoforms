@@ -32,13 +32,20 @@ def cached(timeout=5 * 1, key='view/%s'):
 ## PAOLO
 ######################################################
 
+from ..models import db, User
+
 @blueprint.route('/logintest', methods=["GET", "POST"])
 def anotherlogin():
     form = forms.UserForm()
+    user = User()
     status = "Empty"
     if form.validate_on_submit():
-        status = "Submitted"
-        flash("SQL alchemy is the way", 'success')
+        form.populate_obj(user)
+        flash("Populated user %s" % dir(user), 'success')
+        db.session.add(user)
+        db.session.commit()
+        flash("User saved", 'success')
+        status = "Saved"
 
     return render_template('forms/test.html', form=form, status=status)
 
