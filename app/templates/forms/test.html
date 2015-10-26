@@ -12,17 +12,12 @@
 {% from "forms/_formbootstr.html" import render_field %}
 <form action="logintest" method="post">
 
-    {{ render_field(form.name,
-        placeholder = 'test' ,
-        required = true,
-        autofocus = true
-        ) }}
-    {{ render_field(form.email,
-        placeholder = 'yourname@email.com' ,
-        required = true,
-        autofocus = true
-        ) }}
-    {{ render_field(form.password, placeholder='***') }}
+    {{ render_field(form.name, placeholder = 'test' ,
+        required = true, autofocus = true ) }}
+    {{ render_field(form.test) }}
+    {{ render_field(form.email, placeholder = 'yourname@email.com' ,
+        required = true ) }}
+    {{ render_field(form.password, placeholder='***', required = true) }}
 
     {{ form.csrf_token }}
     <br><br>

@@ -25,10 +25,11 @@ def is_sane_database(Base, session):
 
     engine = session.get_bind()
     iengine = inspect(engine)
-
     errors = False
-
     tables = iengine.get_table_names()
+
+    import re
+    myre = re.compile(r'[A-Z]+\(?[0-9]*\)?')
 
     # Go through all SQLAlchemy models
     for name, klass in Base._decl_class_registry.items():
@@ -61,10 +62,16 @@ def is_sane_database(Base, session):
                         if not column.key in columns:
                             logger.error("Model %s declares column %s which does not exist in database %s", klass, column.key, engine)
                             errors = True
-                        elif str(column.type) != str(coltypes[column.key]):
-                            #print(type(column.type), type(str(coltypes[column.key])))
-                            logger.error("Different column '%s'! schema is %s, table has %s." % \
-                                (column, column.type, coltypes[column.key]))
+                        else:
+                            # Check types
+                            dbcol = str(column.type) 
+                            schemacol = str(coltypes[column.key])
+
+                            # Skip case of enums with specific name is an exception
+                            if myre.search(schemacol) and schemacol != dbcol:
+                                #print(str(column.type), str(coltypes[column.key]))
+                                logger.error("Different column '%s'! schema is %s, table has %s." % \
+                                    (column, column.type, coltypes[column.key]))
 
         else:
             logger.error("Model %s declares table %s which does not exist in database %s", klass, table, engine)

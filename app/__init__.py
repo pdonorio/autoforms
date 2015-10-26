@@ -38,7 +38,7 @@ def create_app(config_filename):
     with app.app_context():
         # Extensions like Flask-SQLAlchemy now know what the "current" app
         # is while within this block. Therefore, you can now run........
-        print("Created dbs")
+        print("Created DB/tables")
         db.create_all()
 
         from .sanity_checks import is_sane_database
