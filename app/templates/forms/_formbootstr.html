@@ -1,24 +1,20 @@
 <!-- Modified from http://flask.pocoo.org/docs/0.10/patterns/wtforms/ -->
 {% macro render_field(field, name=True) %}
 
-<div class="row">
-
-  <div class="col-lg-8 col-md-8 col-sm-8">
-
-    <div class="input-group">
+<!-- Single row -->
+<div class="form-group row">
+  <!-- Single label -->
+  <label for="{{ field.name }}" class="col-sm-3 form-control-label">
+  {% if name %}
+    {{ field.name.replace('_', ' ').capitalize() }}
+  {% endif %}
+  </label>
+  <!-- Single input -->
+  <div class="col-sm-6">
     {{ field(class_='form-control',**kwargs)|safe }}
-    {% if name %}
-      <span class="input-group-btn">
-        <button class="btn btn-secondary">
-          {{ field.label }}
-        </button>
-      </span>
-    {% endif %}
-    </div><!-- /input-group -->
-
   </div>
-
-  <div class="col-lg-4 col-md-4 col-sm-4">
+  <!-- Errors -->
+  <div class="col-sm-3">
   {% if field.errors %}
     <ul class=errors>
     {% for error in field.errors %}
@@ -27,7 +23,6 @@
     </ul>
   {% endif %}
   </div>
-
+<!-- END -->
 </div>
-
 {% endmacro %}

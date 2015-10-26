@@ -23,8 +23,13 @@
     {{ render_field(form.password, placeholder='***', required = true) }}
 
     {{ form.csrf_token }}
-    <br><br>
-    <input type="submit" value="Go">
+
+  <div class="form-group row">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">Sign in</button>
+    </div>
+  </div>
+
 </form>
 
 </p>
