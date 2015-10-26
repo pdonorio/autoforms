@@ -18,6 +18,8 @@ TODO:
   forms with input grouping are ugly
     ✔ find a better way to group input and label @done (15-10-26 21:16)
     http://v4-alpha.getbootstrap.com/components/forms/#form-layouts
+    ☐ cover
+    http://v4-alpha.getbootstrap.com/examples/cover/#
 
 ☐ REFACTORING
   ☐ Understand how it happened
