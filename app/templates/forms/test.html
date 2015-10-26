@@ -14,7 +14,10 @@
 
     {{ render_field(form.name, placeholder = 'test' ,
         required = true, autofocus = true ) }}
-    {{ render_field(form.test) }}
+
+    {{ render_field(form.test_select_a) }}
+    {{ render_field(form.test_select_b) }}
+
     {{ render_field(form.email, placeholder = 'yourname@email.com' ,
         required = true ) }}
     {{ render_field(form.password, placeholder='***', required = true) }}

@@ -21,7 +21,9 @@ class User(db.Model):
     email = db.Column(db.Unicode(255), nullable=False, info={'validators': Email()})
     # Test SELECT
     # enum sqlalchemy tutorial http://techspot.zzzeek.org/2011/01/14/the-enum-recipe/
-    test = db.Column(db.Enum('part_time', 'full_time', 'contractor', name='employee_types'))
+    test_select_a = db.Column(db.Enum('part_time', 'full_time', 'contractor', name='employee_types'))
+    test_select_b = db.Column(db.Integer, \
+        info={'choices': [(i, i) for i in range(13, 99)]}, nullable=False)
     # Password field from WTForm types
     password = db.Column(db.String(255), info={'form_field_class': PasswordField} )
 
