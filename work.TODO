@@ -12,7 +12,12 @@ TODO:
   ✔ derive from sqlalchemy model @done (15-10-25 11:56)
   https://wtforms-alchemy.readthedocs.org/en/latest/configuration.html#custom-form-base-class
   ✔ Select @done (15-10-26 17:20)
-  ☐ Min/Max lenght costraint
+  ✔ Min/Max lenght costraint @done (15-10-26 19:53)
+  http://flask.pocoo.org/docs/0.10/patterns/wtforms/#the-forms
+  ☐ bootstrap4 clean
+  forms with input grouping are ugly
+    ☐ find a better way to group input and label
+    http://v4-alpha.getbootstrap.com/components/forms/#form-layouts
 
 ☐ REFACTORING
   ☐ Understand how it happened

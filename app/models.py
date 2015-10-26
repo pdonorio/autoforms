@@ -9,14 +9,15 @@ from flask.ext.sqlalchemy import SQLAlchemy
 # no app object passed! Instead we use use db.init_app in the factory.
 db = SQLAlchemy()
 
-from wtforms.validators import Email
+from wtforms.validators import Email, Length
 from wtforms import PasswordField
 
 class User(db.Model):
     # Primary key
     id = db.Column(db.BigInteger, autoincrement=True, primary_key=True)
     # Normal
-    name = db.Column(db.Unicode(5), nullable=False)
+    name = db.Column(db.Unicode(5), nullable=False, \
+        info={'validators': Length(min=5,max=255)})
     # Custom validator
     email = db.Column(db.Unicode(255), nullable=False, info={'validators': Email()})
     # Test SELECT
