@@ -1,12 +1,8 @@
 {% extends 'layouts/data.html' %}
 
-{% block search %}
-    TEST SEARCH
-{% endblock %}
-
-{% block insert %}
+{% block datacontent %}
 {% from "forms/_formbootstr.html" import render_field %}
-<form action="logintest" method="post">
+<form action="data" method="post">
 
     {{ render_field(form.name, placeholder = 'test' ,
         required = true, autofocus = true ) }}
@@ -18,8 +14,14 @@
     {{ form.csrf_token }}
   <div class="form-group row">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-primary">Sign in</button>
+      <button type="submit" class="btn btn-primary">
+        {{formname.capitalize()}} data
+      </button>
     </div>
   </div>
 </form>
 {% endblock %}
+
+<!--
+$('#myTab a[href="#profile"]').tab('show') // Select tab by name
+-->

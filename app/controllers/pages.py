@@ -34,53 +34,48 @@ def cached(timeout=5 * 1, key='view/%s'):
 
 from ..models import db, User
 
-@blueprint.route('/data', methods=["GET", "POST"])
-def anotherlogin():
-    form = forms.UserForm()
-    status = "Empty"
+def insertdb(iform):
+    # Handle user model
+    user = User()
+    iform.populate_obj(user)
+    #flash("Populated user %s" % dir(user), 'success')
+    db.session.add(user)
+    # Save into db
+    db.session.commit()
 
-    if form.validate_on_submit():
-
-        # Handle user model
-        user = User()
-        form.populate_obj(user)
-        #flash("Populated user %s" % dir(user), 'success')
-        db.session.add(user)
-
-        db.session.commit()
-
+# #@cached
+@blueprint.route('/insert', methods=["GET", "POST"])
+def insert():
+    status = "Waiting data to save"
+    iform = forms.UserForm()
+    if iform.validate_on_submit():
+        insertdb(iform)
         flash("User saved", 'success')
         status = "Saved"
 
     return render_template('forms/test.html',
         project=current_app.config['PROJECT'],
-        form=form, status=status)
+        status=status, form=iform, formname='insert')
 
-# #Form page
-# #@cached
-# @blueprint.route('/logintest', methods=["GET", "POST"])
-# def mylogin():
-#     form = forms.EmailPasswordForm()
-#     status = "Empty"
+@blueprint.route('/search', methods=["GET", "POST"])
+def search():
+    status = "Waiting data to search"
+    iform = forms.UserForm()
+    if iform.validate_on_submit():
+        status = "Work in progress"
+        #flash("User saved", 'success')
 
-#     if form.validate_on_submit():
-#         status = "Submitted"
-#         flash("MyModel updated", 'success')
-#         #return redirect(url_for('success'))
-#     # else:
-#     #     flash("Error")
-
-#     return render_template('forms/test.html', \
-#         form=form, status=status)
+    return render_template('forms/test.html',
+        project=current_app.config['PROJECT'],
+        status=status, form=iform, formname='search')
 
 ######################################################
 ######################################################
 
 
 ################
-#### routes ####
+#### basic interface routes ####
 ################
-
 
 @blueprint.route('/')
 def home():
@@ -88,12 +83,10 @@ def home():
     return render_template('pages/placeholder.home.html',
         project=current_app.config['PROJECT'])
 
-
 @blueprint.route('/about')
 def about():
     return render_template('pages/placeholder.about.html',
         project=current_app.config['PROJECT'])
-
 
 @blueprint.route('/login', methods=['GET','POST'])
 def login():

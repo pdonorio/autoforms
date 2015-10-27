@@ -8,27 +8,25 @@
 <p class="lead">
     Status: {{ status }}
 
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active" href="#search" role="tab" data-toggle="tab">Search
-        </a> </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#insert" role="tab" data-toggle="tab">Insert
-        </a> </li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="search">
-            <div class="padb"> <h2>Search form</h2>
-                {% block search %}{% endblock %}
-            </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link
+                {% if formname == 'insert' %} active {% endif %}"
+                href="insert"> Insert </a> </li>
+              <li class="nav-item">
+                <a class="nav-link
+                {% if formname == 'search' %} active {% endif %}"
+                href="search"> Search </a> </li>
+            </ul>
         </div>
-        <div role="tabpanel" class="tab-pane" id="insert">
-            <div class="padb"> <h2>Insert form</h2>
-                {% block insert %}{% endblock %}
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 padb">
+            <h2>{{formname.capitalize()}} form</h2>
+            {% block datacontent %}{% endblock %}
         </div>
     </div>
 
