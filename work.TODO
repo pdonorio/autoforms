@@ -14,12 +14,10 @@ TODO:
   ✔ Select @done (15-10-26 17:20)
   ✔ Min/Max lenght costraint @done (15-10-26 19:53)
   http://flask.pocoo.org/docs/0.10/patterns/wtforms/#the-forms
-  ☐ bootstrap4 clean
+  ✔ bootstrap4 clean @done (15-10-27 09:10)
   forms with input grouping are ugly
     ✔ find a better way to group input and label @done (15-10-26 21:16)
     http://v4-alpha.getbootstrap.com/components/forms/#form-layouts
-    ☐ cover
-    http://v4-alpha.getbootstrap.com/examples/cover/#
 
 ☐ REFACTORING
   ☐ Understand how it happened
@@ -28,6 +26,8 @@ TODO:
 https://wtforms-alchemy.readthedocs.org/en/latest/column_conversion.html#using-include-exclude-and-only
 ✔ make bootstrap 4 the default @done (15-10-27 09:08)
   ☐ offline svg font-awesome
+  ☐ bootstrap theme for login page
+    ☐ cover http://v4-alpha.getbootstrap.com/examples/cover/#
   ☐ Detect offline?
     ☐ Css list
     ☐ from link or from current dir

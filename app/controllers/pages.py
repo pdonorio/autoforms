@@ -37,15 +37,18 @@ from ..models import db, User
 @blueprint.route('/logintest', methods=["GET", "POST"])
 def anotherlogin():
     form = forms.UserForm()
-    user = User()
     status = "Empty"
+
     if form.validate_on_submit():
+
+        # Handle user model
+        user = User()
         form.populate_obj(user)
         #flash("Populated user %s" % dir(user), 'success')
-
         db.session.add(user)
+
         db.session.commit()
-        
+
         flash("User saved", 'success')
         status = "Saved"
 
