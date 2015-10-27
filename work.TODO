@@ -20,7 +20,7 @@ TODO:
     http://v4-alpha.getbootstrap.com/components/forms/#form-layouts
 
 ☐ REFACTORING
-  ☐ Understand how it happened
+  ☐ A python code for setting active topbar button?
   ☐ Can i make a for cycle on model fields inside the template?
 ☐ Password saving flask
 https://wtforms-alchemy.readthedocs.org/en/latest/column_conversion.html#using-include-exclude-and-only

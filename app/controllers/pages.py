@@ -34,7 +34,7 @@ def cached(timeout=5 * 1, key='view/%s'):
 
 from ..models import db, User
 
-@blueprint.route('/logintest', methods=["GET", "POST"])
+@blueprint.route('/data', methods=["GET", "POST"])
 def anotherlogin():
     form = forms.UserForm()
     status = "Empty"
@@ -52,7 +52,9 @@ def anotherlogin():
         flash("User saved", 'success')
         status = "Saved"
 
-    return render_template('forms/test.html', form=form, status=status)
+    return render_template('forms/test.html',
+        project=current_app.config['PROJECT'],
+        form=form, status=status)
 
 # #Form page
 # #@cached
@@ -89,7 +91,8 @@ def home():
 
 @blueprint.route('/about')
 def about():
-    return render_template('pages/placeholder.about.html')
+    return render_template('pages/placeholder.about.html',
+        project=current_app.config['PROJECT'])
 
 
 @blueprint.route('/login', methods=['GET','POST'])
