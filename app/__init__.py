@@ -5,7 +5,7 @@
 
 import os,logging
 from flask import Flask, request as req
-from .controllers import pages
+from .pages import blueprint
 
 config = {
     "development": "config.DevelopmentConfig",
@@ -31,7 +31,7 @@ def create_app(config_filename):
     db.init_app(app)
 
     # Add things to this app
-    app.register_blueprint(pages.blueprint)
+    app.register_blueprint(blueprint)
     app.logger.setLevel(logging.NOTSET)
 
     # Application context

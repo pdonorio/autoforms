@@ -32,7 +32,7 @@ def cached(timeout=5 * 1, key='view/%s'):
 ## PAOLO
 ######################################################
 
-from ..models import db, MyModel
+from .models import db, MyModel
 
 def insertdb(iform):
     # Handle user model
