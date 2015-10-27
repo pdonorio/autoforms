@@ -5,8 +5,10 @@
 {% from "forms/_formhelpers.html" import render_field %}
 <form method="post" class="form" action="/login">
     <h3 class="form-heading">
-        Login <a href="/" title="Back to homepage">
-        <i class="fa fa-home pull-right"></i></a>
+        Login
+        <a href="/" title="Back to homepage">
+            <i class="fa fa-home pull-right"></i>
+        </a>
     </h3>
 
     {{ render_field(form.username, name=False,

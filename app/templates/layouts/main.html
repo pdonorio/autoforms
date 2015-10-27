@@ -1,40 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-<!-- meta -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+{% extends 'layouts/index.html' %}
 
-    <meta name="description" content="">
-    <meta name="author" content="">
-<!-- /meta -->
-
-    <title>{% block title %}{% endblock %}</title>
-
-
-<!-- styles -->
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
-
-<link type="text/css" rel="stylesheet" href="/static/css/layout.main.css" />
-<!--
-<link type="text/css" rel="stylesheet" href="/static/css/main.css" />
-<link type="text/css" rel="stylesheet" href="/static/css/main.responsive.css" />
-<link type="text/css" rel="stylesheet" href="/static/css/main.quickfix.css" />
--->
-<!-- /styles -->
-
-<!-- favicons -->
-<link rel="shortcut icon" href="/static/ico/favicon.png">
-<!-- /favicons -->
-
-</head>
-<body>
-
-  <!-- Wrap all page content here -->
-  <div id="wrap">
-
+{% block topbar %}
 <nav class="navbar navbar-dark bg-inverse navbar-fixed-top ">
   <a class="navbar-brand" href="#">
   {{ project }}
@@ -71,59 +37,14 @@
       </li>
     </ul>
 </nav>
+{% endblock %}
 
-    <!-- Begin page content -->
-    <main id="content" role="main" class="container">
-
-<!--
-    http://flask.pocoo.org/docs/0.10/patterns/flashing/
-    Possible alerts: info success warning danger
--->
-      {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-          {% for category, message in messages %}
-            {% if category == 'message' %}
-                <div class="alert alert-info alert-dismissible" role="alert">
-            {% else %}
-                <div class="alert alert-{{ category }} alert-dismissible" role="alert">
-            {% endif %}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                {{ message }}
-            </div>
-          {% endfor %}
-        {% endif %}
-      {% endwith %}
-
-      {% block content %}{% endblock %}
-
-    </main>
-
-  </div>
-
+{% block footer %}
 <footer class="footer">
   <div class="container">
       <br>
       <p>Your Company &copy; All Rights Reserved.</p>
-      {% block footer %}{% endblock %}
+      {% block footercontent %}{% endblock %}
   </div>
 </footer>
-
-<!-- jQuery first, then Bootstrap JS. -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
-
-
-  <script defer src="/static/js/plugins.js"></script>
-  <script defer src="/static/js/script.js"></script>
-  <!--
-  Google Analytics - Change UA-XXXXX-X to be your site's ID
-  <script>
-  window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
-  Modernizr.load({
-    load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
-  });
-  </script>
-  -->
-
-</body>
-</html>
+{% endblock %}
