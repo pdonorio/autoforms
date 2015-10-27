@@ -32,11 +32,11 @@ def cached(timeout=5 * 1, key='view/%s'):
 ## PAOLO
 ######################################################
 
-from ..models import db, User
+from ..models import db, MyModel
 
 def insertdb(iform):
     # Handle user model
-    user = User()
+    user = MyModel
     iform.populate_obj(user)
     #flash("Populated user %s" % dir(user), 'success')
     db.session.add(user)

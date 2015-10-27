@@ -12,7 +12,7 @@ db = SQLAlchemy()
 from wtforms.validators import Email, Length
 from wtforms import PasswordField
 
-class User(db.Model):
+class MyModel(db.Model):
     # Primary key
     id = db.Column(db.BigInteger, autoincrement=True, primary_key=True)
     # Normal

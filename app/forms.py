@@ -63,25 +63,23 @@ class FlaskForm(RedirectForm):
 from wtforms_alchemy import model_form_factory
 ModelForm = model_form_factory(FlaskForm)
 
+## Custom validator
 # def my_length_check(form, field):
 #     if len(field.data) > 5:
 #         raise ValidationError('Field must be less than 50 characters')
 
-# class EmailPasswordForm(FlaskForm):
-
-#     email = TextField('Email', validators=[Required(), Email()])
+## Inside the form
 #     #some = TextField('Some', validators=[Required(), my_length_check])
-#     password = PasswordField('Password', validators=[Required()])
 
 ##################################################
 ## WHERE THE MAGIC HAPPENS
 ##################################################
 
+from .models import MyModel
 
-from .models import User
 class UserForm(ModelForm):
     class Meta:
-        model = User
+        model = MyModel
 
 #     def validate(self):
 #         rv = FlaskForm.validate(self)
@@ -129,7 +127,7 @@ class ForgotForm(Form):
 #http://flask.pocoo.org/snippets/64/
 from flask.ext.wtf import Form
 from wtforms import StringField, PasswordField, validators
-from .models import User
+from .models import MyModel
 
 class LoginForm(Form):
     username = StringField('Username', [validators.Required()])

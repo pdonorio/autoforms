@@ -19,6 +19,8 @@ TODO:
     ✔ find a better way to group input and label @done (15-10-26 21:16)
     http://v4-alpha.getbootstrap.com/components/forms/#form-layouts
 
+ Make it restful!
+
 ☐ REFACTORING
   ☐ A python code for setting active topbar button?
   ☐ Can i make a for cycle on model fields inside the template?

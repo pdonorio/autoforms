@@ -42,9 +42,9 @@ def create_app(config_filename):
         db.create_all()
 
         from .sanity_checks import is_sane_database
-        from .models import User
-        # Note, this will check all models, not only user...
-        is_sane_database(User, db.session)
+        from .models import MyModel
+        # Note, this will check all models, not only MyModel...
+        is_sane_database(MyModel, db.session)
 
     # TUSCANYWIDGETS?
     # from tw2.api import make_middleware
