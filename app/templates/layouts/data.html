@@ -14,6 +14,10 @@
             <ul class="nav nav-tabs">
               <li class="nav-item">
                 <a class="nav-link
+                {% if formname == 'view' %} active {% endif %}"
+                href="view"> View </a> </li>
+              <li class="nav-item">
+                <a class="nav-link
                 {% if formname == 'insert' %} active {% endif %}"
                 href="insert"> Insert </a> </li>
               <li class="nav-item">

@@ -43,6 +43,15 @@ def insertdb(iform):
     # Save into db
     db.session.commit()
 
+template = 'forms/insert_search.html'
+
+@blueprint.route('/view', methods=["GET", "POST"])
+def view():
+    status = "View"
+    return render_template('forms/view.html',
+        project=current_app.config['PROJECT'],
+        status=status, formname='view')
+
 # #@cached
 @blueprint.route('/insert', methods=["GET", "POST"])
 def insert():
@@ -53,8 +62,7 @@ def insert():
         flash("User saved", 'success')
         status = "Saved"
 
-    return render_template('forms/test.html',
-        project=current_app.config['PROJECT'],
+    return render_template(template, project=current_app.config['PROJECT'],
         status=status, form=iform, formname='insert')
 
 @blueprint.route('/search', methods=["GET", "POST"])
@@ -65,8 +73,7 @@ def search():
         status = "Work in progress"
         #flash("User saved", 'success')
 
-    return render_template('forms/test.html',
-        project=current_app.config['PROJECT'],
+    return render_template(template, project=current_app.config['PROJECT'],
         status=status, form=iform, formname='search')
 
 ######################################################
