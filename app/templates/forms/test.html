@@ -1,37 +1,25 @@
-{% extends 'layouts/main.html' %}
-{% block title %}Autoforms from Sqlalchemy{% endblock %}
-{% block content %}
+{% extends 'layouts/data.html' %}
 
-<div class="page-header">
-  <h1>Testing forms</h1>
-</div>
-<p class="lead">
+{% block search %}
+    TEST SEARCH
+{% endblock %}
 
-    Status: {{ status }}
-
+{% block insert %}
 {% from "forms/_formbootstr.html" import render_field %}
 <form action="logintest" method="post">
 
     {{ render_field(form.name, placeholder = 'test' ,
         required = true, autofocus = true ) }}
-
     {{ render_field(form.test_select_a) }}
-    {{ render_field(form.test_select_b) }}
-
     {{ render_field(form.email, placeholder = 'yourname@email.com' ,
         required = true ) }}
     {{ render_field(form.password, placeholder='***', required = true) }}
 
     {{ form.csrf_token }}
-
   <div class="form-group row">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-primary">Sign in</button>
     </div>
   </div>
-
 </form>
-
-</p>
-
 {% endblock %}
