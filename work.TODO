@@ -24,12 +24,17 @@ TODO:
 ✔ sortable? @done (15-10-28 15:06)
    ✔ also implement sort... with sql alchemy i guess @done (15-10-28 15:07)
 
+✔ CONFIGURATION @done (15-10-28 18:50)
+  ☐ project title
+  ☐ footer
+  ☐ homepage text
+  ☐ model for view function
+
 ☐ Upload
 https://pythonhosted.org/Flask-Uploads/
 https://flask-wtf.readthedocs.org/en/latest/form.html#module-flask_wtf.file
 https://github.com/kirsle/flask-multi-upload
 http://www.laurentluce.com/posts/upload-to-django-with-progress-bar-using-ajax-and-jquery/
-
 OR
  ☐ uploads.py
 <form action="upload" method="post" enctype="multipart/form-data">
@@ -40,13 +45,6 @@ OR
  ☐ irods
 
 ☐ Edit row?
-
-☐ CONFIGURATION
-  ☐ project title
-  ☐ footer
-  ☐ homepage text
-  ☐ model for view function
-
 ☐ Make it restful!
 ☐ pagination? 
 https://github.com/lixxu/flask-paginate
