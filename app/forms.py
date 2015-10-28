@@ -53,7 +53,7 @@ from flask import flash
 class FlaskForm(RedirectForm):
 
     def validate(self):
-        rv = Form.validate(self)
+        rv = RedirectForm.validate(self)
         # flash("Validating!", 'warning')
         if not rv:
             flash("Failed", 'danger')

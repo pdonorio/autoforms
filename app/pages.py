@@ -37,7 +37,7 @@ from .models import db, MyModel, MyTable
 def insertdb(iform, obj):
     iform.populate_obj(obj)
     #flash("Populated user %s" % dir(user), 'success')
-    db.session.add(user)
+    db.session.add(obj)
     # Save into db
     db.session.commit()
 
@@ -62,7 +62,7 @@ def insert():
     iform = forms.UserForm()
     if iform.validate_on_submit():
         # Handle user model
-        insertdb(iform, MyModel)
+        insertdb(iform, MyModel())
         flash("User saved", 'success')
         status = "Saved"
 

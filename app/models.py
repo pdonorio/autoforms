@@ -55,19 +55,19 @@ from wtforms.validators import Email, Length
 from wtforms import PasswordField
 
 class MyModel(db.Model):
-    # Primary key
+    ## Primary key
     id = db.Column(db.BigInteger, autoincrement=True, primary_key=True)
-    # Normal
+    ## Normal
     name = db.Column(db.Unicode(5), nullable=False, \
         info={'validators': Length(min=5,max=255)})
-    # Custom validator
+    ## Custom validator
     email = db.Column(db.Unicode(255), nullable=False, info={'validators': Email()})
-    # Test SELECT
+    ## Test SELECT
     # enum sqlalchemy tutorial http://techspot.zzzeek.org/2011/01/14/the-enum-recipe/
     test_select_a = db.Column(db.Enum('part_time', 'full_time', 'contractor', name='employee_types'))
-    test_select_b = db.Column(db.Integer, \
-        info={'choices': [(i, i) for i in range(13, 99)]}, nullable=False)
-    # Password field from WTForm types
+    # test_select_b = db.Column(db.Integer, \
+    #     info={'choices': [(i, i) for i in range(13, 99)]}, nullable=False)
+    ## Password field from WTForm types
     password = db.Column(db.String(255), info={'form_field_class': PasswordField} )
 
 MyTable = model2table(MyModel)
