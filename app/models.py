@@ -12,7 +12,8 @@ db = SQLAlchemy()
 #############################################
 # Convert an SQLALCHEMY model into a Flask table
 
-from flask_table import Table, Col, create_table
+from flask_table import Table, Col#, create_table
+from flask import url_for
 from sqlalchemy import inspect
 
 class ItemTable(Table):
@@ -21,6 +22,15 @@ class ItemTable(Table):
             .format(''.join( (self.th(col_key, col) \
             for col_key, col in self._cols.items() if col.show)))
 
+    def sort_url(self, col_key, reverse=False):
+        direction = 'asc'
+        if reverse:
+            direction =  'desc'
+# // TO FIX:
+# do not like the 'view' link here!
+        return url_for('.view', sort=col_key, direction=direction)
+
+# Note: bootstrap can apply label colors to row
     # def tr_format(self, item):
     #     print(item)
     #     if item.important():
@@ -44,7 +54,8 @@ def model2table(obj):
         #print("SQLALCHEMY col", colname)
         TableCls.add_column(column.key, Col(colname))
 
-    TableCls.classes = ['table', 'table-striped', 'table-hover']
+    TableCls.classes = ['table', 'table-hover'] #,'table-striped']
+    TableCls.allow_sort = True
 
     return TableCls
 
