@@ -9,6 +9,32 @@ from flask.ext.sqlalchemy import SQLAlchemy
 # no app object passed! Instead we use use db.init_app in the factory.
 db = SQLAlchemy()
 
+#############################################
+# Convert an SQLALCHEMY model into a Flask table
+
+from flask_table import Col, create_table
+from sqlalchemy import inspect
+
+def model2table(obj):
+    """ Give me an SQLALCHEMY obj to get an HTML table """
+
+    table_name = 'Table' + obj.__name__
+    TableCls = create_table(table_name)
+    #print("Table:", table_name)
+
+    mapper = inspect(obj)
+    for column in mapper.attrs:
+        colname = column.key.replace('_', ' ').capitalize()
+        #print("SQLALCHEMY col", colname)
+        TableCls.add_column(column.key, Col(colname))
+
+    TableCls.classes = ['table']#, 'table-inverse']
+
+    return TableCls
+
+#############################################
+# Work on models
+
 from wtforms.validators import Email, Length
 from wtforms import PasswordField
 
@@ -27,6 +53,8 @@ class MyModel(db.Model):
         info={'choices': [(i, i) for i in range(13, 99)]}, nullable=False)
     # Password field from WTForm types
     password = db.Column(db.String(255), info={'form_field_class': PasswordField} )
+
+MyTable = model2table(MyModel)
 
 # #############################################
 # class TestModel(db.Model):

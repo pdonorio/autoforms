@@ -32,12 +32,10 @@ def cached(timeout=5 * 1, key='view/%s'):
 ## PAOLO
 ######################################################
 
-from .models import db, MyModel
+from .models import db, MyModel, MyTable
 
-def insertdb(iform):
-    # Handle user model
-    user = MyModel
-    iform.populate_obj(user)
+def insertdb(iform, obj):
+    iform.populate_obj(obj)
     #flash("Populated user %s" % dir(user), 'success')
     db.session.add(user)
     # Save into db
@@ -48,7 +46,13 @@ template = 'forms/insert_search.html'
 @blueprint.route('/view', methods=["GET", "POST"])
 def view():
     status = "View"
+    items = [ \
+        dict(id='a', name='test1', email='peppe', test_select_a='a', test_select_b='b', password='uhm'), \
+        #dict(id='b', name='test2'), \
+        ]
+
     return render_template('forms/view.html',
+        table=MyTable(items),
         project=current_app.config['PROJECT'],
         status=status, formname='view')
 
@@ -58,7 +62,8 @@ def insert():
     status = "Waiting data to save"
     iform = forms.UserForm()
     if iform.validate_on_submit():
-        insertdb(iform)
+        # Handle user model
+        insertdb(iform, MyModel)
         flash("User saved", 'success')
         status = "Saved"
 

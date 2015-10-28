@@ -77,6 +77,7 @@ ModelForm = model_form_factory(FlaskForm)
 
 from .models import MyModel
 
+###########################
 class UserForm(ModelForm):
     class Meta:
         model = MyModel
@@ -86,6 +87,7 @@ class UserForm(ModelForm):
 # # Note:
 # # Add code here to make db operations
 #         return rv
+###########################
 
 #print(UserForm)
 
