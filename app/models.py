@@ -5,7 +5,7 @@
 
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask_table import Table, Col  # , create_table
-from flask import url_for
+from flask import url_for, request
 from sqlalchemy import inspect
 from wtforms.validators import Email, Length
 from wtforms import PasswordField
@@ -32,7 +32,7 @@ class ItemTable(Table):
             direction = 'asc'
 # // TO FIX:
 # do not like the 'view' link here!
-        return url_for('.view', sort=col_key, direction=direction)
+        return url_for(request.endpoint, sort=col_key, direction=direction)
 
 # Note: bootstrap can apply label colors to row
     # def tr_format(self, item):

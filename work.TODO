@@ -32,6 +32,10 @@ TODO:
   ☐ model for view function
 
 ☐ Make it restful!
+☐ pagination? 
+https://github.com/lixxu/flask-paginate
+https://gist.github.com/danielrichman/5876099
+http://flask.pocoo.org/snippets/44/
 
 ☐ REFACTORING
   ☐ A python code for setting active topbar button?
