@@ -48,7 +48,6 @@ def view():
     status = "View"
     items = [ \
         dict(id='a', name='test1', email='peppe', test_select_a='a', test_select_b='b', password='uhm'), \
-        #dict(id='b', name='test2'), \
         ]
 
     return render_template('forms/view.html',

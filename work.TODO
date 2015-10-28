@@ -18,8 +18,10 @@ TODO:
   forms with input grouping are ugly
     ✔ find a better way to group input and label @done (15-10-26 21:16)
     http://v4-alpha.getbootstrap.com/components/forms/#form-layouts
-
- Make it restful!
+✔ flask table @done (15-10-28 09:52)
+  ✔ fix thead and bugs @done (15-10-28 09:52)
+  ☐ provide data with sqlalchemy query
+  ☐ Make it restful!
 
 ☐ REFACTORING
   ☐ A python code for setting active topbar button?

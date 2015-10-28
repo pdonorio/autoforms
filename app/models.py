@@ -12,8 +12,24 @@ db = SQLAlchemy()
 #############################################
 # Convert an SQLALCHEMY model into a Flask table
 
-from flask_table import Col, create_table
+from flask_table import Table, Col, create_table
 from sqlalchemy import inspect
+
+class ItemTable(Table):
+    def thead(self):
+        return '<thead class="thead-default"><tr>{}</tr></thead>'\
+            .format(''.join( (self.th(col_key, col) \
+            for col_key, col in self._cols.items() if col.show)))
+
+    # def tr_format(self, item):
+    #     print(item)
+    #     if item.important():
+    #         return ' <thead class="thead-default"><tr>{}</tr></thead>'
+    #     else:
+    #         return '<tr>{}</tr>'
+
+def create_table(name):
+    return type(name, (ItemTable,), {})
 
 def model2table(obj):
     """ Give me an SQLALCHEMY obj to get an HTML table """
@@ -28,7 +44,7 @@ def model2table(obj):
         #print("SQLALCHEMY col", colname)
         TableCls.add_column(column.key, Col(colname))
 
-    TableCls.classes = ['table']#, 'table-inverse']
+    TableCls.classes = ['table', 'table-striped']#, 'table-inverse']
 
     return TableCls
 
