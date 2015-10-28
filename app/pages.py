@@ -12,7 +12,6 @@ blueprint = Blueprint('pages', __name__)
 ######################################################
 #http://flask.pocoo.org/docs/0.10/patterns/viewdecorators/#caching-decorator
 from functools import wraps
-from flask import request
 
 def cached(timeout=5 * 1, key='view/%s'):
     def decorator(f):
@@ -41,14 +40,19 @@ def insertdb(iform, obj):
     # Save into db
     db.session.commit()
 
+def row2dict(r):
+    """ Convert a single sqlalchemy row into a dictionary """
+    #http://stackoverflow.com/a/1960546/2114395
+    return {c.name: str(getattr(r, c.name)) for c in r.__table__.columns}
+
 template = 'forms/insert_search.html'
 
 @blueprint.route('/view', methods=["GET", "POST"])
 def view():
     status = "View"
-    items = [ \
-        dict(id='a', name='test1', email='peppe', test_select_a='a', test_select_b='b', password='uhm'), \
-        ]
+    items = []
+    for row in MyModel.query.all():
+        items.append(row2dict(row))
 
     return render_template('forms/view.html',
         table=MyTable(items),

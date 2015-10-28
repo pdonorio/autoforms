@@ -20,8 +20,9 @@ TODO:
     http://v4-alpha.getbootstrap.com/components/forms/#form-layouts
 ✔ flask table @done (15-10-28 09:52)
   ✔ fix thead and bugs @done (15-10-28 09:52)
-  ☐ provide data with sqlalchemy query
-  ☐ Make it restful!
+  ✔ provide data with sqlalchemy query @done (15-10-28 11:38)
+☐ Edit?
+☐ Make it restful!
 
 ☐ REFACTORING
   ☐ A python code for setting active topbar button?
