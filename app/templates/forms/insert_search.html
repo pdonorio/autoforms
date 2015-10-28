@@ -2,7 +2,7 @@
 
 {% block datacontent %}
 {% from "forms/_formbootstr.html" import render_field %}
-<form action="data" method="post">
+<form action="{{ formname }}" method="post">
 
     {{ render_field(form.name, placeholder = 'test' ,
         required = true, autofocus = true ) }}

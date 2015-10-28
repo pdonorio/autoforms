@@ -44,7 +44,7 @@ def model2table(obj):
         #print("SQLALCHEMY col", colname)
         TableCls.add_column(column.key, Col(colname))
 
-    TableCls.classes = ['table', 'table-striped']#, 'table-inverse']
+    TableCls.classes = ['table', 'table-striped', 'table-hover']
 
     return TableCls
 
