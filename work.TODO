@@ -21,7 +21,16 @@ TODO:
 ✔ flask table @done (15-10-28 09:52)
   ✔ fix thead and bugs @done (15-10-28 09:52)
   ✔ provide data with sqlalchemy query @done (15-10-28 11:38)
-☐ Edit?
+✔ sortable? @done (15-10-28 15:06)
+   ✔ also implement sort... with sql alchemy i guess @done (15-10-28 15:07)
+
+☐ Edit row?
+
+☐ CONFIGURATION
+  ☐ project title
+  ☐ homepage text
+  ☐ model for view function
+
 ☐ Make it restful!
 
 ☐ REFACTORING

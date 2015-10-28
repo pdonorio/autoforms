@@ -23,9 +23,10 @@ class ItemTable(Table):
             for col_key, col in self._cols.items() if col.show)))
 
     def sort_url(self, col_key, reverse=False):
-        direction = 'asc'
         if reverse:
             direction =  'desc'
+        else:
+            direction = 'asc'
 # // TO FIX:
 # do not like the 'view' link here!
         return url_for('.view', sort=col_key, direction=direction)

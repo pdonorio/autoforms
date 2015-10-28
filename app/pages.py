@@ -47,19 +47,31 @@ def row2dict(r):
 
 template = 'forms/insert_search.html'
 
+@cached
 @blueprint.route('/view', methods=["GET", "POST"])
 def view():
     status = "View"
+
+    sort_field = request.args.get('sort', 'id')
+    reverse = (request.args.get('direction', 'asc') == 'desc')
+
+    field = getattr(MyModel, sort_field)
+    if reverse:
+        from sqlalchemy import desc
+        field = desc(field)
+
+    # SQLalchemy query (sorted)
+    data = MyModel.query.order_by(field)
+
     items = []
-    for row in MyModel.query.all():
+    for row in data:
         items.append(row2dict(row))
 
     return render_template('forms/view.html',
-        table=MyTable(items),
         project=current_app.config['PROJECT'],
+        table=MyTable(items, sort_by=sort_field, sort_reverse=reverse),
         status=status, formname='view')
 
-# #@cached
 @blueprint.route('/insert', methods=["GET", "POST"])
 def insert():
     status = "Waiting data to save"
