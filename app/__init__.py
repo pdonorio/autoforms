@@ -20,9 +20,9 @@ config = {
 
 # First column empty for auto-increment
 data = [
-    "-;FEXS0;adult;A001;IT;caucasian;29;male;168;3-10;60;;-;maternal;yes;1-5;yes;4;II;3;BOTH;1;UPPER LIMBS;;no;yes;right proximal femur ;25;;;;no;diabetis;neurofibromatosis;yes;EXT1;c.1831A>T;p.Lys611*;nonsense;",
-    "-;FEXS0;child;A001;;;7;male;125;50-75;-;;positive;maternal;yes;7;yes;7;I;0;;0;;;no;;;;;;;diabetes;neurofibromatosis;yes;EXT1;1165(-2)A>-G;;splicesite;",
-    "-;FEXS0;child;A001;;;9;male;127;25-50;-;;positive;maternal;yes;9;yes;8;I;0;;0;;;no;;;;;;;diabetes;neurofibromatosis;yes;EXT1;1165(-2)A>-G;;splicesite;",
+    "-;FEXS0;adult;A001;IT;caucasian;29;male;168;3-10;60;;-;maternal;yes;1-5;yes;4;II;3;BOTH;1;UPPER LIMBS;;no;yes;right proximal femur;25;;;;no;diabetes;neurofibromatosis;yes;EXT1;c.1831A>T;p.Lys611*;nonsense;",
+    "-;FEXS0;child;A001;;;7;male;125;50-75;-;;positive;maternal;yes;7;yes;7;I;0;;0;;;no;;;;;;;;diabetes;neurofibromatosis;yes;EXT1;1165(-2)A>-G;;splicesite;",
+    "-;FEXS0;child;A001;;;9;male;127;25-50;-;;positive;maternal;yes;9;yes;8;I;0;;0;;;no;;;;;;;;diabetes;neurofibromatosis;yes;EXT1;1165(-2)A>-G;;splicesite;",
 ]
 
 def myinsert(db, data):
@@ -77,7 +77,7 @@ def create_app(config_filename):
 # // TO FIX:
 # Drop tables and populate with basic data, only on request
 # e.g. startup option
-        db.drop_all(bind=None)
+        db.drop_all()
         print("Created DB/tables")
         db.create_all()
         myinsert(db, data)

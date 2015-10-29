@@ -7,6 +7,7 @@ from ..basemodel import db, DictSerializable
 # from wtforms.validators import Email, Length
 # from wtforms import PasswordField
 
+yesno = db.Enum('no', 'yes', name='yesno')
 
 #############################################
 # Work on models
@@ -35,34 +36,34 @@ class MyModel(db.Model, DictSerializable):
 # MISSING ADULT
     family_history = db.Column(
         db.Enum('positive', 'negative', name='familyh'))
-# MISSING ADULT
+
     inheritance = db.Column(
         db.Enum('maternal', 'paternal', 'none', name='inhe'))
-    imaging_evaluation = db.Column(db.String(20))
-    affected_skeletal_site = db.Column(db.String(20))
-    simmetry = db.Column(db.String(20))
-    bones_affeced_ocs = db.Column(db.String(20))
-    ior_classification = db.Column(db.String(20))
-    skeletal_deformities = db.Column(db.String(20))
-    deformities_localization = db.Column(db.String(20))
-    functional_limitations = db.Column(db.String(20))
+    imaging_evaluation = db.Column(yesno)
+    affected_skeletal_site = db.Column(db.String(10))
+    simmetry = db.Column(yesno)
+    bones_affeced_ocs = db.Column(db.Integer)
+    ior_classification = db.Column(db.String(4))
+    skeletal_deformities = db.Column(db.Integer)
+    deformities_localization = db.Column(db.String(9))
+    functional_limitations = db.Column(db.Integer)
     limitations_localization = db.Column(db.String(20))
-    spine_problems = db.Column(db.String(20))
-    dental_abnormalities = db.Column(db.String(20))
+    spine_problems = db.Column(yesno)
+    dental_abnormalities = db.Column(yesno)
 
 # ADULT EXTRA
-    malignant_degeneration = db.Column(db.String(20))
+    malignant_degeneration = db.Column(yesno)
     sites_affected_by_psc = db.Column(db.String(20))
-    age_of_psc_onset = db.Column(db.String(20))
+    age_of_psc_onset = db.Column(db.Integer)
     psc_grade = db.Column(db.String(20))
     psc_size = db.Column(db.String(20))
     psc_treatment = db.Column(db.String(20))
 # ADULT EXTRA
 
-    recurrence = db.Column(db.String(20))
+    recurrence = db.Column(yesno)
     other_medical_diseases = db.Column(db.String(20))
     other_genetic_diseases = db.Column(db.String(20))
-    germinal_mutation = db.Column(db.String(20))
+    germinal_mutation = db.Column(yesno)
     gene_involved = db.Column(db.String(20))
     dna_change = db.Column(db.String(20))
     protein_change = db.Column(db.String(20))
