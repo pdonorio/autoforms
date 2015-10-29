@@ -29,8 +29,8 @@ TODO:
   ✔ homepage text @done (15-10-29 09:24)
   ✔ footer IF @done (15-10-29 10:27)
   ✔ logo @done (15-10-29 11:01)
-  ☐ model for view function
-    ☐ python file??
+  ✔ model for view function @done (15-10-29 11:40)
+    ✔ python file @done (15-10-29 11:40)
 
 ☐ Main view extra column with actions
  ☐ Edit row

@@ -28,7 +28,7 @@ def create_app(config_filename):
     # cache = SimpleCache()
 
     # Database
-    from .models import db
+    from .basemodel import db
     db.init_app(app)
 
     # Add things to this app
@@ -42,10 +42,11 @@ def create_app(config_filename):
         print("Created DB/tables")
         db.create_all()
 
-        from .sanity_checks import is_sane_database
-        from .models import MyModel
-        # Note, this will check all models, not only MyModel...
-        is_sane_database(MyModel, db.session)
+# SANITY CHECKS?
+        # from .sanity_checks import is_sane_database
+        # from .models import MyModel
+        # # Note, this will check all models, not only MyModel...
+        # is_sane_database(MyModel, db.session)
 
     # Logging
     @app.after_request
