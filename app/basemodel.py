@@ -7,6 +7,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask_table import Table, Col  # , create_table
 from flask import url_for, request
 from sqlalchemy import inspect
+from collections import OrderedDict
 
 #############################################
 # DB INIT
@@ -71,6 +72,16 @@ def model2table(obj, selected):
     TableCls.allow_sort = True
 
     return TableCls
+
+
+# http://piotr.banaszkiewicz.org/blog/2012/06/30/serialize-sqlalchemy-results-into-json/ 
+class DictSerializable(object):
+    """ An object to keep an ordered version of ORM model attributes """
+    def _asdict(self):
+        result = OrderedDict()
+        for key in self.__mapper__.c.keys():
+            result[key] = getattr(self, key)
+        return result
 
 
 # #############################################

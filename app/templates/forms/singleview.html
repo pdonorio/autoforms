@@ -7,10 +7,12 @@
     {% for item in dbitems %}
     <table class="table table-hover">
         {% for (key,value) in item.items() %}
-        <tr>
-            <th> {{ key.replace('_', ' ').capitalize() }} </th>
-            <td> {{ value }} </td>
-        </tr>
+            {% if key != 'id' %}
+                <tr>
+                    <th> {{ key.replace('_', ' ').capitalize() }} </th>
+                    <td> {{ value }} </td>
+                </tr>
+            {% endif %}
         {% endfor %}
     </table>
     {% endfor %}

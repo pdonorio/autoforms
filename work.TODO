@@ -35,7 +35,7 @@ TODO:
 Release:
 ✔ insert link to single view @done (15-10-29 14:57)
   ✔ create a single view @done (15-10-29 16:09)
-  ☐ single view fields order??
+  ✔ single view fields order?? @done (15-10-29 18:52)
 ☐ fix types
   ✔ fix comparison @done (15-10-29 15:37)
 ✔ id insert autoincrement in my model @bug @done (15-10-29 16:28)
