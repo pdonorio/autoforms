@@ -7,7 +7,8 @@ import os, json
 
 CONFIG_PATH = 'config'
 JSON_EXT = 'json'
-PATH = 'base'
+#PATH = 'base'
+PATH = 'custom'
 
 
 ########################################

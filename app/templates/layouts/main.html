@@ -1,11 +1,18 @@
 {% extends 'layouts/index.html' %}
 
 {% block topbar %}
-<nav class="navbar navbar-dark bg-inverse navbar-fixed-top ">
+<nav class="navbar navbar-fixed-top navbar-light bg-faded"
+    style="background-color: #D4E9FF;"
+    >
+
+  <a href="#" class="pull-right" style='padding-right:10px;'>
+    <img src="/static/img/main.png" width="180"></a>
   {% if logopath %}
-  <a href="#" class="pull-left"><img src="{{ logopath }}" width=100></a>
+  <a href="#" class="pull-right" style='padding-right:10px;'>
+    <img src="{{ logopath }}" width="350"></a>
   {% endif %}
-  <a class="navbar-brand" href="#">
+
+  <a class="navbar-brand pull-left" href="/">
   {{ project }}
   </a>
   <ul class="nav navbar-nav">
