@@ -19,8 +19,6 @@ db = SQLAlchemy()
 class AnchorCol(Col):
     def td_format(self, content):
         return '<a href="view/' + content + '">' + content + '</a>'
-    # def td_contents(self, i, attr_list):
-    #     return self.td_format(self.from_attr_list(i, attr_list))
 
 
 class ItemTable(Table):

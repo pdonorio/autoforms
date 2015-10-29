@@ -35,7 +35,7 @@ TODO:
 ✔ insert link to single view @done (15-10-29 14:57)
   ☐ create a single view
 ☐ fix types
-  ☐ fix comparison
+  ✔ fix comparison @done (15-10-29 15:37)
 ☐ move configs to json
 ☐ better config for insert (couples? key: validators)
 

@@ -15,8 +15,8 @@ config = {
 
 data = [
     "1;FEXS0;adult;A001;IT;caucasian;29;male;168;3-10;60;;missing;maternal;yes;1-5;yes;4;II;3;BOTH;1;UPPER LIMBS;;no;yes;right proximal femur ;25;;;;no;diabetis;neurofibromatosis;yes;EXT1;c.1831A>T;p.Lys611*;nonsense;",
-    "2;FEXS0;child;A001;;;7;male;125;50-75;0;;positive;maternal;yes;7;yes;7;I;0;;0;;;no;diabetes;neurofibromatosis;yes;EXT1;1165(-2)A>-G;;splicesite;",
-    "3;FEXS0;child;A001;;;9;male;127;25-50;0;;positive;maternal;yes;9;yes;8;I;0;;0;;;no;diabetes;neurofibromatosis;yes;EXT1;1165(-2)A>-G;;splicesite;",
+    "2;FEXS0;child;A001;;;7;male;125;50-75;-;;positive;maternal;yes;7;yes;7;I;0;;0;;;no;;;;;;;diabetes;neurofibromatosis;yes;EXT1;1165(-2)A>-G;;splicesite;",
+    "3;FEXS0;child;A001;;;9;male;127;25-50;-;;positive;maternal;yes;9;yes;8;I;0;;0;;;no;;;;;;;diabetes;neurofibromatosis;yes;EXT1;1165(-2)A>-G;;splicesite;",
 ]
 
 def myinsert(db, data):
@@ -25,13 +25,15 @@ def myinsert(db, data):
     from .models.mo import MyModel
 
     for row in data:
-        tmp = row.split(';')
+        pieces = row.split(';')
         mapper = inspect(MyModel)
         i = 0
         content = {}
         for column in mapper.attrs:
             try:
-                content[column.key] = tmp[i]
+                value = pieces[i]
+                if not (value == '-' or value.strip() == ''):
+                    content[column.key] = pieces[i]
             except:
                 pass
             i += 1

@@ -30,11 +30,10 @@ class MyModel(db.Model):
     weight_kg = db.Column(db.Integer)
     weight_percentile = db.Column(db.String(9))
 
-# missing father
+# MISSING ADULT
     family_history = db.Column(db.String(20))
 
     inheritance = db.Column(db.String(20))
-
     imaging_evaluation = db.Column(db.String(20))
     affected_skeletal_site = db.Column(db.String(20))
     simmetry = db.Column(db.String(20))
@@ -46,13 +45,15 @@ class MyModel(db.Model):
     limitations_localization = db.Column(db.String(20))
     spine_problems = db.Column(db.String(20))
     dental_abnormalities = db.Column(db.String(20))
-    malignant_degeneration = db.Column(db.String(20))
 
+# ADULT EXTRA
+    malignant_degeneration = db.Column(db.String(20))
     sites_affected_by_psc = db.Column(db.String(20))
     age_of_psc_onset = db.Column(db.String(20))
     psc_grade = db.Column(db.String(20))
     psc_size = db.Column(db.String(20))
     psc_treatment = db.Column(db.String(20))
+# ADULT EXTRA
 
     recurrence = db.Column(db.String(20))
     other_medical_diseases = db.Column(db.String(20))
