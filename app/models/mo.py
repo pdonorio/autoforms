@@ -24,7 +24,8 @@ class MyModel(db.Model):
     country = db.Column(db.String(3))
     ethnicity = db.Column(db.String(20))
     age_at_visit = db.Column(db.Integer)
-    gender = db.Column(db.Enum('male', 'female', name='gender'))
+    gender = db.Column(
+        db.Enum('male', 'female', name='gender'))
 
     height_cm = db.Column(db.Integer)
     height_percentile = db.Column(db.String(9))
@@ -32,9 +33,11 @@ class MyModel(db.Model):
     weight_percentile = db.Column(db.String(9))
 
 # MISSING ADULT
-    family_history = db.Column(db.String(20))
-
-    inheritance = db.Column(db.String(20))
+    family_history = db.Column(
+        db.Enum('positive', 'negative', name='familyh'))
+# MISSING ADULT
+    inheritance = db.Column(
+        db.Enum('maternal', 'paternal', 'none', name='inhe'))
     imaging_evaluation = db.Column(db.String(20))
     affected_skeletal_site = db.Column(db.String(20))
     simmetry = db.Column(db.String(20))
