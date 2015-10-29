@@ -38,20 +38,23 @@ Release:
   ☐ single view fields order??
 ☐ fix types
   ✔ fix comparison @done (15-10-29 15:37)
-☐ id insert autoincrement in my model @bug
+✔ id insert autoincrement in my model @bug @done (15-10-29 16:28)
+☐ Upload file in single view
+  ☐ also list files
 
 After release:
+☐ CRON BACKUP!
 ☐ move configs to json
+  ☐ table name?
 ☐ anchor col inside configuration
 ☐ all logos inside configuration
 ☐ insert data as run option
  ☐ get data from json
+ ☐ set
 ☐ better config for insert (couples? key: validators)
-☐ CRON BACKUP!
 
 ☐ Main view extra column with actions
- ☐ Edit row
- ☐ Upload file
+  ☐ most important action: Edit row
 
 Upload:
 https://flask-wtf.readthedocs.org/en/latest/form.html#module-flask_wtf.file
