@@ -4,12 +4,12 @@
 {% from "forms/_formbootstr.html" import render_field %}
 <form action="{{ formname }}" method="post">
 
-    {{ render_field(form.name, placeholder = 'test' ,
+    {{ render_field(form.patient_id, placeholder = 'Patient id' ,
         required = true, autofocus = true ) }}
-    {{ render_field(form.test_select_a) }}
-    {{ render_field(form.email, placeholder = 'yourname@email.com' ,
-        required = true ) }}
-    {{ render_field(form.password, placeholder='***', required = true) }}
+
+    {% for item in selected %}
+        {{ render_field(form[item]) }}
+    {% endfor %}
 
     {{ form.csrf_token }}
   <div class="form-group row">
@@ -21,3 +21,17 @@
   </div>
 </form>
 {% endblock %}
+
+<!--
+    {% for item in form %}
+        {% if item.name != 'csrf_token' %}
+            {{ render_field(item.name, name=False) }}
+        {% endif %}
+    {% endfor %}
+    {{ render_field(form.name, placeholder = 'test' ,
+        required = true, autofocus = true ) }}
+    {{ render_field(form.test_select_a) }}
+    {{ render_field(form.email, placeholder = 'yourname@email.com' ,
+        required = true ) }}
+    {{ render_field(form.password, placeholder='***', required = true) }}
+-->

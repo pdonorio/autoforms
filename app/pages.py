@@ -33,7 +33,11 @@ blueprint = Blueprint('pages', __name__)
 #     return decorator
 
 ######################################################
-selected = ['id', 'age', 'gender', 'ethnicity']
+
+# // TO FIX: move inside json
+selected = ['patient_id', 'patient_type', 'gender', 'ethnicity']
+insertable = ['patient_type', 'gender', 'ethnicity']
+
 MyTable = model2table(MyModel, selected)
 
 
@@ -94,7 +98,7 @@ def insert():
         status = "Saved"
 
     return render_template(template,
-        status=status, form=iform, formname='insert',
+        status=status, form=iform, formname='insert', selected=insertable,
         **user_config['content'])
 
 

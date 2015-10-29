@@ -31,8 +31,9 @@ MUTATION TYPE;NOTE
 class MyModel(db.Model):
 
     # Primary key
-    id = db.Column(db.String(10), primary_key=True)
-    age = db.Column(db.Enum('adult', 'child', name='age'))
+    id = db.Column(db.BigInteger, autoincrement=True, primary_key=True)
+    patient_id = db.Column(db.String(10), unique=True)
+    patient_type = db.Column(db.Enum('adult', 'child', name='age'))
 
     country_iso = db.Column(db.String(10))
     country = db.Column(db.String(3))

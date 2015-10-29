@@ -14,7 +14,7 @@ config = {
 }
 
 data = []
-data.append("FEXS0;adult;A001;IT;caucasian;29;male;168;3-10;60;;maternal;yes;1-5;yes;4;II;3;BOTH;1;UPPER LIMBS;;no;yes;right proximal femur ;25;;;;no;diabetis;neurofibromatosis;yes;EXT1;c.1831A>T;p.Lys611*;nonsense;")
+data.append("0;FEXS0;adult;A001;IT;caucasian;29;male;168;3-10;60;;maternal;yes;1-5;yes;4;II;3;BOTH;1;UPPER LIMBS;;no;yes;right proximal femur ;25;;;;no;diabetis;neurofibromatosis;yes;EXT1;c.1831A>T;p.Lys611*;nonsense;")
 
 def myinsert(db, data):
 
@@ -60,9 +60,10 @@ def create_app(config_filename):
     with app.app_context():
         # Extensions like Flask-SQLAlchemy now know what the "current" app
         # is while within this block. Therefore, you can now run........
+        db.drop_all(bind=None)
         print("Created DB/tables")
         db.create_all()
-        #myinsert(db, data)
+        myinsert(db, data)
 
 # SANITY CHECKS?
         # from .sanity_checks import is_sane_database
