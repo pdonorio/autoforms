@@ -4,6 +4,7 @@
 {% from "forms/_formbootstr.html" import render_field %}
 <form action="{{ formname }}" method="post">
 
+<!-- insert link -->
     {{ render_field(form.patient_id, placeholder = 'Patient id' ,
         required = true, autofocus = true ) }}
 
