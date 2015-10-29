@@ -10,29 +10,13 @@ from wtforms import PasswordField
 #############################################
 # Work on models
 
-"""
-PATIENT ID;FAMILY ID;COUNTRY (ISO CODE 3166);ETHNICITY;AGE AT VISIT;GENDER;
-HEIGHT (cm);HEIGHT PERCENTILE (kg);WEIGHT;WEIGHT PERCENTILE;INHERITANCE ;
-TOTAL IMAGING EVALUATION;
-
-N. OF AFFECTED SKELETAL SITE ;SIMMETRY ;
-N. OF BONES AFFECED BY OCs;IOR CLINICAL CLASSIFICATION;
-N. OF SKELETAL DEFORMITIES;DEFORMITIES LOCALIZATION;
-N. OF FUNCTIONAL LIMITATIONS;LIMITATIONS LOCALIZATION;
-SPINE PROBLEMS;DENTAL ABNORMALITIES;MALIGNANT DEGENERATION ;
-SITES AFFECTED BY PSC;AGE OF PSC ONSET;PSC GRADE ;PSC SIZE ;
-PSC TREATMENT;RECURRENCE ;OTHER MEDICAL DISEASES;OTHER GENETIC DISEASES;
-GERMINAL MUTATION;GENE INVOLVED;DNA CHANGE (c.);PROTEIN CHANGE (p.);
-MUTATION TYPE;NOTE
-
-
-"""
+""" Rizzoli model """
 
 class MyModel(db.Model):
 
     # Primary key
     id = db.Column(db.BigInteger, autoincrement=True, primary_key=True)
-    patient_id = db.Column(db.String(10), unique=True)
+    patient_id = db.Column(db.String(10)) # , unique=True)
     patient_type = db.Column(db.Enum('adult', 'child', name='age'))
 
     country_iso = db.Column(db.String(10))
@@ -45,6 +29,11 @@ class MyModel(db.Model):
     height_percentile = db.Column(db.String(9))
     weight_kg = db.Column(db.Integer)
     weight_percentile = db.Column(db.String(9))
+
+# missing father
+    family_history = db.Column(db.String(20))
+
+    inheritance = db.Column(db.String(20))
 
     imaging_evaluation = db.Column(db.String(20))
     affected_skeletal_site = db.Column(db.String(20))

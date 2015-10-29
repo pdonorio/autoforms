@@ -35,8 +35,14 @@ blueprint = Blueprint('pages', __name__)
 ######################################################
 
 # // TO FIX: move inside json
-selected = ['patient_id', 'patient_type', 'gender', 'ethnicity']
-insertable = ['patient_type', 'gender', 'ethnicity']
+selected = [
+    #'patient_id', 'patient_type', 'gender', 'imaging_evaluation']
+    "patient_type", "country_iso", "country", "ethnicity", "age_at_visit", "gender", "height_cm", "height_percentile", "weight_kg", "weight_percentile", "imaging_evaluation", "affected_skeletal_site", "simmetry", "bones_affeced_ocs", "ior_classification", "skeletal_deformities", "deformities_localization", "functional_limitations", "limitations_localization", "spine_problems", "dental_abnormalities", "malignant_degeneration", "sites_affected_by_psc", "age_of_psc_onset", "psc_grade", "psc_size", "psc_treatment", "recurrence", "other_medical_diseases", "other_genetic_diseases", "germinal_mutation", "gene_involved", "dna_change", "protein_change", "mutation_type", "notes"
+    ]
+insertable = [
+    #'patient_type', 'gender', 'ethnicity'
+    "patient_type", "country_iso", "country", "ethnicity", "age_at_visit", "gender", "height_cm", "height_percentile", "weight_kg", "weight_percentile", "imaging_evaluation", "affected_skeletal_site", "simmetry", "bones_affeced_ocs", "ior_classification", "skeletal_deformities", "deformities_localization", "functional_limitations", "limitations_localization", "spine_problems", "dental_abnormalities", "malignant_degeneration", "sites_affected_by_psc", "age_of_psc_onset", "psc_grade", "psc_size", "psc_treatment", "recurrence", "other_medical_diseases", "other_genetic_diseases", "germinal_mutation", "gene_involved", "dna_change", "protein_change", "mutation_type", "notes"
+]
 
 MyTable = model2table(MyModel, selected)
 

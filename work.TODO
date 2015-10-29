@@ -32,10 +32,11 @@ TODO:
   ✔ model for view function @done (15-10-29 11:40)
     ✔ python file @done (15-10-29 11:40)
 
-☐ insert link to single view
-☐ create a single view
-☐ move configs to json
+✔ insert link to single view @done (15-10-29 14:57)
+  ☐ create a single view
 ☐ fix types
+  ☐ fix comparison
+☐ move configs to json
 ☐ better config for insert (couples? key: validators)
 
 ☐ Main view extra column with actions
