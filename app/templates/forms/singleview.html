@@ -2,17 +2,19 @@
 
 {% block datacontent %}
 
-Single view
-
-{% for item in dbitems %}
-<table class="table table-hover">
-    {% for (key,value) in item.items() %}
-    <tr>
-        <th> {{ key.replace('_', ' ').capitalize() }} </th>
-        <td> {{ value }} </td>
-    </tr>
+<div class="row">
+    <div class="col-sm-offset-1 col-sm-8">
+    {% for item in dbitems %}
+    <table class="table table-hover">
+        {% for (key,value) in item.items() %}
+        <tr>
+            <th> {{ key.replace('_', ' ').capitalize() }} </th>
+            <td> {{ value }} </td>
+        </tr>
+        {% endfor %}
+    </table>
     {% endfor %}
-</table>
-{% endfor %}
+    </div>
+</div>
 
 {% endblock %}

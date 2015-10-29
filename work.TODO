@@ -32,16 +32,21 @@ TODO:
   ✔ model for view function @done (15-10-29 11:40)
     ✔ python file @done (15-10-29 11:40)
 
+Release:
 ✔ insert link to single view @done (15-10-29 14:57)
   ✔ create a single view @done (15-10-29 16:09)
   ☐ single view fields order??
 ☐ fix types
   ✔ fix comparison @done (15-10-29 15:37)
+☐ id insert autoincrement in my model @bug
+
+After release:
 ☐ move configs to json
 ☐ anchor col inside configuration
 ☐ all logos inside configuration
+☐ insert data as run option
+ ☐ get data from json
 ☐ better config for insert (couples? key: validators)
-
 ☐ CRON BACKUP!
 
 ☐ Main view extra column with actions

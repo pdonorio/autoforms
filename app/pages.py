@@ -64,7 +64,7 @@ def row2dict(r):
 
 
 @blueprint.route('/view', methods=["GET", "POST"])
-@blueprint.route('/view/<id>', methods=["GET"])
+@blueprint.route('/view/<int:id>', methods=["GET"])
 def view(id=None):
     status = "View"
     template = 'forms/view.html'
@@ -78,7 +78,8 @@ def view(id=None):
         field = desc(field)
 
     if id is not None:
-        status = 'Single ' + status + ' for Record <b>#' + id + '</b>'
+        status = 'Single ' + status + \
+            sort_field + ' for Record <b>#' + str(id) + '</b>'
         template = 'forms/singleview.html'
         data = [MyModel.query.filter(MyModel.id == id).first()]
     else:

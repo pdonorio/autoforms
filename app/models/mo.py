@@ -4,19 +4,20 @@
 """ User defined model """
 
 from ..basemodel import db
-from wtforms.validators import Email, Length
-from wtforms import PasswordField
+# from wtforms.validators import Email, Length
+# from wtforms import PasswordField
+
 
 #############################################
 # Work on models
-
-""" Rizzoli model """
-
 class MyModel(db.Model):
+    """ Rizzoli's model """
+
+    __tablename__ = 'rizzoli'
 
     # Primary key
     id = db.Column(db.BigInteger, autoincrement=True, primary_key=True)
-    patient_id = db.Column(db.String(10)) # , unique=True)
+    patient_id = db.Column(db.String(10))  # , unique=True)
     patient_type = db.Column(db.Enum('adult', 'child', name='age'))
 
     country_iso = db.Column(db.String(10))
