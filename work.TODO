@@ -40,7 +40,25 @@ Release:
   ✔ fix comparison @done (15-10-29 15:37)
 ✔ id insert autoincrement in my model @bug @done (15-10-29 16:28)
 ☐ Upload file in single view
-  ☐ also list files
+  ☐ remove button
+  ✘ alchemy: save relationship between record and files? @cancelled (15-10-29 21:29)
+  ☐ create a directory per id
+    ☐ list files via os
+    ☐ redirect to view id after upload
+
+Upload:
+https://flask-wtf.readthedocs.org/en/latest/form.html#module-flask_wtf.file
+https://pythonhosted.org/Flask-Uploads/
+https://github.com/kirsle/flask-multi-upload
+http://www.laurentluce.com/posts/upload-to-django-with-progress-bar-using-ajax-and-jquery/
+OR
+#uploads.py
+<form action="upload" method="post" enctype="multipart/form-data">
+  <input type="file" name="file"><br /><br />
+  <input type="submit" value="Upload">
+</form>
+OR
+iRODS
 
 After release:
 ☐ CRON BACKUP!
@@ -56,20 +74,6 @@ After release:
 
 ☐ Main view extra column with actions
   ☐ most important action: Edit row
-
-Upload:
-https://flask-wtf.readthedocs.org/en/latest/form.html#module-flask_wtf.file
-https://pythonhosted.org/Flask-Uploads/
-https://github.com/kirsle/flask-multi-upload
-http://www.laurentluce.com/posts/upload-to-django-with-progress-bar-using-ajax-and-jquery/
-OR
-#uploads.py
-<form action="upload" method="post" enctype="multipart/form-data">
-  <input type="file" name="file"><br /><br />
-  <input type="submit" value="Upload">
-</form>
-OR
-iRODS
 
 ☐ Make it restful!
 Pagination:

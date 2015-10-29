@@ -38,18 +38,25 @@ admins:
         - 8080:80
 
 #################################
+uploads:
+    image: busybox
+    volumes:
+        - /uploads
+
 web:
     image: pdonorio/flasking
     hostname: flask
     #command: ./run.py
-    #command: gunicorn -k meinheld.gmeinheld.MeinheldWorker -b 0.0.0.0:5000 -w6 run:app
-    command: sleep 1234567890
+    command: gunicorn -k meinheld.gmeinheld.MeinheldWorker -b 0.0.0.0:5000 -w2 run:app
+    #command: sleep 1234567890
     # extends:
     #     service: security
     links:
         - sql:db
     volumes:
         - .:/data:ro
+    volumes_from:
+        - uploads
     # Open your browser here
     ports:
         - 80:5000

@@ -3,9 +3,10 @@
 
 """ Main routes """
 
-import importlib
-from flask import Blueprint, \
-    render_template, request, flash, redirect, url_for
+import os
+from flask import Blueprint, current_app, \
+    render_template, request, flash, redirect, url_for, send_from_directory
+from werkzeug import secure_filename
 from app import forms
 from config import user_config
 from .basemodel import db, model2table
@@ -130,7 +131,6 @@ def search():
         status=status, form=iform, formname='search',
         **user_config['content'])
 
-
 ################
 # Basic interface routes ####
 ################
@@ -159,7 +159,7 @@ def login():
         print("\n\n\nLOGGED!!\n\n\n")
 
         # Redirect to index?
-        return redirect(url_for('index'))
+        return redirect(url_for('.home'))
 
         # Redirect to last page accessed?
         #return form.redirect('index')
@@ -175,3 +175,47 @@ def register():
 def forgot():
     form = forms.ForgotForm(request.form)
     return render_template('forms/forgot.html', form=form)
+
+
+################
+# UPLOADs
+################
+
+# For a given file, return whether it's an allowed type or not
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in current_app.config['ALLOWED_EXTENSIONS']
+
+
+# Route that will process the file upload
+@blueprint.route('/uploader', methods=['GET'])
+def uploader():
+    return render_template('forms/upload.html', **user_config['content'])
+
+
+# This route is expecting a parameter containing the name
+# of a file. Then it will locate that file on the upload
+# directory and show it on the browser, so if the user uploads
+# an image, that image is going to be show after the upload
+@blueprint.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(current_app.config['UPLOAD_FOLDER'],
+                               filename)
+
+
+# Route that will process the file upload
+@blueprint.route('/upload', methods=['POST'])
+def upload():
+    # Get the name of the uploaded file
+    file = request.files['file']
+    # Check if the file is one of the allowed types/extensions
+    if file and allowed_file(file.filename):
+        # Make the filename safe, remove unsupported chars
+        filename = secure_filename(file.filename)
+        # Move the file form the temporal folder to
+        # the upload folder we setup
+        file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+        # Redirect the user to the uploaded_file route, which
+        # will basicaly show on the browser the uploaded file
+        return redirect(url_for('.uploaded_file', filename=filename))
+

@@ -1,6 +1,6 @@
 {
     "project": "OMDB",
-    "menus": [ "home", "view", "about" ],
+    "menus": [ "home", "view", "uploader", "about" ],
     "title": " <b>OM</b> <i>database</i> <br>Osteocondromi Multipli",
 	"subtitle": "Valutazione tramite high-throughput data mining dell’eterogeneità clinica e molecolare <br> in pazienti affetti da Osteocondromi Multipli",
 	"web": "http://www.ior.it/",

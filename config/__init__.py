@@ -10,7 +10,6 @@ JSON_EXT = 'json'
 #PATH = 'base'
 PATH = 'custom'
 
-
 ########################################
 # Read user config
 
@@ -50,8 +49,11 @@ class DevelopmentConfig(BaseConfig):
 
     DEBUG = True
     HOST = '0.0.0.0'
-
     WTF_CSRF_SECRET_KEY = 'a random string'
+
+    BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+    UPLOAD_FOLDER = '/uploads'
+    ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
     # We have POSTGRESQL. Use docker environment variables
     dbdriver = "postgresql"
