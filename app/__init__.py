@@ -13,6 +13,27 @@ config = {
     "default": "config.DevelopmentConfig"
 }
 
+data = []
+data.append("FEXS0;adult;A001;IT;caucasian;29;male;168;3-10;60;;maternal;yes;1-5;yes;4;II;3;BOTH;1;UPPER LIMBS;;no;yes;right proximal femur ;25;;;;no;diabetis;neurofibromatosis;yes;EXT1;c.1831A>T;p.Lys611*;nonsense;")
+
+def myinsert(db, data):
+
+    from sqlalchemy import inspect
+    from .models.mo import MyModel
+
+    for row in data:
+        tmp = row.split(';')
+        mapper = inspect(MyModel)
+        i = 0
+        content = {}
+        for column in mapper.attrs:
+            content[column.key] = tmp[i]
+            i += 1
+
+        obj = MyModel(**content)
+        db.session.add(obj)
+        db.session.commit()
+
 
 def create_app(config_filename):
     """ Create the istance for Flask application """
@@ -41,6 +62,7 @@ def create_app(config_filename):
         # is while within this block. Therefore, you can now run........
         print("Created DB/tables")
         db.create_all()
+        #myinsert(db, data)
 
 # SANITY CHECKS?
         # from .sanity_checks import is_sane_database

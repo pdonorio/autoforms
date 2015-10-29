@@ -33,7 +33,8 @@ blueprint = Blueprint('pages', __name__)
 #     return decorator
 
 ######################################################
-MyTable = model2table(MyModel)
+selected = ['id', 'age', 'gender', 'ethnicity']
+MyTable = model2table(MyModel, selected)
 
 
 def insertdb(iform, obj):
@@ -69,7 +70,12 @@ def view():
 
     items = []
     for row in data:
-        items.append(row2dict(row))
+        pieces = row2dict(row)
+        final = {}
+        for key, value in pieces.items():
+            if key in selected:
+                final[key] = value
+        items.append(final)
 
     return render_template('forms/view.html',
         table=MyTable(items, sort_by=sort_field, sort_reverse=reverse),

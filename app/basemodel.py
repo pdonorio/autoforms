@@ -45,7 +45,7 @@ def create_table(name):
     return type(name, (ItemTable,), {})
 
 
-def model2table(obj):
+def model2table(obj, selected):
     """ Give me an SQLALCHEMY obj to get an HTML table """
 
     table_name = 'Table' + obj.__name__
@@ -56,7 +56,8 @@ def model2table(obj):
     for column in mapper.attrs:
         colname = column.key.replace('_', ' ').capitalize()
         # print("SQLALCHEMY col", colname)
-        TableCls.add_column(column.key, Col(colname))
+        if column.key in selected:
+            TableCls.add_column(column.key, Col(colname))
 
     TableCls.classes = ['table', 'table-hover']
     TableCls.allow_sort = True
