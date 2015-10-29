@@ -76,6 +76,9 @@ After release:
   ☐ most important action: Edit row
 
 ☐ Make it restful!
+ ☐ and blueprint 
+ http://flask-restful-cn.readthedocs.org/en/0.3.4/intermediate-usage.html
+
 Pagination:
 https://github.com/lixxu/flask-paginate
 https://gist.github.com/danielrichman/5876099
