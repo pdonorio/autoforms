@@ -24,10 +24,11 @@ TODO:
 ✔ sortable? @done (15-10-28 15:06)
    ✔ also implement sort... with sql alchemy i guess @done (15-10-28 15:07)
 ✔ CONFIGURATION @done (15-10-28 18:50)
-  ☐ project title
-  ☐ footer
-  ☐ homepage text
+  ✔ project title @done (15-10-29 09:24)
+  ✔ footer @done (15-10-29 09:24)
+  ✔ homepage text @done (15-10-29 09:24)
   ☐ model for view function
+    ☐ python file??
 
 ☐ Main view extra column with actions
  ☐ Edit row
@@ -44,7 +45,7 @@ OR
   <input type="file" name="file"><br /><br />
   <input type="submit" value="Upload">
 </form>
-OR 
+OR
 iRODS
 
 ☐ Make it restful!

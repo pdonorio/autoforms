@@ -3,21 +3,42 @@
 
 """ Configurations """
 
-import os
+import os, json
 
+CONFIG_PATH = 'config'
+JSON_EXT = 'json'
+
+
+########################################
+# Read user config
+def read_files(path):
+    """ All user specifications """
+
+    # The HTML content
+    file = 'content'
+    filename = os.path.join(CONFIG_PATH, path, file + "." + JSON_EXT)
+    myjson = {}
+    with open(filename) as f:
+        myjson[file] = json.load(f)
+    return myjson
+
+user_config = read_files('base')
+
+
+########################################
 class BaseConfig(object):
-
-    PROJECT = 'My Project'
 
     DEBUG = False
     TESTING = False
 
     SECRET_KEY = 'my precious'
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///'+os.path.join(BASE_DIR, 'database.db')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + \
+        os.path.join(BASE_DIR, 'database.db')
 
     HOST = 'localhost'
     PORT = int(os.environ.get('PORT', 5000))
+
 
 class DevelopmentConfig(BaseConfig):
 

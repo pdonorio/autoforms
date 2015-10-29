@@ -3,30 +3,31 @@
 
 """ Factory and blueprints patterns """
 
-import os,logging
+import os, logging
 from flask import Flask, request as req
 from .pages import blueprint
 
 config = {
     "development": "config.DevelopmentConfig",
-    #"testing": "bookshelf.config.TestingConfig",
+    # "testing": "bookshelf.config.TestingConfig",
     "default": "config.DevelopmentConfig"
 }
 
-def create_app(config_filename):
 
+def create_app(config_filename):
+    """ Create the istance for Flask application """
     app = Flask(__name__)
 
     # Apply configuration
     config_name = os.getenv('FLASK_CONFIGURATION', 'default')
-    app.config.from_object(config[config_name]) # object-based default configuration
+    app.config.from_object(config[config_name])
 
-    # Cache
-    #http://flask.pocoo.org/docs/0.10/patterns/caching/#setting-up-a-cache
-    from werkzeug.contrib.cache import SimpleCache
-    cache = SimpleCache()
+    # # Cache
+    # # http://flask.pocoo.org/docs/0.10/patterns/caching/#setting-up-a-cache
+    # from werkzeug.contrib.cache import SimpleCache
+    # cache = SimpleCache()
 
-    # Database
+    # Database
     from .models import db
     db.init_app(app)
 
@@ -45,10 +46,6 @@ def create_app(config_filename):
         from .models import MyModel
         # Note, this will check all models, not only MyModel...
         is_sane_database(MyModel, db.session)
-
-    # TUSCANYWIDGETS?
-    # from tw2.api import make_middleware
-    # app.wsgi_app = make_middleware(app.wsgi_app, stack_registry=True)
 
     # Logging
     @app.after_request
