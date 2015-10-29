@@ -7,6 +7,7 @@ import os, json
 
 CONFIG_PATH = 'config'
 JSON_EXT = 'json'
+PATH = 'base'
 
 
 ########################################
@@ -15,14 +16,16 @@ def read_files(path):
     """ All user specifications """
 
     # The HTML content
-    file = 'content'
-    filename = os.path.join(CONFIG_PATH, path, file + "." + JSON_EXT)
+    section = 'content'
+    filename = os.path.join(CONFIG_PATH, path, section + "." + JSON_EXT)
     myjson = {}
     with open(filename) as f:
-        myjson[file] = json.load(f)
+        myjson[section] = json.load(f)
+    # Logo image
+    myjson[section]['logopath'] = os.path.join('/static/img/logo.png')
     return myjson
 
-user_config = read_files('base')
+user_config = read_files(PATH)
 
 
 ########################################

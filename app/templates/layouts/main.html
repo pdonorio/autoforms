@@ -2,6 +2,9 @@
 
 {% block topbar %}
 <nav class="navbar navbar-dark bg-inverse navbar-fixed-top ">
+  {% if logopath %}
+  <a href="#" class="pull-left"><img src="{{ logopath }}" width=100></a>
+  {% endif %}
   <a class="navbar-brand" href="#">
   {{ project }}
   </a>
@@ -41,12 +44,14 @@
 </nav>
 {% endblock %}
 
-{% block footer %}
-<footer class="footer">
-  <div class="container">
-      <br>
-      <p> {{ footer }} </p>
-      {% block extrafootercontent %}{% endblock %}
-  </div>
-</footer>
-{% endblock %}
+{% if footer %}
+    {% block footer %}
+    <footer class="footer">
+      <div class="container">
+          <br>
+          <p> {{ footer }} </p>
+          {% block extrafootercontent %}{% endblock %}
+      </div>
+    </footer>
+    {% endblock %}
+{% endif %}
