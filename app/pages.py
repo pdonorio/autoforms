@@ -36,7 +36,8 @@ blueprint = Blueprint('pages', __name__)
 
 # // TO FIX: move inside json
 selected = [
-    #'patient_id', 'patient_type', 'gender', 'imaging_evaluation']
+    'id',
+    'patient_id', #'patient_type', 'gender', 'imaging_evaluation']
     "patient_type", "country_iso", "country", "ethnicity", "age_at_visit", "gender", "height_cm", "height_percentile", "weight_kg", "weight_percentile", "imaging_evaluation", "affected_skeletal_site", "simmetry", "bones_affeced_ocs", "ior_classification", "skeletal_deformities", "deformities_localization", "functional_limitations", "limitations_localization", "spine_problems", "dental_abnormalities", "malignant_degeneration", "sites_affected_by_psc", "age_of_psc_onset", "psc_grade", "psc_size", "psc_treatment", "recurrence", "other_medical_diseases", "other_genetic_diseases", "germinal_mutation", "gene_involved", "dna_change", "protein_change", "mutation_type", "notes"
     ]
 insertable = [
@@ -60,12 +61,13 @@ def row2dict(r):
     # http://stackoverflow.com/a/1960546/2114395
     return {c.name: str(getattr(r, c.name)) for c in r.__table__.columns}
 
-template = 'forms/insert_search.html'
 
 
 @blueprint.route('/view', methods=["GET", "POST"])
-def view():
+@blueprint.route('/view/<id>', methods=["GET"])
+def view(id=None):
     status = "View"
+    template = 'forms/view.html'
 
     sort_field = request.args.get('sort', 'id')
     reverse = (request.args.get('direction', 'asc') == 'desc')
@@ -75,8 +77,13 @@ def view():
         from sqlalchemy import desc
         field = desc(field)
 
-    # SQLalchemy query (sorted)
-    data = MyModel.query.order_by(field)
+    if id is not None:
+        status = 'Single ' + status + ' for Record <b>#' + id + '</b>'
+        template = 'forms/singleview.html'
+        data = [MyModel.query.filter(MyModel.id == id).first()]
+    else:
+        # SQLalchemy query (sorted)
+        data = MyModel.query.order_by(field)
 
     items = []
     for row in data:
@@ -87,10 +94,12 @@ def view():
                 final[key] = value
         items.append(final)
 
-    return render_template('forms/view.html',
+    return render_template(template,
+        status=status, formname='view', dbitems=items,
         table=MyTable(items, sort_by=sort_field, sort_reverse=reverse),
-        status=status, formname='view',
         **user_config['content'])
+
+template = 'forms/insert_search.html'
 
 
 @blueprint.route('/insert', methods=["GET", "POST"])

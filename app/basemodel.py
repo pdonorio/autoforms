@@ -18,7 +18,7 @@ db = SQLAlchemy()
 # Convert an SQLALCHEMY model into a Flask table
 class AnchorCol(Col):
     def td_format(self, content):
-        return '<a href="view/' + content + '">' + content + '</a>'
+        return '<a href="/view/' + content + '">' + content + '</a>'
 
 
 class ItemTable(Table):
@@ -62,7 +62,7 @@ def model2table(obj, selected):
         colname = column.key.replace('_', ' ').capitalize()
         # print("SQLALCHEMY col", colname)
         if column.key in selected:
-            if column.key == 'patient_id':
+            if column.key == 'id':  # 'patient_id':
                 TableCls.add_column(column.key, AnchorCol(colname))
             else:
                 TableCls.add_column(column.key, Col(colname))

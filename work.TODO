@@ -33,11 +33,16 @@ TODO:
     ✔ python file @done (15-10-29 11:40)
 
 ✔ insert link to single view @done (15-10-29 14:57)
-  ☐ create a single view
+  ✔ create a single view @done (15-10-29 16:09)
+  ☐ single view fields order??
 ☐ fix types
   ✔ fix comparison @done (15-10-29 15:37)
 ☐ move configs to json
+☐ anchor col inside configuration
+☐ all logos inside configuration
 ☐ better config for insert (couples? key: validators)
+
+☐ CRON BACKUP!
 
 ☐ Main view extra column with actions
  ☐ Edit row
