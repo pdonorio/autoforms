@@ -23,17 +23,35 @@ TODO:
   ✔ provide data with sqlalchemy query @done (15-10-28 11:38)
 ✔ sortable? @done (15-10-28 15:06)
    ✔ also implement sort... with sql alchemy i guess @done (15-10-28 15:07)
+✔ CONFIGURATION @done (15-10-28 18:50)
+  ✔ project title @done (15-10-29 09:24)
+  ✔ footer @done (15-10-29 09:24)
+  ✔ homepage text @done (15-10-29 09:24)
+  ✔ footer IF @done (15-10-29 10:27)
+  ✔ logo @done (15-10-29 11:01)
+  ✔ model for view function @done (15-10-29 11:40)
+    ✔ python file @done (15-10-29 11:40)
 
-☐ Edit row?
+☐ Main view extra column with actions
+ ☐ Edit row
+ ☐ Upload file
 
-☐ CONFIGURATION
-  ☐ project title
-  ☐ footer
-  ☐ homepage text
-  ☐ model for view function
+Upload:
+https://flask-wtf.readthedocs.org/en/latest/form.html#module-flask_wtf.file
+https://pythonhosted.org/Flask-Uploads/
+https://github.com/kirsle/flask-multi-upload
+http://www.laurentluce.com/posts/upload-to-django-with-progress-bar-using-ajax-and-jquery/
+OR
+#uploads.py
+<form action="upload" method="post" enctype="multipart/form-data">
+  <input type="file" name="file"><br /><br />
+  <input type="submit" value="Upload">
+</form>
+OR
+iRODS
 
 ☐ Make it restful!
-☐ pagination? 
+Pagination:
 https://github.com/lixxu/flask-paginate
 https://gist.github.com/danielrichman/5876099
 http://flask.pocoo.org/snippets/44/

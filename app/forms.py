@@ -17,7 +17,9 @@ try:  # python3
     from urllib.parse import urlparse, urljoin
 except:  # python2
     from urlparse import urlparse, urljoin
-from .models import MyModel
+
+import importlib
+from config import user_config
 
 
 def is_safe_url(target):
@@ -77,12 +79,13 @@ ModelForm = model_form_factory(FlaskForm)
 ## WHERE THE MAGIC HAPPENS
 ##################################################
 
-from .models import MyModel
+package = 'app.models.' + user_config['models']['model']
+module = importlib.import_module(package)
 
 ###########################
 class UserForm(ModelForm):
     class Meta:
-        model = MyModel
+        model = module.MyModel
 
 #     def validate(self):
 #         rv = FlaskForm.validate(self)

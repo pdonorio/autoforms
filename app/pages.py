@@ -3,51 +3,55 @@
 
 """ Main routes """
 
-from flask import current_app, Blueprint, \
+import importlib
+from flask import Blueprint, \
     render_template, request, flash, redirect, url_for
 from app import forms
+from config import user_config
+from .basemodel import db, model2table
+from .forms import module
 
+MyModel = module.MyModel
 blueprint = Blueprint('pages', __name__)
 
-######################################################
-#http://flask.pocoo.org/docs/0.10/patterns/viewdecorators/#caching-decorator
-from functools import wraps
+# ######################################################
+# #http://flask.pocoo.org/docs/0.10/patterns/viewdecorators/#caching-decorator
+# from functools import wraps
 
-def cached(timeout=5 * 1, key='view/%s'):
-    def decorator(f):
-        @wraps(f)
-        def decorated_function(*args, **kwargs):
-            cache_key = key % request.path
-            rv = cache.get(cache_key)
-            if rv is not None:
-                return rv
-            rv = f(*args, **kwargs)
-            cache.set(cache_key, rv, timeout=timeout)
-            return rv
-        return decorated_function
-    return decorator
+# def cached(timeout=5 * 1, key='view/%s'):
+#     def decorator(f):
+#         @wraps(f)
+#         def decorated_function(*args, **kwargs):
+#             cache_key = key % request.path
+#             rv = cache.get(cache_key)
+#             if rv is not None:
+#                 return rv
+#             rv = f(*args, **kwargs)
+#             cache.set(cache_key, rv, timeout=timeout)
+#             return rv
+#         return decorated_function
+#     return decorator
 
 ######################################################
-## PAOLO
-######################################################
+MyTable = model2table(MyModel)
 
-from .models import db, MyModel, MyTable
 
 def insertdb(iform, obj):
     iform.populate_obj(obj)
-    #flash("Populated user %s" % dir(user), 'success')
+    # flash("Populated user %s" % dir(user), 'success')
     db.session.add(obj)
-    # Save into db
+    # Save into db
     db.session.commit()
+
 
 def row2dict(r):
     """ Convert a single sqlalchemy row into a dictionary """
-    #http://stackoverflow.com/a/1960546/2114395
+    # http://stackoverflow.com/a/1960546/2114395
     return {c.name: str(getattr(r, c.name)) for c in r.__table__.columns}
 
 template = 'forms/insert_search.html'
 
-@cached
+
 @blueprint.route('/view', methods=["GET", "POST"])
 def view():
     status = "View"
@@ -60,7 +64,7 @@ def view():
         from sqlalchemy import desc
         field = desc(field)
 
-    # SQLalchemy query (sorted)
+    # SQLalchemy query (sorted)
     data = MyModel.query.order_by(field)
 
     items = []
@@ -68,9 +72,10 @@ def view():
         items.append(row2dict(row))
 
     return render_template('forms/view.html',
-        project=current_app.config['PROJECT'],
         table=MyTable(items, sort_by=sort_field, sort_reverse=reverse),
-        status=status, formname='view')
+        status=status, formname='view',
+        **user_config['content'])
+
 
 @blueprint.route('/insert', methods=["GET", "POST"])
 def insert():
@@ -82,8 +87,10 @@ def insert():
         flash("User saved", 'success')
         status = "Saved"
 
-    return render_template(template, project=current_app.config['PROJECT'],
-        status=status, form=iform, formname='insert')
+    return render_template(template,
+        status=status, form=iform, formname='insert',
+        **user_config['content'])
+
 
 @blueprint.route('/search', methods=["GET", "POST"])
 def search():
@@ -91,29 +98,27 @@ def search():
     iform = forms.UserForm()
     if iform.validate_on_submit():
         status = "Work in progress"
-        #flash("User saved", 'success')
+        # flash("User saved", 'success')
 
-    return render_template(template, project=current_app.config['PROJECT'],
-        status=status, form=iform, formname='search')
-
-######################################################
-######################################################
+    return render_template(template,
+        status=status, form=iform, formname='search',
+        **user_config['content'])
 
 
 ################
-#### basic interface routes ####
+# Basic interface routes ####
 ################
 
 @blueprint.route('/')
+@blueprint.route('/home')
 def home():
-    print(current_app.config['PROJECT'])
     return render_template('pages/placeholder.home.html',
-        project=current_app.config['PROJECT'])
+        **user_config['content'])
 
 @blueprint.route('/about')
 def about():
     return render_template('pages/placeholder.about.html',
-        project=current_app.config['PROJECT'])
+        **user_config['content'])
 
 @blueprint.route('/login', methods=['GET','POST'])
 def login():

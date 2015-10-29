@@ -3,21 +3,47 @@
 
 """ Configurations """
 
-import os
+import os, json
 
+CONFIG_PATH = 'config'
+JSON_EXT = 'json'
+PATH = 'base'
+
+
+########################################
+# Read user config
+
+def read_files(path):
+    """ All user specifications """
+    sections = ['content', 'models', 'options']
+    myjson = {}
+
+    for section in sections:
+        filename = os.path.join(CONFIG_PATH, path, section + "." + JSON_EXT)
+        with open(filename) as f:
+            myjson[section] = json.load(f)
+    # Logo image
+    myjson['content']['logopath'] = os.path.join('/static/img/logo.png')
+
+    return myjson
+
+user_config = read_files(PATH)
+
+
+########################################
 class BaseConfig(object):
-
-    PROJECT = 'My Project'
 
     DEBUG = False
     TESTING = False
 
     SECRET_KEY = 'my precious'
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///'+os.path.join(BASE_DIR, 'database.db')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + \
+        os.path.join(BASE_DIR, 'database.db')
 
     HOST = 'localhost'
     PORT = int(os.environ.get('PORT', 5000))
+
 
 class DevelopmentConfig(BaseConfig):
 
