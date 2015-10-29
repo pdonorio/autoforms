@@ -81,19 +81,19 @@ def view(id=None):
         status = 'Single ' + status + \
             sort_field + ' for Record <b>#' + str(id) + '</b>'
         template = 'forms/singleview.html'
-        data = [MyModel.query.filter(MyModel.id == id).first()]
+# from collections import OrderedDict
+        items = [MyModel.query.filter(MyModel.id == id).first()._asdict()]
     else:
         # SQLalchemy query (sorted)
         data = MyModel.query.order_by(field)
-
-    items = []
-    for row in data:
-        pieces = row2dict(row)
-        final = {}
-        for key, value in pieces.items():
-            if key in selected:
-                final[key] = value
-        items.append(final)
+        items = []
+        for row in data:
+            pieces = row2dict(row)
+            final = {}
+            for key, value in pieces.items():
+                if key in selected:
+                    final[key] = value
+            items.append(final)
 
     return render_template(template,
         status=status, formname='view', dbitems=items,

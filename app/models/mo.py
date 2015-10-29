@@ -3,14 +3,14 @@
 
 """ User defined model """
 
-from ..basemodel import db
+from ..basemodel import db, DictSerializable
 # from wtforms.validators import Email, Length
 # from wtforms import PasswordField
 
 
 #############################################
 # Work on models
-class MyModel(db.Model):
+class MyModel(db.Model, DictSerializable):
     """ Rizzoli's model """
 
     __tablename__ = 'rizzoli'
