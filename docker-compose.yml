@@ -47,8 +47,8 @@ web:
     image: pdonorio/flasking
     hostname: flask
     #command: ./run.py
-    command: gunicorn -k meinheld.gmeinheld.MeinheldWorker -b 0.0.0.0:5000 -w2 run:app
-    #command: sleep 1234567890
+    #command: gunicorn -k meinheld.gmeinheld.MeinheldWorker -b 0.0.0.0:5000 -w2 run:app
+    command: sleep 1234567890
     # extends:
     #     service: security
     links:

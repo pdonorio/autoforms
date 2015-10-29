@@ -13,25 +13,20 @@ config = {
     "default": "config.DevelopmentConfig"
 }
 
-# // TO FIX:
-# move this data into json
-# also: should i read json files here? and save them as global
-# with flask g?
+import csv
+data = []
+with open('config/custom/mymodel.csv', 'r') as csvfile:
+    creader = csv.reader(csvfile, delimiter=';')
+    for row in creader:
+        data.append(row)
 
-# First column empty for auto-increment
-data = [
-    "-;FEXS0;adult;A001;IT;caucasian;29;male;168;3-10;60;;-;maternal;yes;1-5;yes;4;II;3;BOTH;1;UPPER LIMBS;;no;yes;right proximal femur;25;;;;no;diabetes;neurofibromatosis;yes;EXT1;c.1831A>T;p.Lys611*;nonsense;",
-    "-;FEXS0;child;A001;;;7;male;125;50-75;-;;positive;maternal;yes;7;yes;7;I;0;;0;;;no;;;;;;;;diabetes;neurofibromatosis;yes;EXT1;1165(-2)A>-G;;splicesite;",
-    "-;FEXS0;child;A001;;;9;male;127;25-50;-;;positive;maternal;yes;9;yes;8;I;0;;0;;;no;;;;;;;;diabetes;neurofibromatosis;yes;EXT1;1165(-2)A>-G;;splicesite;",
-]
 
 def myinsert(db, data):
 
     from sqlalchemy import inspect
     from .models.mo import MyModel
 
-    for row in data:
-        pieces = row.split(';')
+    for pieces in data:
         mapper = inspect(MyModel)
         i = 0
         content = {}
