@@ -14,6 +14,8 @@ from collections import OrderedDict
 # no app object passed! Instead we use use db.init_app in the factory.
 db = SQLAlchemy()
 
+from flask.ext.openid import OpenID
+oid = OpenID()
 
 #############################################
 # Convert an SQLALCHEMY model into a Flask table
@@ -102,3 +104,36 @@ class DictSerializable(object):
 
 #     def __repr__(self):
 #         return '<User %r>' % self.username
+
+###############################################
+# Flask LOGIN
+from flask.ext.login import LoginManager
+lm = LoginManager()
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nickname = db.Column(db.String(64), index=True, unique=True)
+    email = db.Column(db.String(120), index=True, unique=True)
+
+    @property
+    def is_authenticated(self):
+        return True
+
+    @property
+    def is_active(self):
+        return True
+
+    @property
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        try:
+            return unicode(self.id)  # python 2
+        except NameError:
+            return str(self.id)  # python 3
+
+    def __repr__(self):
+        return '<User %r>' % (self.nickname)
+

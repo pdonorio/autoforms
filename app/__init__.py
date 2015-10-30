@@ -5,6 +5,7 @@
 
 import os, logging
 from flask import Flask, request as req
+from flask.ext.openid import OpenID
 from .pages import blueprint
 
 config = {
@@ -44,6 +45,7 @@ def myinsert(db, data):
         db.session.commit()
 
 
+
 def create_app(config_filename):
     """ Create the istance for Flask application """
     app = Flask(__name__)
@@ -58,12 +60,18 @@ def create_app(config_filename):
     # cache = SimpleCache()
 
     # Database
-    from .basemodel import db
+    from .basemodel import db, lm, oid
     db.init_app(app)
 
     # Add things to this app
     app.register_blueprint(blueprint)
     app.logger.setLevel(logging.NOTSET)
+
+    # Flask LOGIN
+    lm.init_app(app)
+    oid.init_app(app)
+    lm.login_view = 'login'
+    #oid = OpenID(app, '/tmp')
 
     # Application context
     with app.app_context():

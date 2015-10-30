@@ -46,10 +46,10 @@ uploads:
 web:
     image: pdonorio/flasking
     hostname: flask
-    #command: sleep 1234567890 # DEBUG!
+    command: sleep 1234567890 # DEBUG!
     #command: ./run.py
     #command: gunicorn -b 0.0.0.0:5000 -w2 run:app
-    command: ./bootstrap.sh
+    #command: ./bootstrap.sh
     # extends:
     #     service: security
     links:

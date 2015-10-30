@@ -5,16 +5,23 @@
 
 import os, glob
 from flask import Blueprint, current_app, \
-    render_template, request, flash, redirect, url_for, send_from_directory
+    render_template, request, flash, redirect, url_for, g
+from flask.ext.login import login_user, \
+    logout_user, current_user, login_required
 from werkzeug import secure_filename
 from app import forms
 from config import user_config
-from .basemodel import db, model2table
-from .forms import module
+from .basemodel import db, lm, oid, model2table, User
+from .forms import module, LoginForm
 from flask_table import Col, create_table
 
 MyModel = module.MyModel
 blueprint = Blueprint('pages', __name__)
+
+
+@lm.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 # ######################################################
 # #http://flask.pocoo.org/docs/0.10/patterns/viewdecorators/#caching-decorator
@@ -60,8 +67,10 @@ def row2dict(r):
     return {c.name: str(getattr(r, c.name)) for c in r.__table__.columns}
 
 
+# ######################################################
 @blueprint.route('/view', methods=["GET", "POST"])
 @blueprint.route('/view/<int:id>', methods=["GET"])
+@login_required
 def view(id=None):
     status = "View"
     template = 'forms/view.html'
@@ -170,24 +179,60 @@ def about():
     return render_template('pages/placeholder.about.html',
         **user_config['content'])
 
-@blueprint.route('/login', methods=['GET','POST'])
+# @blueprint.route('/login', methods=['GET','POST'])
+# def login():
+
+#     form = forms.LoginForm(request.form)
+
+# #http://flask.pocoo.org/snippets/64/
+# # NOT WORKING?
+#     if form.validate_on_submit():
+#         flash(u'Successfully logged in as %s' % form.user.username)
+#         session['user_id'] = form.user.id
+#         print("\n\n\nLOGGED!!\n\n\n")
+
+#         # Redirect to index?
+#         return redirect(url_for('.home'))
+
+#         # Redirect to last page accessed?
+#         #return form.redirect('index')
+#     return render_template('forms/login.html', form=form)
+
+@blueprint.before_request
+def before_request():
+    g.user = current_user
+
+@blueprint.route('/login', methods=['GET', 'POST'])
+@oid.loginhandler
 def login():
-
-    form = forms.LoginForm(request.form)
-
-#http://flask.pocoo.org/snippets/64/
-# NOT WORKING?
+    if g.user is not None and g.user.is_authenticated:
+        return redirect(url_for('index'))
+    form = LoginForm()
     if form.validate_on_submit():
-        flash(u'Successfully logged in as %s' % form.user.username)
-        session['user_id'] = form.user.id
-        print("\n\n\nLOGGED!!\n\n\n")
+        session['remember_me'] = form.remember_me.data
+        return oid.try_login(form.openid.data, ask_for=['nickname', 'email'])
+    return render_template('forms/newlogin.html',
+       title='Sign In', form=form, providers=current_app.config['OPENID_PROVIDERS'])
 
-        # Redirect to index?
-        return redirect(url_for('.home'))
-
-        # Redirect to last page accessed?
-        #return form.redirect('index')
-    return render_template('forms/login.html', form=form)
+@oid.after_login
+def after_login(resp):
+    if resp.email is None or resp.email == "":
+        flash('Invalid login. Please try again.')
+        return redirect(url_for('login'))
+    user = User.query.filter_by(email=resp.email).first()
+    if user is None:
+        nickname = resp.nickname
+        if nickname is None or nickname == "":
+            nickname = resp.email.split('@')[0]
+        user = User(nickname=nickname, email=resp.email)
+        db.session.add(user)
+        db.session.commit()
+    remember_me = False
+    if 'remember_me' in session:
+        remember_me = session['remember_me']
+        session.pop('remember_me', None)
+    login_user(user, remember = remember_me)
+    return redirect(request.args.get('next') or url_for('index'))
 
 @blueprint.route('/register')
 def register():

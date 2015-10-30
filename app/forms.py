@@ -9,7 +9,9 @@
 
 from flask import request, url_for, redirect, flash
 from flask.ext.wtf import Form
-from wtforms import StringField, HiddenField, PasswordField, validators
+from wtforms import StringField, \
+    BooleanField, HiddenField, PasswordField, \
+    validators
 from wtforms.validators import DataRequired, EqualTo, Length
 # from wtforms.validators import Email, Required
 from wtforms_alchemy import model_form_factory
@@ -125,32 +127,37 @@ class ForgotForm(Form):
     email = StringField('Email', validators=[DataRequired(), Length(min=6,max=40)])
 
 
-##################################################
-## YET TO TEST?
-##################################################
-# http://flask.pocoo.org/snippets/64/
+
 class LoginForm(Form):
-    username = StringField('Username', [validators.Required()])
-    password = PasswordField('Password', [validators.Required()])
+    openid = StringField('openid', validators=[DataRequired()])
+    remember_me = BooleanField('remember_me', default=False)
 
-    def __init__(self, *args, **kwargs):
-        Form.__init__(self, *args, **kwargs)
-        self.user = None
+# ##################################################
+# ## YET TO TEST?
+# ##################################################
+# # http://flask.pocoo.org/snippets/64/
+# class LoginForm(Form):
+#     username = StringField('Username', [validators.Required()])
+#     password = PasswordField('Password', [validators.Required()])
 
-    def validate(self):
-        rv = Form.validate(self)
-        if not rv:
-            return False
+#     def __init__(self, *args, **kwargs):
+#         Form.__init__(self, *args, **kwargs)
+#         self.user = None
 
-        user = MyModel.query.filter_by(
-            username=self.username.data).first()
-        if user is None:
-            self.username.errors.append('Unknown username')
-            return False
+#     def validate(self):
+#         rv = Form.validate(self)
+#         if not rv:
+#             return False
 
-        if not user.check_password(self.password.data):
-            self.password.errors.append('Invalid password')
-            return False
+#         user = MyModel.query.filter_by(
+#             username=self.username.data).first()
+#         if user is None:
+#             self.username.errors.append('Unknown username')
+#             return False
 
-        self.user = user
-        return True
+#         if not user.check_password(self.password.data):
+#             self.password.errors.append('Invalid password')
+#             return False
+
+#         self.user = user
+#         return True
