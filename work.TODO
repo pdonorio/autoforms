@@ -50,25 +50,23 @@ Completed:
 --- ✄ -----------------------
 
 TODO:
-  After release:
-  ☐ move configs to json
-    ☐ all logos inside configuration
-  ☐ CRON BACKUP!
-  ☐ remove button?
-    ☐ delete method in upload, like @frapi
+  ✔ move configs to json @done (15-10-30 15:46)
+    ✔ all logos inside configuration @done (15-10-30 15:46)
+    ☐ password in configurations?
   ☐ Move db init somewhere else
     ☐ table name?
   ☐ anchor col inside configuration
-  ☐ None value for NULL in the table? better -
+  ☐ None value for NULL in the table? better a symbol '-'
   ☐ insert data as run option
-   ☐ get data from json
-   ☐ set
   ☐ better config for insert (couples? key: validators)
+  ☐ CRON BACKUP!
   ☐ MAIN VIEW extra column with actions
     ☐ most important action: Edit row
   ☐ MAKE IT RESTFUL!
    ☐ and blueprint
    http://flask-restful-cn.readthedocs.org/en/0.3.4/intermediate-usage.html
+  ☐ remove file button?
+    ☐ delete method in upload, like @frapi
 
   Pagination:
   https://github.com/lixxu/flask-paginate

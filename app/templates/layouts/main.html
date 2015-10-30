@@ -5,12 +5,20 @@
     style="background-color: #D4E9FF;"
     >
 
+  {% if not mainlogo and not secondarylogo %}
   <a href="#" class="pull-right" style='padding-right:10px;'>
-    <img src="/static/img/main.png" width="180"></a>
-  {% if logopath %}
-  <a href="#" class="pull-right" style='padding-right:10px;'>
-    <img src="{{ logopath }}" width="350"></a>
+    <img src="static/img/default.png" width="130"></a>
+  {% else %}
+      {% if mainlogo %}
+      <a href="#" class="pull-right" style='padding-right:10px;'>
+        <img src="{{ mainlogo }}" width="180"></a>
+      {% endif %}
+      {% if secondarylogo %}
+      <a href="#" class="pull-right" style='padding-right:10px;'>
+        <img src="{{ secondarylogo }}" width="350"></a>
+      {% endif %}
   {% endif %}
+
 
   <a class="navbar-brand pull-left" href="/">
   {{ project }}
@@ -30,29 +38,6 @@
     {% endif %}
 
   </ul>
-<!--
-  <form class="form-inline navbar-form pull-right">
-    <input class="form-control" type="text" placeholder="Search">
-    <button class="btn btn-success-outline" type="submit">Search</button>
-  </form>
-
-  <img src="..." alt="..." class="img-circle">
--->
-
-<!-- USER PROFILE DROPDOWN
-    <ul class="nav navbar-nav pull-right">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">User profile</a>
-        <div class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" href="/register">Signup</a>
-          <a class="dropdown-item" href="/login">Login</a>
-          <a class="dropdown-item" href="/forgot">Reset</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Divided</a>
-        </div>
-      </li>
-    </ul>
--->
 
 </nav>
 {% endblock %}

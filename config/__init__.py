@@ -3,12 +3,14 @@
 
 """ Configurations """
 
-import os, json
+import os
+import json
 
-CONFIG_PATH = 'config'
-JSON_EXT = 'json'
+########################################
 #PATH = 'base'
 PATH = 'custom'
+CONFIG_PATH = 'config'
+JSON_EXT = 'json'
 
 ########################################
 # Read user config
@@ -44,8 +46,11 @@ class BaseConfig(object):
     HOST = 'localhost'
     PORT = int(os.environ.get('PORT', 5000))
 
-    BASIC_USER = {'username': 'rprototype', 'password': 'rizzolicineca',
-        'email': 'idonotexist@test.com'}
+    BASIC_USER = {
+        'username': 'prototype', 'password': 'test',
+        # 'username': 'rprototype', 'password': 'rizzolicineca',
+        'email': 'idonotexist@test.com'
+    }
 
 
 class DevelopmentConfig(BaseConfig):
