@@ -12,23 +12,20 @@ PATH = 'custom'
 CONFIG_PATH = 'config'
 JSON_EXT = 'json'
 
+
 ########################################
 # Read user config
-
 def read_files(path):
     """ All user specifications """
     sections = ['content', 'models', 'options']
     myjson = {}
-
     for section in sections:
         filename = os.path.join(CONFIG_PATH, path, section + "." + JSON_EXT)
         with open(filename) as f:
             myjson[section] = json.load(f)
-    # Logo image
-    myjson['content']['logopath'] = os.path.join('/static/img/logo.png')
-
     return myjson
 
+# Use the function
 user_config = read_files(PATH)
 
 

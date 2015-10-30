@@ -77,6 +77,7 @@ TODO:
     ☐ A python code for setting active topbar button?
     ☐ Can i make a for cycle on model fields inside the template?
   ☐ Password saving flask
+  ☐ List of usernames
   https://wtforms-alchemy.readthedocs.org/en/latest/column_conversion.html#using-include-exclude-and-only
   ✔ make bootstrap 4 the default @done (15-10-27 09:08)
     ☐ offline svg font-awesome

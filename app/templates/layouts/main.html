@@ -2,27 +2,18 @@
 
 {% block topbar %}
 <nav class="navbar navbar-fixed-top navbar-light bg-faded"
-    style="background-color: #D4E9FF;"
-    >
+    style="background-color: #D4E9FF;">
 
-  {% if not mainlogo and not secondarylogo %}
+  {% if not logos %}
   <a href="#" class="pull-right" style='padding-right:10px;'>
     <img src="static/img/default.png" width="130"></a>
   {% else %}
-      {% if mainlogo %}
-      <a href="#" class="pull-right" style='padding-right:10px;'>
-        <img src="{{ mainlogo }}" width="180"></a>
-      {% endif %}
-      {% if secondarylogo %}
-      <a href="#" class="pull-right" style='padding-right:10px;'>
-        <img src="{{ secondarylogo }}" width="350"></a>
-      {% endif %}
+      {% for logo in logos %}
+          <a href="#" class="pull-right" style='padding-right:10px;'>
+            <img src="{{ logo.src }}" width="{{ logo.width }}"></a>
+      {% endfor %}
   {% endif %}
-
-
-  <a class="navbar-brand pull-left" href="/">
-  {{ project }}
-  </a>
+  <a class="navbar-brand pull-left" href="/"> {{ project }} </a>
   <ul class="nav navbar-nav">
     {% for menu in menus %}
     <li class="nav-item">
