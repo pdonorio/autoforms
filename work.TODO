@@ -51,8 +51,8 @@ Completed:
 
 TODO:
   ✔ move configs to json @done (15-10-30 15:46)
-    ✔ all logos inside configuration @done (15-10-30 15:46)
-    ☐ password in configurations?
+    ✔ all logos inside configuration @done (15-10-30 15:55)
+    ✔ password in configurations? @done (15-10-30 15:55)
   ☐ Move db init somewhere else
     ☐ table name?
   ☐ anchor col inside configuration

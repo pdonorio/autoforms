@@ -47,9 +47,9 @@ class BaseConfig(object):
     PORT = int(os.environ.get('PORT', 5000))
 
     BASIC_USER = {
-        'username': 'prototype', 'password': 'test',
-        # 'username': 'rprototype', 'password': 'rizzolicineca',
-        'email': 'idonotexist@test.com'
+        'username': user_config['content'].get('username', 'prototype'),
+        'password': user_config['content'].get('password', 'test'),
+        'email': user_config['content'].get('email', 'idonotexist@test.com')
     }
 
 
