@@ -83,7 +83,11 @@ def view(id=None):
             sort_field + ' for Record <b>#' + str(id) + '</b>'
         template = 'forms/singleview.html'
 # from collections import OrderedDict
-        items = [MyModel.query.filter(MyModel.id == id).first()._asdict()]
+        items = [MyModel.query.filter(
+            MyModel.id == id).first()._asdict()]
+        uploaded = request.args.get('uploaded')
+        if uploaded is not None:
+            flash("Uploaded file '%s'" % uploaded, 'success')
     else:
         # SQLalchemy query (sorted)
         data = MyModel.query.order_by(field)
@@ -97,7 +101,7 @@ def view(id=None):
             items.append(final)
 
     return render_template(template,
-        status=status, formname='view', dbitems=items,
+        status=status, formname='view', dbitems=items, id=id,
         table=MyTable(items, sort_by=sort_field, sort_reverse=reverse),
         **user_config['content'])
 
@@ -186,36 +190,42 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in current_app.config['ALLOWED_EXTENSIONS']
 
+# Only needed for separate debug
+
+# # Route that will process the file upload
+# @blueprint.route('/uploader/<int:id>', methods=['GET'])
+# def uploader(id):
+#     flash("Id is %d" % id)
+#     return render_template('forms/upload.html', **user_config['content'])
+
+# # Expecting a parameter containing the name of a file.
+# # It will locate that file on the upload directory and show it
+# @blueprint.route('/uploads/<filename>')
+# def uploaded_file(filename):
+#     return send_from_directory(current_app.config['UPLOAD_FOLDER'],
+#                                filename)
+
 
 # Route that will process the file upload
-@blueprint.route('/uploader', methods=['GET'])
-def uploader():
-    return render_template('forms/upload.html', **user_config['content'])
-
-
-# This route is expecting a parameter containing the name
-# of a file. Then it will locate that file on the upload
-# directory and show it on the browser, so if the user uploads
-# an image, that image is going to be show after the upload
-@blueprint.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(current_app.config['UPLOAD_FOLDER'],
-                               filename)
-
-
-# Route that will process the file upload
-@blueprint.route('/upload', methods=['POST'])
-def upload():
+@blueprint.route('/upload/<int:id>', methods=['POST'])
+def upload(id):
     # Get the name of the uploaded file
     file = request.files['file']
     # Check if the file is one of the allowed types/extensions
     if file and allowed_file(file.filename):
         # Make the filename safe, remove unsupported chars
         filename = secure_filename(file.filename)
-        # Move the file form the temporal folder to
-        # the upload folder we setup
-        file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
-        # Redirect the user to the uploaded_file route, which
-        # will basicaly show on the browser the uploaded file
-        return redirect(url_for('.uploaded_file', filename=filename))
+        # Build the directory and make if if not exists
+        mydir = os.path.join(
+            current_app.config['UPLOAD_FOLDER'], str(id))
+        if not os.path.exists(mydir):
+            os.mkdir(mydir)
+        abs_filepath = os.path.join(mydir, filename)
+        # Move the file from the temporal folder
+        file.save(abs_filepath)
+        # Redirect
+        # return redirect(url_for('.uploaded_file', filename=filename))
+# // TO FIX:
+# Change this to view of single id
+        return redirect('/view/' + str(id) + '?uploaded=' + filename)
 
