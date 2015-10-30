@@ -3,7 +3,7 @@
 
 """ Main routes """
 
-import os
+import os, glob
 from flask import Blueprint, current_app, \
     render_template, request, flash, redirect, url_for, send_from_directory
 from werkzeug import secure_filename
@@ -11,6 +11,7 @@ from app import forms
 from config import user_config
 from .basemodel import db, model2table
 from .forms import module
+from flask_table import Col, create_table
 
 MyModel = module.MyModel
 blueprint = Blueprint('pages', __name__)
@@ -63,31 +64,51 @@ def row2dict(r):
     return {c.name: str(getattr(r, c.name)) for c in r.__table__.columns}
 
 
-
 @blueprint.route('/view', methods=["GET", "POST"])
 @blueprint.route('/view/<int:id>', methods=["GET"])
 def view(id=None):
     status = "View"
     template = 'forms/view.html'
+    mytable = None
 
+    # SORT
     sort_field = request.args.get('sort', 'id')
     reverse = (request.args.get('direction', 'asc') == 'desc')
-
     field = getattr(MyModel, sort_field)
     if reverse:
         from sqlalchemy import desc
         field = desc(field)
 
+    ####################################################
+    # SINGLE VIEW
     if id is not None:
+        template = 'forms/singleview.html'
         status = 'Single ' + status + \
             sort_field + ' for Record <b>#' + str(id) + '</b>'
-        template = 'forms/singleview.html'
-# from collections import OrderedDict
         items = [MyModel.query.filter(
             MyModel.id == id).first()._asdict()]
+        # Upload
         uploaded = request.args.get('uploaded')
         if uploaded is not None:
             flash("Uploaded file '%s'" % uploaded, 'success')
+        # List of available files
+        ufolder = current_app.config['UPLOAD_FOLDER']
+        mydir = os.path.join(ufolder, str(id)) + '/'
+        flist = glob.glob(mydir + '*')
+        if flist:
+            TableCls = create_table("file_list")
+            TableCls.add_column('files', Col('Already associated files:'))
+            TableCls.classes = ['table', 'table-hover']
+            tcontent = []
+            for f in flist:
+                tcontent.append({'files': f.replace(mydir,'')})
+            mytable = TableCls(tcontent)
+
+    # SINGLE VIEW
+    ####################################################
+
+    ####################################################
+    # NORMAL VIEW (all elements)
     else:
         # SQLalchemy query (sorted)
         data = MyModel.query.order_by(field)
@@ -99,10 +120,13 @@ def view(id=None):
                 if key in selected:
                     final[key] = value
             items.append(final)
+    # NORMAL VIEW (all elements)
+    ####################################################
 
     return render_template(template,
         status=status, formname='view', dbitems=items, id=id,
         table=MyTable(items, sort_by=sort_field, sort_reverse=reverse),
+        ftable=mytable,
         **user_config['content'])
 
 template = 'forms/insert_search.html'

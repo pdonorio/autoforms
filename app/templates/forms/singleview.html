@@ -14,22 +14,16 @@
     {% endfor %}
     </div> <div class="col-sm-1"> </div>
     <div class="col-sm-4">
-        <div>
-            <h3>Associated files</h3>
-            List
-            <hr>
-        </div>
-        <div>
-            <h3>Upload</h3>
-         <div class="row"> <div class="col-sm-12">
-
-<form action="/upload/{{id}}" method="post" enctype="multipart/form-data">
-  <input type="file" name="file"><br /><br />
-  <input type="submit" value="Upload">
-</form>
-
-         </div> </div>
-        </div>
+     <div>
+        <h3>Add file</h3>
+        <form action="/upload/{{id}}" method="post" enctype="multipart/form-data">
+          <input type="file" name="file"><br /><br />
+          <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+     </div>
+     <div> <hr>
+    {% if ftable %} {{ ftable }} {% else %} No files found yet. {% endif %}
+    </div>
     </div>
 </div>
 
