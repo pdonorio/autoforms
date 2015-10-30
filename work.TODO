@@ -45,6 +45,9 @@ Release:
     ✔ redirect to view id after upload @done (15-10-30 09:21)
     ✔ list files via os @done (15-10-30 09:47)
   ✔ insert BUG @done (15-10-30 10:00)
+  ✔ Quick LOGIN with flask-login @done (15-10-30 14:17)
+  https://blog.openshift.com/use-flask-login-to-add-user-authentication-to-your-python-application/
+  https://flask-login.readthedocs.org
   ☐ remove button?
     ☐ delete method in upload, like @frapi
 ☐ Move db init somewhere else

@@ -3,7 +3,8 @@
 
 """ Main routes """
 
-import os, glob
+import os
+import glob
 from flask import Blueprint, current_app, \
     render_template, request, flash, redirect, url_for, g
 from flask.ext.login import login_user, \
@@ -11,17 +12,13 @@ from flask.ext.login import login_user, \
 from werkzeug import secure_filename
 from app import forms
 from config import user_config
-from .basemodel import db, lm, oid, model2table, User
-from .forms import module, LoginForm
+from .basemodel import db, lm, model2table, User  # ,oid
+from .forms import module
 from flask_table import Col, create_table
 
 MyModel = module.MyModel
 blueprint = Blueprint('pages', __name__)
 
-
-@lm.user_loader
-def load_user(id):
-    return User.query.get(int(id))
 
 # ######################################################
 # #http://flask.pocoo.org/docs/0.10/patterns/viewdecorators/#caching-decorator
@@ -179,6 +176,11 @@ def about():
     return render_template('pages/placeholder.about.html',
         **user_config['content'])
 
+
+###########################################################
+# LOGIN!
+###########################################################
+
 # @blueprint.route('/login', methods=['GET','POST'])
 # def login():
 
@@ -198,41 +200,43 @@ def about():
 #         #return form.redirect('index')
 #     return render_template('forms/login.html', form=form)
 
+
+@lm.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+
 @blueprint.before_request
 def before_request():
     g.user = current_user
 
-@blueprint.route('/login', methods=['GET', 'POST'])
-@oid.loginhandler
-def login():
-    if g.user is not None and g.user.is_authenticated:
-        return redirect(url_for('index'))
-    form = LoginForm()
-    if form.validate_on_submit():
-        session['remember_me'] = form.remember_me.data
-        return oid.try_login(form.openid.data, ask_for=['nickname', 'email'])
-    return render_template('forms/newlogin.html',
-       title='Sign In', form=form, providers=current_app.config['OPENID_PROVIDERS'])
 
-@oid.after_login
-def after_login(resp):
-    if resp.email is None or resp.email == "":
-        flash('Invalid login. Please try again.')
-        return redirect(url_for('login'))
-    user = User.query.filter_by(email=resp.email).first()
-    if user is None:
-        nickname = resp.nickname
-        if nickname is None or nickname == "":
-            nickname = resp.email.split('@')[0]
-        user = User(nickname=nickname, email=resp.email)
-        db.session.add(user)
-        db.session.commit()
-    remember_me = False
-    if 'remember_me' in session:
-        remember_me = session['remember_me']
-        session.pop('remember_me', None)
-    login_user(user, remember = remember_me)
-    return redirect(request.args.get('next') or url_for('index'))
+@blueprint.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('.home'))
+
+
+@blueprint.route('/login', methods=['GET', 'POST'])
+def login():
+
+    if request.method == 'GET':
+        return render_template('forms/newlogin.html', **user_config['content'])
+    username = request.form['username']
+    password = request.form['password']
+    registered_user = User.query.filter_by(username=username,
+        password=password).first()
+
+    print("\n\nUSER*%s*%s*" % (username, password))
+    print(registered_user)
+    print("\n\n")
+    if registered_user is None:
+        flash('Username or Password is invalid', 'danger')
+        return redirect(url_for('.login'))
+    login_user(registered_user)
+    flash('Logged in successfully')
+    return redirect(request.args.get('next') or url_for('.view'))
+
 
 @blueprint.route('/register')
 def register():

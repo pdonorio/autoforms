@@ -127,10 +127,9 @@ class ForgotForm(Form):
     email = StringField('Email', validators=[DataRequired(), Length(min=6,max=40)])
 
 
-
-class LoginForm(Form):
-    openid = StringField('openid', validators=[DataRequired()])
-    remember_me = BooleanField('remember_me', default=False)
+# class LoginForm(Form):
+#     openid = StringField('openid', validators=[DataRequired()])
+#     remember_me = BooleanField('remember_me', default=False)
 
 # ##################################################
 # ## YET TO TEST?

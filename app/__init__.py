@@ -5,7 +5,6 @@
 
 import os, logging
 from flask import Flask, request as req
-from flask.ext.openid import OpenID
 from .pages import blueprint
 
 config = {
@@ -22,10 +21,14 @@ with open('config/custom/mymodel.csv', 'r') as csvfile:
         data.append(row)
 
 
-def myinsert(db, data):
+def myinsert(db, data, first_user):
 
     from sqlalchemy import inspect
+    from .basemodel import User
     from .models.mo import MyModel
+
+    user = User(**first_user)
+    db.session.add(user)
 
     for pieces in data:
         mapper = inspect(MyModel)
@@ -42,7 +45,7 @@ def myinsert(db, data):
 
         obj = MyModel(**content)
         db.session.add(obj)
-        db.session.commit()
+    db.session.commit()
 
 
 
@@ -60,7 +63,7 @@ def create_app(config_filename):
     # cache = SimpleCache()
 
     # Database
-    from .basemodel import db, lm, oid
+    from .basemodel import db, lm  # , oid
     db.init_app(app)
 
     # Add things to this app
@@ -69,9 +72,8 @@ def create_app(config_filename):
 
     # Flask LOGIN
     lm.init_app(app)
-    oid.init_app(app)
-    lm.login_view = 'login'
-    #oid = OpenID(app, '/tmp')
+    #oid.init_app(app)
+    lm.login_view = '.login'
 
     # Application context
     with app.app_context():
@@ -83,7 +85,7 @@ def create_app(config_filename):
         db.drop_all()
         print("Created DB/tables")
         db.create_all()
-        myinsert(db, data)
+        myinsert(db, data, app.config['BASIC_USER'])
 
 # SANITY CHECKS?
         # from .sanity_checks import is_sane_database
