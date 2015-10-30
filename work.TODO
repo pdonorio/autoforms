@@ -1,6 +1,5 @@
 
-
-TODO:
+Completed:
 ✔ WTF @done (15-10-25 23:34)
   ✔ Normal form @done (15-10-23 14:52)
   ✔ validation @done (15-10-23 15:55)
@@ -18,97 +17,84 @@ TODO:
   forms with input grouping are ugly
     ✔ find a better way to group input and label @done (15-10-26 21:16)
     http://v4-alpha.getbootstrap.com/components/forms/#form-layouts
-✔ flask table @done (15-10-28 09:52)
-  ✔ fix thead and bugs @done (15-10-28 09:52)
-  ✔ provide data with sqlalchemy query @done (15-10-28 11:38)
-✔ sortable? @done (15-10-28 15:06)
-   ✔ also implement sort... with sql alchemy i guess @done (15-10-28 15:07)
-✔ CONFIGURATION @done (15-10-28 18:50)
-  ✔ project title @done (15-10-29 09:24)
-  ✔ footer @done (15-10-29 09:24)
-  ✔ homepage text @done (15-10-29 09:24)
-  ✔ footer IF @done (15-10-29 10:27)
-  ✔ logo @done (15-10-29 11:01)
-  ✔ model for view function @done (15-10-29 11:40)
-    ✔ python file @done (15-10-29 11:40)
+  ✔ flask table @done (15-10-28 09:52)
+    ✔ fix thead and bugs @done (15-10-28 09:52)
+    ✔ provide data with sqlalchemy query @done (15-10-28 11:38)
+  ✔ sortable? @done (15-10-28 15:06)
+     ✔ also implement sort... with sql alchemy i guess @done (15-10-28 15:07)
+  ✔ CONFIGURATION @done (15-10-28 18:50)
+    ✔ project title @done (15-10-29 09:24)
+    ✔ footer @done (15-10-29 09:24)
+    ✔ homepage text @done (15-10-29 09:24)
+    ✔ footer IF @done (15-10-29 10:27)
+    ✔ logo @done (15-10-29 11:01)
+    ✔ model for view function @done (15-10-29 11:40)
+      ✔ python file @done (15-10-29 11:40)
+  Release:
+  ✔ insert link to single view @done (15-10-29 14:57)
+    ✔ create a single view @done (15-10-29 16:09)
+    ✔ single view fields order?? @done (15-10-29 18:52)
+  ✔ fix types @done (15-10-29 19:43)
+    ✔ fix comparison @done (15-10-29 15:37)
+  ✔ id insert autoincrement in my model @bug @done (15-10-29 16:28)
+  ✔ Upload file in single view @done (15-10-30 09:21)
+    ✘ alchemy: save relationship between record and files? @cancelled (15-10-29 21:29)
+    ✔ create a directory per id @done (15-10-30 09:21)
+      ✔ redirect to view id after upload @done (15-10-30 09:21)
+      ✔ list files via os @done (15-10-30 09:47)
+    ✔ insert BUG @done (15-10-30 10:00)
+    ✔ Quick LOGIN with flask-login @done (15-10-30 14:17)
+    https://blog.openshift.com/use-flask-login-to-add-user-authentication-to-your-python-application/
+    https://flask-login.readthedocs.org
 
-Release:
-✔ insert link to single view @done (15-10-29 14:57)
-  ✔ create a single view @done (15-10-29 16:09)
-  ✔ single view fields order?? @done (15-10-29 18:52)
-✔ fix types @done (15-10-29 19:43)
-  ✔ fix comparison @done (15-10-29 15:37)
-✔ id insert autoincrement in my model @bug @done (15-10-29 16:28)
-✔ Upload file in single view @done (15-10-30 09:21)
-  ✘ alchemy: save relationship between record and files? @cancelled (15-10-29 21:29)
-  ✔ create a directory per id @done (15-10-30 09:21)
-    ✔ redirect to view id after upload @done (15-10-30 09:21)
-    ✔ list files via os @done (15-10-30 09:47)
-  ✔ insert BUG @done (15-10-30 10:00)
-  ✔ Quick LOGIN with flask-login @done (15-10-30 14:17)
-  https://blog.openshift.com/use-flask-login-to-add-user-authentication-to-your-python-application/
-  https://flask-login.readthedocs.org
+--- ✄ -----------------------
+
+TODO:
+  After release:
+  ☐ move configs to json
+    ☐ all logos inside configuration
+  ☐ CRON BACKUP!
   ☐ remove button?
     ☐ delete method in upload, like @frapi
-☐ Move db init somewhere else
+  ☐ Move db init somewhere else
+    ☐ table name?
+  ☐ anchor col inside configuration
+  ☐ None value for NULL in the table? better -
+  ☐ insert data as run option
+   ☐ get data from json
+   ☐ set
+  ☐ better config for insert (couples? key: validators)
+  ☐ MAIN VIEW extra column with actions
+    ☐ most important action: Edit row
+  ☐ MAKE IT RESTFUL!
+   ☐ and blueprint
+   http://flask-restful-cn.readthedocs.org/en/0.3.4/intermediate-usage.html
 
-Upload:
-https://flask-wtf.readthedocs.org/en/latest/form.html#module-flask_wtf.file
-https://pythonhosted.org/Flask-Uploads/
-https://github.com/kirsle/flask-multi-upload
-http://www.laurentluce.com/posts/upload-to-django-with-progress-bar-using-ajax-and-jquery/
-OR
-#uploads.py
-<form action="upload" method="post" enctype="multipart/form-data">
-  <input type="file" name="file"><br /><br />
-  <input type="submit" value="Upload">
-</form>
-OR
-iRODS
+  Pagination:
+  https://github.com/lixxu/flask-paginate
+  https://gist.github.com/danielrichman/5876099
+  http://flask.pocoo.org/snippets/44/
 
-After release:
-☐ CRON BACKUP!
-☐ move configs to json
-  ☐ table name?
-☐ anchor col inside configuration
-☐ all logos inside configuration
-☐ None value for NULL in the table? better -
-☐ insert data as run option
- ☐ get data from json
- ☐ set
-☐ better config for insert (couples? key: validators)
+  ☐ REFACTORING
+    ☐ A python code for setting active topbar button?
+    ☐ Can i make a for cycle on model fields inside the template?
+  ☐ Password saving flask
+  https://wtforms-alchemy.readthedocs.org/en/latest/column_conversion.html#using-include-exclude-and-only
+  ✔ make bootstrap 4 the default @done (15-10-27 09:08)
+    ☐ offline svg font-awesome
+    ☐ bootstrap theme for login page
+      ☐ cover http://v4-alpha.getbootstrap.com/examples/cover/#
+    ☐ Detect offline?
+      ☐ Css list
+      ☐ from link or from current dir
+  ✔ Sqlalchemy sanity checks @done (15-10-25 23:35)
+  ☐ Write some debug not as print or normal logger
+    ☐ a separate file?
+  ✔ Apply data container @done (15-10-25 23:33)
+   ☐ test backup/restore
+   ☐ tasker
 
-☐ Main view extra column with actions
-  ☐ most important action: Edit row
-
-☐ Make it restful!
- ☐ and blueprint
- http://flask-restful-cn.readthedocs.org/en/0.3.4/intermediate-usage.html
-
-Pagination:
-https://github.com/lixxu/flask-paginate
-https://gist.github.com/danielrichman/5876099
-http://flask.pocoo.org/snippets/44/
-
-☐ REFACTORING
-  ☐ A python code for setting active topbar button?
-  ☐ Can i make a for cycle on model fields inside the template?
-☐ Password saving flask
-https://wtforms-alchemy.readthedocs.org/en/latest/column_conversion.html#using-include-exclude-and-only
-✔ make bootstrap 4 the default @done (15-10-27 09:08)
-  ☐ offline svg font-awesome
-  ☐ bootstrap theme for login page
-    ☐ cover http://v4-alpha.getbootstrap.com/examples/cover/#
-  ☐ Detect offline?
-    ☐ Css list
-    ☐ from link or from current dir
-✔ Sqlalchemy sanity checks @done (15-10-25 23:35)
-☐ Write some debug not as print or normal logger
-  ☐ a separate file?
-✔ Apply data container @done (15-10-25 23:33)
- ☐ test backup/restore
- ☐ tasker
-
+--- ✄ -----------------------
 
 Session and cookies:
  http://flask.pocoo.org/docs/0.10/quickstart/#sessions
