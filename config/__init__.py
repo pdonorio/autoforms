@@ -9,8 +9,8 @@ import json
 ########################################
 # Warning: this decides about final configuration
 
-# PATH = 'base'
-PATH = 'custom'
+PATH = 'base'
+# PATH = 'custom'
 CONFIG_PATH = 'config'
 JSON_EXT = 'json'
 
