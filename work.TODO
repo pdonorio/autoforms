@@ -44,7 +44,7 @@ Release:
   ✔ create a directory per id @done (15-10-30 09:21)
     ✔ redirect to view id after upload @done (15-10-30 09:21)
     ✔ list files via os @done (15-10-30 09:47)
-  ☐ insert BUG
+  ✔ insert BUG @done (15-10-30 10:00)
   ☐ remove button?
     ☐ delete method in upload, like @frapi
 ☐ Move db init somewhere else
