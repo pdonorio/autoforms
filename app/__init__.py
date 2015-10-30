@@ -3,35 +3,48 @@
 
 """ Factory and blueprints patterns """
 
-import os, logging
+import os
+import logging
+import csv
 from flask import Flask, request as req
+from sqlalchemy import inspect
 from .pages import blueprint
+from .basemodel import db, lm, User
+
+# // TO FIX:
+# Make this DYNAMIC
+from .models.mo import MyModel
 
 config = {
     "development": "config.DevelopmentConfig",
-    # "testing": "bookshelf.config.TestingConfig",
     "default": "config.DevelopmentConfig"
+    # "testing": "bookshelf.config.TestingConfig",
 }
 
-import csv
-data = []
-with open('config/custom/mymodel.csv', 'r') as csvfile:
-    creader = csv.reader(csvfile, delimiter=';')
-    for row in creader:
-        data.append(row)
 
+def init_insert(db, config):
 
-def myinsert(db, data, first_user):
-
-    from sqlalchemy import inspect
-    from .basemodel import User
-    from .models.mo import MyModel
-
-    user = User(**first_user)
+    # Add at least the first user
+# // TO FIX:
+# Make this DYNAMIC just like above
+    user = User(**config['BASIC_USER'])
     db.session.add(user)
+    db.session.commit()
 
+    # Try to populate with data if there is some
+    modelname = 'mymodel'
+    csvfile = os.path.join(config['MYCONFIG_PATH'], modelname + '.csv')
+    if not os.path.exists(csvfile):
+        return
+
+    data = []
+    with open(csvfile, 'r') as csvfile:
+        creader = csv.reader(csvfile, delimiter=';')
+        for row in creader:
+            data.append(row)
+
+    mapper = inspect(MyModel)
     for pieces in data:
-        mapper = inspect(MyModel)
         i = 0
         content = {}
         for column in mapper.attrs:
@@ -42,11 +55,10 @@ def myinsert(db, data, first_user):
             except:
                 pass
             i += 1
-
+        # Add one row at the time
         obj = MyModel(**content)
         db.session.add(obj)
     db.session.commit()
-
 
 
 def create_app(config_filename):
@@ -63,7 +75,6 @@ def create_app(config_filename):
     # cache = SimpleCache()
 
     # Database
-    from .basemodel import db, lm  # , oid
     db.init_app(app)
 
     # Add things to this app
@@ -85,7 +96,7 @@ def create_app(config_filename):
         db.drop_all()
         print("Created DB/tables")
         db.create_all()
-        myinsert(db, data, app.config['BASIC_USER'])
+        init_insert(db, app.config)
 
 # SANITY CHECKS?
         # from .sanity_checks import is_sane_database

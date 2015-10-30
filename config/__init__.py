@@ -7,7 +7,9 @@ import os
 import json
 
 ########################################
-#PATH = 'base'
+# Warning: this decides about final configuration
+
+# PATH = 'base'
 PATH = 'custom'
 CONFIG_PATH = 'config'
 JSON_EXT = 'json'
@@ -34,6 +36,7 @@ class BaseConfig(object):
 
     DEBUG = False
     TESTING = False
+    MYCONFIG_PATH = os.path.join(CONFIG_PATH, PATH)
 
     SECRET_KEY = 'my precious'
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))
