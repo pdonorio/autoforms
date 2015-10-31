@@ -16,7 +16,21 @@ from .basemodel import db, lm, model2table, User  # ,oid
 from .forms import module
 from flask_table import Col, create_table
 
+# // TO FIX:
+# Make this DYNAMIC
 MyModel = module.MyModel
+
+# From configuration, choose table and insert fields
+insertable = user_config['models'].get('insert_fields')
+extra_selected = user_config['models'].get('extra_fields_to_show')
+selected = None
+if insertable and extra_selected:
+    selected = extra_selected + insertable
+print(selected)
+
+# Build the main table for the view
+MyTable = model2table(MyModel, selected)
+
 blueprint = Blueprint('pages', __name__)
 
 
@@ -40,21 +54,10 @@ blueprint = Blueprint('pages', __name__)
 
 ######################################################
 
-# // TO FIX: move inside json
-extra_selected = [ 'id', 'patient_id']
-insertable = [
-    "patient_type", "country_iso", "country", "ethnicity", "age_at_visit", "gender", "height_cm", "height_percentile", "weight_kg", "weight_percentile", "family_history", "inheritance", "imaging_evaluation", "affected_skeletal_site", "simmetry", "bones_affeced_ocs", "ior_classification", "skeletal_deformities", "deformities_localization", "functional_limitations", "limitations_localization", "spine_problems", "dental_abnormalities", "malignant_degeneration", "sites_affected_by_psc", "age_of_psc_onset", "psc_grade", "psc_size", "psc_treatment", "recurrence", "other_medical_diseases", "other_genetic_diseases", "germinal_mutation", "gene_involved", "dna_change", "protein_change", "mutation_type", "notes"
-    ]
-selected = extra_selected + insertable
 
-MyTable = model2table(MyModel, selected)
-
-
-def insertdb(iform, obj):
+def single_element_insert_db(iform, obj):
     iform.populate_obj(obj)
-    # flash("Populated user %s" % dir(user), 'success')
     db.session.add(obj)
-    # Save into db
     db.session.commit()
 
 
@@ -140,7 +143,7 @@ def insert():
     iform = forms.UserForm()
     if iform.validate_on_submit():
         # Handle user model
-        insertdb(iform, MyModel())
+        single_element_insert_db(iform, MyModel())
         flash("User saved", 'success')
         status = "Saved"
 

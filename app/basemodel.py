@@ -61,17 +61,19 @@ def model2table(obj, selected):
 
     table_name = 'Table' + obj.__name__
     TableCls = create_table(table_name)
-    # print("Table:", table_name)
-
     mapper = inspect(obj)
+
     for column in mapper.attrs:
+
+        # What to skip
+        if selected and column.key not in selected:
+            continue
+
         colname = column.key.replace('_', ' ').capitalize()
-        # print("SQLALCHEMY col", colname)
-        if column.key in selected:
-            if column.key == 'id':  # 'patient_id':
-                TableCls.add_column(column.key, AnchorCol(colname))
-            else:
-                TableCls.add_column(column.key, Col(colname))
+        if column.key == 'id':  # 'patient_id':
+            TableCls.add_column(column.key, AnchorCol(colname))
+        else:
+            TableCls.add_column(column.key, Col(colname))
 
     TableCls.classes = ['table', 'table-hover']
     TableCls.allow_sort = True
