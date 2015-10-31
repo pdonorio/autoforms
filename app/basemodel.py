@@ -55,6 +55,11 @@ class ItemTable(Table):
 def create_table(name):
     return type(name, (ItemTable,), {})
 
+def model2list(obj):
+    mylist = []
+    for column in inspect(obj).attrs:
+        mylist.append(column.key)
+    return mylist
 
 def model2table(obj, selected):
     """ Give me an SQLALCHEMY obj to get an HTML table """

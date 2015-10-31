@@ -12,7 +12,7 @@ from flask.ext.login import login_user, \
 from werkzeug import secure_filename
 from app import forms
 from config import user_config
-from .basemodel import db, lm, model2table, User  # ,oid
+from .basemodel import db, lm, model2table, model2list, User  # ,oid
 from .forms import module
 from flask_table import Col, create_table
 
@@ -26,7 +26,11 @@ extra_selected = user_config['models'].get('extra_fields_to_show')
 selected = None
 if insertable and extra_selected:
     selected = extra_selected + insertable
-print(selected)
+if selected is None:
+    print("\n\nGet all")
+    selected = model2list(MyModel)
+    insertable = selected
+    print(selected)
 
 # Build the main table for the view
 MyTable = model2table(MyModel, selected)
@@ -148,7 +152,8 @@ def insert():
         status = "Saved"
 
     return render_template(template,
-        status=status, form=iform, formname='insert', selected=insertable,
+        status=status, form=iform, formname='insert', 
+        selected=insertable, keyfield =user_config['models'].get('key_field'),
         **user_config['content'])
 
 

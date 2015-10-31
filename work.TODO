@@ -5,9 +5,10 @@ TODO:
     ✔ password in configurations? @done (15-10-30 15:55)
   ✔ fields to use inside configuration @done (15-10-30 16:32)
     ✔ otherwise: ALL @done (15-10-30 16:32)
-    ✔ topbar color goes to json @done (15-10-31 13:03)
-    ☐ fix cycle of insert inside html/jinja
-      ☐ may need to specify that key field for insert (patient_id)
+    ✔ topbar color goes to json @done (15-10-31 14:20)
+    ✔ fix cycle of insert inside html/jinja @done (15-10-31 14:41)
+      ✔ may need to specify that key field for insert (patient_id) @done (15-10-31 14:43)
+      ☐ fix specification of forms
 
  ☐ How to read an object from a string variable out of a module?
    ☐ i already did this somewhere (irods2graph?) @thisishard
