@@ -1,5 +1,5 @@
 {
-    "model": "mo",
+    "module": "mo",
     "key_field": "patient_id",
     "insert_fields": [
         "patient_type", "country_iso", "country", "ethnicity",

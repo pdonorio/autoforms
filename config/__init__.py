@@ -7,10 +7,13 @@ import os
 import json
 
 ########################################
-# Warning: this decides about final configuration
 
-PATH = 'base'
-# PATH = 'custom'
+#######################
+# Warning: this decides about final configuration
+PATH = 'base'   # Main directory where all conf files are found
+# Warning: this decides about final configuration
+#######################
+
 CONFIG_PATH = 'config'
 JSON_EXT = 'json'
 

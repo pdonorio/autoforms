@@ -6,8 +6,8 @@
 from ..basemodel import db, DictSerializable
 # from wtforms.validators import Email, Length
 # from wtforms import PasswordField
-
 yesno = db.Enum('no', 'yes', name='yesno')
+
 
 #############################################
 # Work on models

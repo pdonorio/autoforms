@@ -4,38 +4,24 @@
 {% from "forms/_formbootstr.html" import render_field %}
 <form action="{{ formname }}" method="post">
 
-    {% if key_field %}
-    {{ render_field(form.patient_id, placeholder = 'Patient id' ,
-        required = true, autofocus = true ) }}
+{% if keyfield %}
+    {{ render_field(form[keyfield], placeholder=keyfield.replace('_',' ').capitalize(), 
+        required=true, autofocus=true) }}
+{% endif %}
+
+{% for item in selected %}
+    {% if form[item] %}
+        {{ render_field(form[item]) }}
     {% endif %}
+{% endfor %}
 
-    {% for item in selected %}
-        {% if form[item] %}
-            {{ render_field(form[item]) }}
-        {% endif %}
-    {% endfor %}
-
-    {{ form.csrf_token }}
-  <div class="form-group row">
+{{ form.csrf_token }}
+<div class="form-group row">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-primary">
         {{formname.capitalize()}} data
       </button>
     </div>
-  </div>
+</div>
 </form>
 {% endblock %}
-
-<!--
-    {% for item in form %}
-        {% if item.name != 'csrf_token' %}
-            {{ render_field(item.name, name=False) }}
-        {% endif %}
-    {% endfor %}
-    {{ render_field(form.name, placeholder = 'test' ,
-        required = true, autofocus = true ) }}
-    {{ render_field(form.test_select_a) }}
-    {{ render_field(form.email, placeholder = 'yourname@email.com' ,
-        required = true ) }}
-    {{ render_field(form.password, placeholder='***', required = true) }}
--->

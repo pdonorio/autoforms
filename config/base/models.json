@@ -1,3 +1,4 @@
 {
-	"model": "example"
+	"module": "example",
+	"model": "MyModel"
 }

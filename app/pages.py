@@ -10,30 +10,11 @@ from flask import Blueprint, current_app, \
 from flask.ext.login import login_user, \
     logout_user, current_user, login_required
 from werkzeug import secure_filename
+from .basemodel import db, lm, create_table, Col, \
+    User, MyModel, MyTable, \
+    user_config, insertable, selected
 from app import forms
-from config import user_config
-from .basemodel import db, lm, model2table, model2list, User  # ,oid
-from .forms import module
-from flask_table import Col, create_table
 
-# // TO FIX:
-# Make this DYNAMIC
-MyModel = module.MyModel
-
-# From configuration, choose table and insert fields
-insertable = user_config['models'].get('insert_fields')
-extra_selected = user_config['models'].get('extra_fields_to_show')
-selected = None
-if insertable and extra_selected:
-    selected = extra_selected + insertable
-if selected is None:
-    print("\n\nGet all")
-    selected = model2list(MyModel)
-    insertable = selected
-    print(selected)
-
-# Build the main table for the view
-MyTable = model2table(MyModel, selected)
 
 blueprint = Blueprint('pages', __name__)
 

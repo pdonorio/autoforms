@@ -9,12 +9,14 @@ TODO:
     ✔ fix cycle of insert inside html/jinja @done (15-10-31 14:41)
       ✔ may need to specify that key field for insert (patient_id) @done (15-10-31 14:43)
       ✔ fix specification of forms @done (15-10-31 14:53)
- ☐ How to read an object from a string variable out of a module?
-   ☐ i already did this somewhere (irods2graph?) @thisishard
-
+ ✔ How to read an object from a string variable out of a module? @done (15-10-31 16:03)
+   ✘ i already did this somewhere (irods1graph?) @thisishard @cancelled (15-10-31 16:03)
+   ✔ simpy getattr @done (15-10-31 16:03)
  ☐ Change blueprint name...
  blueprint is the name of the function associated to a group of endpoints
    ☐ aforms!
+ ☐ Add required option for some fields
+   ☐ an array into json?
 
   ☐ Move db init somewhere else
   ☐ anchor col inside configuration?
@@ -31,7 +33,8 @@ TODO:
   ☐ remove file button?
     ☐ delete method in upload, like @frapi
 
-  Pagination:
+  Pagination: 
+  (Isn't better Angular??)
   https://github.com/lixxu/flask-paginate
   https://gist.github.com/danielrichman/5876099
   http://flask.pocoo.org/snippets/44/
