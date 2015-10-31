@@ -7,14 +7,11 @@
 </div>
  -->
  <br>
-<div class="jumbotron jumbotron-fluid"
-style='
-border-radius: 10px;
-'>
+<div class="jumbotron jumbotron-fluid" style='border-radius: 10px;'>
   <div class="container">
-    <h1 class="display-3">{{ title }}</h1>
+    <h1 class="display-3">{{ title | safe }}</h1>
     <p class="lead">
-        {{ subtitle }}
+        {{ subtitle | safe}}
     </p>
   </div>
 </div>

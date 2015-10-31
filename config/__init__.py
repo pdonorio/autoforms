@@ -3,30 +3,34 @@
 
 """ Configurations """
 
-import os, json
+import os
+import json
+
+########################################
+
+#######################
+# Warning: this decides about final configuration
+PATH = 'base'   # Main directory where all conf files are found
+# Warning: this decides about final configuration
+#######################
 
 CONFIG_PATH = 'config'
 JSON_EXT = 'json'
-PATH = 'base'
 
 
 ########################################
 # Read user config
-
 def read_files(path):
     """ All user specifications """
     sections = ['content', 'models', 'options']
     myjson = {}
-
     for section in sections:
         filename = os.path.join(CONFIG_PATH, path, section + "." + JSON_EXT)
         with open(filename) as f:
             myjson[section] = json.load(f)
-    # Logo image
-    myjson['content']['logopath'] = os.path.join('/static/img/logo.png')
-
     return myjson
 
+# Use the function
 user_config = read_files(PATH)
 
 
@@ -35,6 +39,7 @@ class BaseConfig(object):
 
     DEBUG = False
     TESTING = False
+    MYCONFIG_PATH = os.path.join(CONFIG_PATH, PATH)
 
     SECRET_KEY = 'my precious'
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -44,13 +49,22 @@ class BaseConfig(object):
     HOST = 'localhost'
     PORT = int(os.environ.get('PORT', 5000))
 
+    BASIC_USER = {
+        'username': user_config['content'].get('username', 'prototype'),
+        'password': user_config['content'].get('password', 'test'),
+        'email': user_config['content'].get('email', 'idonotexist@test.com')
+    }
+
 
 class DevelopmentConfig(BaseConfig):
 
     DEBUG = True
     HOST = '0.0.0.0'
-
     WTF_CSRF_SECRET_KEY = 'a random string'
+
+    BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+    UPLOAD_FOLDER = '/uploads'
+    ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
     # We have POSTGRESQL. Use docker environment variables
     dbdriver = "postgresql"
