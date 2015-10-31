@@ -10,8 +10,7 @@
 from flask import request, url_for, redirect, flash
 from flask.ext.wtf import Form
 from wtforms import StringField, \
-    BooleanField, HiddenField, PasswordField, \
-    validators
+    HiddenField, PasswordField  # , \ validators
 from wtforms.validators import DataRequired, EqualTo, Length
 # from wtforms.validators import Email, Required
 from wtforms_alchemy import model_form_factory
