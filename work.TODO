@@ -1,68 +1,11 @@
 
-About python
- ☐ Sublime text + Anaconda - or Vim + Vundle
- ☐ Flask (REST and WEB) + plugins
- ☐ Jupyter and Fabric for courses
- ☐ Manuals dropbox?
-   ☐ doctests
---- ✄ -----------------------
-
-Completed:
-✔ WTF @done (15-10-25 23:34)
-  ✔ Normal form @done (15-10-23 14:52)
-  ✔ validation @done (15-10-23 15:55)
-  ✔ form helper @done (15-10-23 16:26)
-   http://flask.pocoo.org/docs/0.10/patterns/wtforms/
-  ✔ wtf fields validator, do they integrate with flask flash? @done (15-10-23 16:26)
-  ✔ fix forms template @done (15-10-24 12:01)
-  ✔ secure wtf form snippet @done (15-10-24 12:39)
-  ✔ derive from sqlalchemy model @done (15-10-25 11:56)
-  https://wtforms-alchemy.readthedocs.org/en/latest/configuration.html#custom-form-base-class
-  ✔ Select @done (15-10-26 17:20)
-  ✔ Min/Max lenght costraint @done (15-10-26 19:53)
-  http://flask.pocoo.org/docs/0.10/patterns/wtforms/#the-forms
-  ✔ bootstrap4 clean @done (15-10-27 09:10)
-  forms with input grouping are ugly
-    ✔ find a better way to group input and label @done (15-10-26 21:16)
-    http://v4-alpha.getbootstrap.com/components/forms/#form-layouts
-  ✔ flask table @done (15-10-28 09:52)
-    ✔ fix thead and bugs @done (15-10-28 09:52)
-    ✔ provide data with sqlalchemy query @done (15-10-28 11:38)
-  ✔ sortable? @done (15-10-28 15:06)
-     ✔ also implement sort... with sql alchemy i guess @done (15-10-28 15:07)
-  ✔ CONFIGURATION @done (15-10-28 18:50)
-    ✔ project title @done (15-10-29 09:24)
-    ✔ footer @done (15-10-29 09:24)
-    ✔ homepage text @done (15-10-29 09:24)
-    ✔ footer IF @done (15-10-29 10:27)
-    ✔ logo @done (15-10-29 11:01)
-    ✔ model for view function @done (15-10-29 11:40)
-      ✔ python file @done (15-10-29 11:40)
-  Release:
-  ✔ insert link to single view @done (15-10-29 14:57)
-    ✔ create a single view @done (15-10-29 16:09)
-    ✔ single view fields order?? @done (15-10-29 18:52)
-  ✔ fix types @done (15-10-29 19:43)
-    ✔ fix comparison @done (15-10-29 15:37)
-  ✔ id insert autoincrement in my model @bug @done (15-10-29 16:28)
-  ✔ Upload file in single view @done (15-10-30 09:21)
-    ✘ alchemy: save relationship between record and files? @cancelled (15-10-29 21:29)
-    ✔ create a directory per id @done (15-10-30 09:21)
-      ✔ redirect to view id after upload @done (15-10-30 09:21)
-      ✔ list files via os @done (15-10-30 09:47)
-    ✔ insert BUG @done (15-10-30 10:00)
-    ✔ Quick LOGIN with flask-login @done (15-10-30 14:17)
-    https://blog.openshift.com/use-flask-login-to-add-user-authentication-to-your-python-application/
-    https://flask-login.readthedocs.org
-
---- ✄ -----------------------
-
 TODO:
   ✔ move configs to json @done (15-10-30 15:46)
     ✔ all logos inside configuration @done (15-10-30 15:55)
     ✔ password in configurations? @done (15-10-30 15:55)
   ✔ fields to use inside configuration @done (15-10-30 16:32)
     ✔ otherwise: ALL @done (15-10-30 16:32)
+    ✔ topbar color goes to json @done (15-10-31 13:03)
     ☐ fix cycle of insert inside html/jinja
       ☐ may need to specify that key field for insert (patient_id)
 
@@ -70,6 +13,7 @@ TODO:
    ☐ i already did this somewhere (irods2graph?) @thisishard
 
  ☐ Change blueprint name...
+ blueprint is the name of the function associated to a group of endpoints
    ☐ aforms!
 
   ☐ Move db init somewhere else
@@ -136,3 +80,54 @@ docker run --volumes-from mydata busybox cat /data/hello
 
 AUTOMATICALLY START CONTAINERS:
   https://docs.docker.com/articles/host_integration/
+
+--- ✄ -----------------------
+
+Completed:
+✔ WTF @done (15-10-25 23:34)
+  ✔ Normal form @done (15-10-23 14:52)
+  ✔ validation @done (15-10-23 15:55)
+  ✔ form helper @done (15-10-23 16:26)
+   http://flask.pocoo.org/docs/0.10/patterns/wtforms/
+  ✔ wtf fields validator, do they integrate with flask flash? @done (15-10-23 16:26)
+  ✔ fix forms template @done (15-10-24 12:01)
+  ✔ secure wtf form snippet @done (15-10-24 12:39)
+  ✔ derive from sqlalchemy model @done (15-10-25 11:56)
+  https://wtforms-alchemy.readthedocs.org/en/latest/configuration.html#custom-form-base-class
+  ✔ Select @done (15-10-26 17:20)
+  ✔ Min/Max lenght costraint @done (15-10-26 19:53)
+  http://flask.pocoo.org/docs/0.10/patterns/wtforms/#the-forms
+  ✔ bootstrap4 clean @done (15-10-27 09:10)
+  forms with input grouping are ugly
+    ✔ find a better way to group input and label @done (15-10-26 21:16)
+    http://v4-alpha.getbootstrap.com/components/forms/#form-layouts
+  ✔ flask table @done (15-10-28 09:52)
+    ✔ fix thead and bugs @done (15-10-28 09:52)
+    ✔ provide data with sqlalchemy query @done (15-10-28 11:38)
+  ✔ sortable? @done (15-10-28 15:06)
+     ✔ also implement sort... with sql alchemy i guess @done (15-10-28 15:07)
+  ✔ CONFIGURATION @done (15-10-28 18:50)
+    ✔ project title @done (15-10-29 09:24)
+    ✔ footer @done (15-10-29 09:24)
+    ✔ homepage text @done (15-10-29 09:24)
+    ✔ footer IF @done (15-10-29 10:27)
+    ✔ logo @done (15-10-29 11:01)
+    ✔ model for view function @done (15-10-29 11:40)
+      ✔ python file @done (15-10-29 11:40)
+  Release:
+  ✔ insert link to single view @done (15-10-29 14:57)
+    ✔ create a single view @done (15-10-29 16:09)
+    ✔ single view fields order?? @done (15-10-29 18:52)
+  ✔ fix types @done (15-10-29 19:43)
+    ✔ fix comparison @done (15-10-29 15:37)
+  ✔ id insert autoincrement in my model @bug @done (15-10-29 16:28)
+  ✔ Upload file in single view @done (15-10-30 09:21)
+    ✘ alchemy: save relationship between record and files? @cancelled (15-10-29 21:29)
+    ✔ create a directory per id @done (15-10-30 09:21)
+      ✔ redirect to view id after upload @done (15-10-30 09:21)
+      ✔ list files via os @done (15-10-30 09:47)
+    ✔ insert BUG @done (15-10-30 10:00)
+    ✔ Quick LOGIN with flask-login @done (15-10-30 14:17)
+    https://blog.openshift.com/use-flask-login-to-add-user-authentication-to-your-python-application/
+    https://flask-login.readthedocs.org
+

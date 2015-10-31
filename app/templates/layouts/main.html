@@ -1,8 +1,15 @@
 {% extends 'layouts/index.html' %}
 
 {% block topbar %}
-<nav class="navbar navbar-fixed-top navbar-light bg-faded"
-    style="background-color: #D4E9FF;">
+  {% if topbar_color %}
+    {% if topbar_color == 'dark' %}
+      <nav class="navbar navbar-dark bg-inverse navbar-fixed-top">
+    {% else %}
+      <nav class="navbar navbar-fixed-top navbar-light bg-faded" style="background-color: #{{ topbar-color }};">
+    {% endif %}
+  {% else %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+  {% endif %}
 
   {% if not logos %}
   <a href="#" class="pull-right" style='padding-right:10px;'>
