@@ -144,7 +144,7 @@ template = 'forms/insert_search.html'
 @blueprint.route('/insert', methods=["GET", "POST"])
 def insert():
     status = "Waiting data to save"
-    iform = forms.UserForm()
+    iform = forms.DataForm()
     if iform.validate_on_submit():
         # Handle user model
         single_element_insert_db(iform, MyModel())
@@ -160,7 +160,7 @@ def insert():
 @blueprint.route('/search', methods=["GET", "POST"])
 def search():
     status = "Waiting data to search"
-    iform = forms.UserForm()
+    iform = forms.DataForm()
     if iform.validate_on_submit():
         status = "Work in progress"
         # flash("User saved", 'success')

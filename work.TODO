@@ -8,8 +8,7 @@ TODO:
     ✔ topbar color goes to json @done (15-10-31 14:20)
     ✔ fix cycle of insert inside html/jinja @done (15-10-31 14:41)
       ✔ may need to specify that key field for insert (patient_id) @done (15-10-31 14:43)
-      ☐ fix specification of forms
-
+      ✔ fix specification of forms @done (15-10-31 14:53)
  ☐ How to read an object from a string variable out of a module?
    ☐ i already did this somewhere (irods2graph?) @thisishard
 

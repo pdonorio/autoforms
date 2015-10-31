@@ -10,7 +10,9 @@
     {% endif %}
 
     {% for item in selected %}
-        {{ render_field(form[item]) }}
+        {% if form[item] %}
+            {{ render_field(form[item]) }}
+        {% endif %}
     {% endfor %}
 
     {{ form.csrf_token }}

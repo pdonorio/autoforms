@@ -84,7 +84,7 @@ package = 'app.models.' + user_config['models']['model']
 module = importlib.import_module(package)
 
 ###########################
-class UserForm(ModelForm):
+class DataForm(ModelForm):
     class Meta:
         model = module.MyModel
 
@@ -94,8 +94,6 @@ class UserForm(ModelForm):
 # # Add code here to make db operations
 #         return rv
 ###########################
-
-#print(UserForm)
 
 ##################################################
 # ORIGINALS
