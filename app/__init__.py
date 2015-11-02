@@ -8,7 +8,7 @@ import logging
 import csv
 from flask import Flask, request as req
 from sqlalchemy import inspect
-from .pages import blueprint
+from .pages import cms
 from .basemodel import db, lm, User
 
 # // TO FIX:
@@ -78,19 +78,18 @@ def create_app(config_filename):
     db.init_app(app)
 
     # Add things to this app
-    app.register_blueprint(blueprint)
+    app.register_blueprint(cms)
     app.logger.setLevel(logging.NOTSET)
 
     # Flask LOGIN
     lm.init_app(app)
-    #oid.init_app(app)
     lm.login_view = '.login'
 
     # Application context
     with app.app_context():
         # Extensions like Flask-SQLAlchemy now know what the "current" app
         # is while within this block. Therefore, you can now run........
-# // TO FIX:
+# // TO FIX:
 # Drop tables and populate with basic data, only on request
 # e.g. startup option
         db.drop_all()

@@ -12,12 +12,8 @@ TODO:
  ✔ How to read an object from a string variable out of a module? @done (15-10-31 16:03)
    ✘ i already did this somewhere (irods1graph?) @thisishard @cancelled (15-10-31 16:03)
    ✔ simpy getattr @done (15-10-31 16:03)
- ☐ Change blueprint name...
+ ✔ Change blueprint name... @done (15-11-02 08:24)
  blueprint is the name of the function associated to a group of endpoints
-   ☐ aforms!
- ☐ Add required option for some fields
-   ☐ an array into json?
-
   ☐ Move db init somewhere else
   ☐ anchor col inside configuration?
     ☐ default is id
@@ -25,15 +21,15 @@ TODO:
   ☐ insert data as run option
   ☐ better config for insert (couples? key: validators)
   ☐ CRON BACKUP!
-  ☐ MAIN VIEW extra column with actions
-    ☐ most important action: Edit row
-  ☐ MAKE IT RESTFUL!
-   ☐ and blueprint
-   http://flask-restful-cn.readthedocs.org/en/0.3.4/intermediate-usage.html
   ☐ remove file button?
     ☐ delete method in upload, like @frapi
 
-  Pagination: 
+Restful:
+  ☐ MAKE IT RESTFUL!
+   ☐ with blueprint
+   http://flask-restful-cn.readthedocs.org/en/0.3.4/intermediate-usage.html
+
+  Pagination:
   (Isn't better Angular??)
   https://github.com/lixxu/flask-paginate
   https://gist.github.com/danielrichman/5876099

@@ -16,7 +16,7 @@ from .basemodel import db, lm, create_table, Col, \
 from app import forms
 
 
-blueprint = Blueprint('pages', __name__)
+cms = Blueprint('pages', __name__)
 
 
 # ######################################################
@@ -53,8 +53,8 @@ def row2dict(r):
 
 
 # ######################################################
-@blueprint.route('/view', methods=["GET", "POST"])
-@blueprint.route('/view/<int:id>', methods=["GET"])
+@cms.route('/view', methods=["GET", "POST"])
+@cms.route('/view/<int:id>', methods=["GET"])
 @login_required
 def view(id=None):
     status = "View"
@@ -122,7 +122,7 @@ def view(id=None):
 template = 'forms/insert_search.html'
 
 
-@blueprint.route('/insert', methods=["GET", "POST"])
+@cms.route('/insert', methods=["GET", "POST"])
 def insert():
     status = "Waiting data to save"
     iform = forms.DataForm()
@@ -133,12 +133,12 @@ def insert():
         status = "Saved"
 
     return render_template(template,
-        status=status, form=iform, formname='insert', 
+        status=status, form=iform, formname='insert',
         selected=insertable, keyfield =user_config['models'].get('key_field'),
         **user_config['content'])
 
 
-@blueprint.route('/search', methods=["GET", "POST"])
+@cms.route('/search', methods=["GET", "POST"])
 def search():
     status = "Waiting data to search"
     iform = forms.DataForm()
@@ -154,13 +154,13 @@ def search():
 # Basic interface routes ####
 ################
 
-@blueprint.route('/')
-@blueprint.route('/home')
+@cms.route('/')
+@cms.route('/home')
 def home():
     return render_template('pages/placeholder.home.html',
         **user_config['content'])
 
-@blueprint.route('/about')
+@cms.route('/about')
 def about():
     return render_template('pages/placeholder.about.html',
         **user_config['content'])
@@ -170,7 +170,7 @@ def about():
 # LOGIN!
 ###########################################################
 
-# @blueprint.route('/login', methods=['GET','POST'])
+# @cms.route('/login', methods=['GET','POST'])
 # def login():
 
 #     form = forms.LoginForm(request.form)
@@ -195,18 +195,18 @@ def load_user(id):
     return User.query.get(int(id))
 
 
-@blueprint.before_request
+@cms.before_request
 def before_request():
     g.user = current_user
 
 
-@blueprint.route('/logout')
+@cms.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('.home'))
 
 
-@blueprint.route('/login', methods=['GET', 'POST'])
+@cms.route('/login', methods=['GET', 'POST'])
 def login():
 
     if request.method == 'GET':
@@ -227,13 +227,13 @@ def login():
     return redirect(request.args.get('next') or url_for('.view'))
 
 
-@blueprint.route('/register')
+@cms.route('/register')
 def register():
     form = forms.RegisterForm(request.form)
     return render_template('forms/register.html', form=form)
 
 
-@blueprint.route('/forgot')
+@cms.route('/forgot')
 def forgot():
     form = forms.ForgotForm(request.form)
     return render_template('forms/forgot.html', form=form)
@@ -251,21 +251,21 @@ def allowed_file(filename):
 # Only needed for separate debug
 
 # # Route that will process the file upload
-# @blueprint.route('/uploader/<int:id>', methods=['GET'])
+# @cms.route('/uploader/<int:id>', methods=['GET'])
 # def uploader(id):
 #     flash("Id is %d" % id)
 #     return render_template('forms/upload.html', **user_config['content'])
 
 # # Expecting a parameter containing the name of a file.
 # # It will locate that file on the upload directory and show it
-# @blueprint.route('/uploads/<filename>')
+# @cms.route('/uploads/<filename>')
 # def uploaded_file(filename):
 #     return send_from_directory(current_app.config['UPLOAD_FOLDER'],
 #                                filename)
 
 
 # Route that will process the file upload
-@blueprint.route('/upload/<int:id>', methods=['POST'])
+@cms.route('/upload/<int:id>', methods=['POST'])
 def upload(id):
     # Get the name of the uploaded file
     file = request.files['file']
